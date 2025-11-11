@@ -1,7 +1,7 @@
 "use client";
 
 import { SideNav } from "@/components/side-nav";
-import { SettingsIcon, HeadphonesIcon, MessageSquareIcon, LayoutDashboardIcon, KanbanSquareIcon } from "lucide-react";
+import { LayoutDashboardIcon, KanbanSquareIcon } from "lucide-react";
 
 export default function GovernanceLayout({
   children,
@@ -11,9 +11,6 @@ export default function GovernanceLayout({
   const sideNavItems = [
     { title: "Dashboard", href: "/governance", icon: <LayoutDashboardIcon className="h-4 w-4" /> },
     { title: "Boards", href: "/governance/boards", icon: <KanbanSquareIcon className="h-4 w-4" /> },
-    { title: "Operations", href: "/governance/operations", icon: <SettingsIcon className="h-4 w-4" /> },
-    { title: "Customer Support", href: "/governance/customer-support", icon: <HeadphonesIcon className="h-4 w-4" /> },
-    { title: "Feedback Loop", href: "/governance/feedback-loop", icon: <MessageSquareIcon className="h-4 w-4" /> },
   ];
 
   return (
