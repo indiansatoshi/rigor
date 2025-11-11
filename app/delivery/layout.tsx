@@ -1,7 +1,7 @@
 "use client";
 
 import { SideNav } from "@/components/side-nav";
-import { PackageIcon, CodeIcon, TestTubeIcon, LayoutDashboardIcon, KanbanSquareIcon } from "lucide-react";
+import { LayoutDashboardIcon, KanbanSquareIcon } from "lucide-react";
 
 export default function DeliveryLayout({
   children,
@@ -11,9 +11,6 @@ export default function DeliveryLayout({
   const sideNavItems = [
     { title: "Dashboard", href: "/delivery", icon: <LayoutDashboardIcon className="h-4 w-4" /> },
     { title: "Boards", href: "/delivery/boards", icon: <KanbanSquareIcon className="h-4 w-4" /> },
-    { title: "Deployment", href: "/delivery/deployment", icon: <PackageIcon className="h-4 w-4" /> },
-    { title: "Development", href: "/delivery/development", icon: <CodeIcon className="h-4 w-4" /> },
-    { title: "Testing", href: "/delivery/testing", icon: <TestTubeIcon className="h-4 w-4" /> },
   ];
 
   return (
