@@ -111,7 +111,6 @@ export default function TestingPage() {
   return (
     <PageWrapper
       breadcrumbs={[
-        { label: "Default Workspace", href: "#" },
         { label: "Delivery", href: "/delivery" },
       ]}
       currentPage="Testing"

@@ -1,11 +1,14 @@
+"use client";
+
 import { PageWrapper } from "@/components/page-wrapper";
+import { useTeam } from "@/components/team-context";
 
 export default function Page() {
+  const { activeTeam } = useTeam();
+  const breadcrumbs = activeTeam ? [{ label: activeTeam.name, href: "#" }] : [];
+
   return (
-    <PageWrapper
-      breadcrumbs={[{ label: "Default Workspace", href: "#" }]}
-      currentPage="Dashboard"
-    >
+    <PageWrapper breadcrumbs={breadcrumbs} currentPage="Dashboard">
       <div className="grid auto-rows-min gap-4 md:grid-cols-3">
         <div className="bg-muted/50 aspect-video rounded-xl" />
         <div className="bg-muted/50 aspect-video rounded-xl" />

@@ -103,7 +103,6 @@ export default function ReleaseTrackerPage() {
   return (
     <PageWrapper
       breadcrumbs={[
-        { label: "Default Workspace", href: "#" },
         { label: "Planning", href: "/planning" },
       ]}
       currentPage="Release Tracker"

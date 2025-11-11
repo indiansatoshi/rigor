@@ -51,7 +51,6 @@ export default function OSTPage() {
   return (
     <PageWrapper
       breadcrumbs={[
-        { label: "Default Workspace", href: "#" },
         { label: "Discovery", href: "/discovery" },
       ]}
       currentPage="OST"

@@ -108,7 +108,6 @@ export default function CustomerSupportPage() {
   return (
     <PageWrapper
       breadcrumbs={[
-        { label: "Default Workspace", href: "#" },
         { label: "Governance", href: "/governance" },
       ]}
       currentPage="Customer Support"

@@ -106,7 +106,6 @@ export default function PIPlanPage() {
   return (
     <PageWrapper
       breadcrumbs={[
-        { label: "Default Workspace", href: "#" },
         { label: "Planning", href: "/planning" },
       ]}
       currentPage="PI Plans"

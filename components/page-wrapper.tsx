@@ -1,3 +1,5 @@
+"use client"
+
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -8,6 +10,7 @@ import {
 } from "@/components/ui/breadcrumb";
 import { Separator } from "@/components/ui/separator";
 import { SidebarTrigger } from "@/components/ui/sidebar";
+import { useTeam } from "@/components/team-context";
 
 interface PageWrapperProps {
   children: React.ReactNode;
@@ -19,6 +22,17 @@ interface PageWrapperProps {
 }
 
 export function PageWrapper({ children, breadcrumbs = [], currentPage }: PageWrapperProps) {
+  const { activeTeam } = useTeam();
+  const resolvedBreadcrumbs = (() => {
+    if (breadcrumbs.length === 0 && activeTeam) {
+      return [{ label: activeTeam.name, href: "#" }];
+    }
+    return breadcrumbs.map((b) => ({
+      ...b,
+      label: b.label === "Default Workspace" && activeTeam ? activeTeam.name : b.label,
+    }));
+  })();
+
   return (
     <>
       <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
@@ -30,7 +44,7 @@ export function PageWrapper({ children, breadcrumbs = [], currentPage }: PageWra
           />
           <Breadcrumb>
             <BreadcrumbList>
-              {breadcrumbs.map((breadcrumb, index) => (
+              {resolvedBreadcrumbs.map((breadcrumb, index) => (
                 <div key={index} className="contents">
                   <BreadcrumbItem className="hidden md:block">
                     {breadcrumb.href ? (

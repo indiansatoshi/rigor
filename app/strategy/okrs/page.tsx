@@ -55,7 +55,6 @@ export default function OKRsPage() {
   return (
     <PageWrapper
       breadcrumbs={[
-        { label: "Default Workspace", href: "#" },
         { label: "Strategy", href: "/strategy" },
       ]}
       currentPage="OKRs"

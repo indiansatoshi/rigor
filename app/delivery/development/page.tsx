@@ -90,7 +90,6 @@ export default function DevelopmentPage() {
   return (
     <PageWrapper
       breadcrumbs={[
-        { label: "Default Workspace", href: "#" },
         { label: "Delivery", href: "/delivery" },
       ]}
       currentPage="Development"

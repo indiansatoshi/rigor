@@ -54,10 +54,7 @@ const Example = () => {
   const [features, setFeatures] = useState(exampleFeatures);
 
   return (
-    <PageWrapper
-      breadcrumbs={[{ label: "Default Workspace", href: "#" }]}
-      currentPage="Delivery"
-    >
+    <PageWrapper currentPage="Delivery">
       <KanbanProvider
         columns={columns}
         data={features}

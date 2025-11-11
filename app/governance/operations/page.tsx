@@ -74,7 +74,6 @@ export default function OperationsPage() {
   return (
     <PageWrapper
       breadcrumbs={[
-        { label: "Default Workspace", href: "#" },
         { label: "Governance", href: "/governance" },
       ]}
       currentPage="Operations"

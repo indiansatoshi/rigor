@@ -54,7 +54,6 @@ export default function HypothesesPage() {
   return (
     <PageWrapper
       breadcrumbs={[
-        { label: "Default Workspace", href: "#" },
         { label: "Discovery", href: "/discovery" },
       ]}
       currentPage="Hypotheses"

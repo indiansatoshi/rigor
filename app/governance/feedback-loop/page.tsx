@@ -131,7 +131,6 @@ export default function FeedbackLoopPage() {
   return (
     <PageWrapper
       breadcrumbs={[
-        { label: "Default Workspace", href: "#" },
         { label: "Governance", href: "/governance" },
       ]}
       currentPage="Feedback Loop"

@@ -53,7 +53,6 @@ export default function RoadmapsPage() {
   return (
     <PageWrapper
       breadcrumbs={[
-        { label: "Default Workspace", href: "#" },
         { label: "Planning", href: "/planning" },
       ]}
       currentPage="Roadmaps"
