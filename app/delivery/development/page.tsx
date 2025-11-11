@@ -8,17 +8,13 @@ import { Input } from "@/components/ui/input";
 import { 
   SearchIcon, 
   PlusIcon,
-  BellIcon,
-  HelpCircleIcon,
   ChevronDownIcon,
   CalendarIcon,
   GridIcon,
   ListIcon
 } from "lucide-react";
-import { useState } from "react";
 
 export default function DevelopmentPage() {
-  const [activeTab, setActiveTab] = useState("kanban-board");
 
   const tasks = [
     {
@@ -123,37 +119,13 @@ export default function DevelopmentPage() {
       ]}
       currentPage="Development"
     >
-      {/* Top Navigation */}
+      {/* Page Header */}
       <div className="flex items-center justify-between mb-6">
-        <div className="flex items-center gap-2">
-          <Button
-            variant={activeTab === "kanban-board" ? "default" : "ghost"}
-            className={activeTab === "kanban-board" ? "bg-card text-accent hover:bg-card" : "text-muted-foreground"}
-            onClick={() => setActiveTab("kanban-board")}
-          >
-            Kanban Board
-          </Button>
-          <Button
-            variant="ghost"
-            className="text-muted-foreground"
-            onClick={() => setActiveTab("backlog")}
-          >
-            Backlog
-          </Button>
-          <Button
-            variant="ghost"
-            className="text-muted-foreground"
-            onClick={() => setActiveTab("releases")}
-          >
-            Releases
-          </Button>
-          <Button
-            variant="ghost"
-            className="text-muted-foreground"
-            onClick={() => setActiveTab("reports")}
-          >
-            Reports
-          </Button>
+        <div>
+          <h1 className="text-2xl font-semibold text-foreground">Development</h1>
+          <p className="text-sm text-muted-foreground mt-1">
+            Manage development tasks and track progress
+          </p>
         </div>
         <div className="flex items-center gap-2">
           <div className="relative">
@@ -167,18 +139,6 @@ export default function DevelopmentPage() {
             <PlusIcon className="h-4 w-4 mr-2" />
             New Task
           </Button>
-          <Button variant="ghost" size="icon">
-            <BellIcon className="h-5 w-5" />
-          </Button>
-          <Button variant="ghost" size="icon">
-            <HelpCircleIcon className="h-5 w-5" />
-          </Button>
-          <Avatar className="h-8 w-8">
-            <AvatarImage src="/avatars/user.png" />
-            <AvatarFallback className="bg-accent text-accent-foreground text-xs">
-              U
-            </AvatarFallback>
-          </Avatar>
         </div>
       </div>
 

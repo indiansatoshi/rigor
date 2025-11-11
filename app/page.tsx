@@ -1,16 +1,24 @@
 "use client";
 
 import { PageWrapper } from "@/components/page-wrapper";
+import { PageBreadcrumbs } from "@/components/page-breadcrumbs";
+import { SideNav } from "@/components/side-nav";
 import { useTeam } from "@/components/team-context";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
-import { ArrowUpIcon, ArrowDownIcon, PlusIcon } from "lucide-react";
+import { ArrowUpIcon, ArrowDownIcon, PlusIcon, LayoutDashboardIcon, TargetIcon, LayoutGridIcon } from "lucide-react";
 
 export default function Page() {
   const { activeTeam } = useTeam();
   const breadcrumbs = activeTeam ? [{ label: activeTeam.name, href: "#" }] : [];
+
+  const sideNavItems = [
+    { title: "Dashboard", href: "/", icon: <LayoutDashboardIcon className="h-4 w-4" /> },
+    { title: "Lean Canvas", href: "/strategy/lean-canvas", icon: <LayoutGridIcon className="h-4 w-4" /> },
+    { title: "OKRs", href: "/strategy/okrs", icon: <TargetIcon className="h-4 w-4" /> },
+  ];
 
   // Mock data for metrics
   const metrics = [
@@ -103,14 +111,18 @@ export default function Page() {
   ];
 
   return (
-    <PageWrapper breadcrumbs={breadcrumbs} currentPage="Dashboard">
-      <div className="flex items-center justify-between mb-4">
-        <div>
-          <h1 className="text-2xl font-semibold text-foreground">Dashboard</h1>
-          <p className="text-sm text-muted-foreground">
-            An overview of key metrics, OKRs, and Lean Canvas progress.
-          </p>
-        </div>
+    <>
+      <SideNav items={sideNavItems} title="Strategy" />
+      <div className="flex-1 overflow-auto bg-background">
+        <div className="p-6 space-y-6">
+          <PageBreadcrumbs items={[{ label: "Strategy", href: "/strategy" }, { label: "Dashboard" }]} />
+          <div className="flex items-center justify-between mb-4">
+            <div>
+              <h1 className="text-2xl font-semibold text-foreground">Dashboard</h1>
+              <p className="text-sm text-muted-foreground">
+                An overview of key metrics, OKRs, and Lean Canvas progress.
+              </p>
+            </div>
         <Button className="bg-accent hover:bg-accent/90 text-accent-foreground">
           <PlusIcon className="h-4 w-4 mr-2" />
           Create New OKR
@@ -234,6 +246,8 @@ export default function Page() {
           </div>
         </CardContent>
       </Card>
-    </PageWrapper>
+        </div>
+      </div>
+    </>
   );
 }

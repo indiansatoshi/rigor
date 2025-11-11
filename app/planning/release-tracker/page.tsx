@@ -9,8 +9,6 @@ import { Progress } from "@/components/ui/progress";
 import { 
   SearchIcon, 
   PlusIcon,
-  SettingsIcon,
-  BellIcon,
   GridIcon,
   ListIcon,
   MoreVerticalIcon,
@@ -19,7 +17,6 @@ import {
 import { useState } from "react";
 
 export default function ReleaseTrackerPage() {
-  const [activeTab, setActiveTab] = useState("release-tracker");
   const [viewMode, setViewMode] = useState("list");
 
   const releases = [
@@ -107,37 +104,13 @@ export default function ReleaseTrackerPage() {
       ]}
       currentPage="Release Tracker"
     >
-      {/* Top Navigation */}
+      {/* Page Header */}
       <div className="flex items-center justify-between mb-6">
-        <div className="flex items-center gap-2">
-          <Button
-            variant="ghost"
-            className="text-muted-foreground"
-            onClick={() => setActiveTab("roadmap")}
-          >
-            Roadmap
-          </Button>
-          <Button
-            variant={activeTab === "release-tracker" ? "default" : "ghost"}
-            className={activeTab === "release-tracker" ? "bg-card text-accent hover:bg-card" : "text-muted-foreground"}
-            onClick={() => setActiveTab("release-tracker")}
-          >
-            Release Tracker
-          </Button>
-          <Button
-            variant="ghost"
-            className="text-muted-foreground"
-            onClick={() => setActiveTab("ci-cd")}
-          >
-            CI/CD
-          </Button>
-          <Button
-            variant="ghost"
-            className="text-muted-foreground"
-            onClick={() => setActiveTab("metrics")}
-          >
-            Metrics
-          </Button>
+        <div>
+          <h1 className="text-2xl font-semibold text-foreground">Release Tracker</h1>
+          <p className="text-sm text-muted-foreground mt-1">
+            Track and manage product releases
+          </p>
         </div>
         <div className="flex items-center gap-2">
           <div className="relative">
@@ -147,23 +120,8 @@ export default function ReleaseTrackerPage() {
               className="pl-9 w-64 bg-muted/30 border-border"
             />
           </div>
-          <Button variant="ghost" size="icon">
-            <SettingsIcon className="h-5 w-5" />
-          </Button>
-          <Button variant="ghost" size="icon">
-            <BellIcon className="h-5 w-5" />
-          </Button>
-          <Avatar className="h-8 w-8">
-            <AvatarImage src="/avatars/user.png" />
-            <AvatarFallback className="bg-accent text-accent-foreground text-xs">
-              U
-            </AvatarFallback>
-          </Avatar>
         </div>
       </div>
-
-      {/* Page Title */}
-      <h1 className="text-2xl font-semibold text-foreground mb-6">Release Tracker</h1>
 
       {/* Metrics Cards */}
       <div className="grid grid-cols-4 gap-4 mb-6">

@@ -8,7 +8,6 @@ import { ChevronUpIcon, ChevronDownIcon } from "lucide-react";
 import { useState } from "react";
 
 export default function OKRsPage() {
-  const [activeTab, setActiveTab] = useState("current");
   const [expandedObjectives, setExpandedObjectives] = useState<number[]>([0]);
 
   const okrs = [
@@ -61,63 +60,16 @@ export default function OKRsPage() {
       ]}
       currentPage="OKR Management"
     >
-      {/* Tabs */}
+      {/* Page Header */}
       <div className="flex items-center justify-between mb-6">
-        <div className="flex items-center gap-2">
-          <Button
-            variant={activeTab === "okr-management" ? "default" : "ghost"}
-            className="text-muted-foreground"
-            onClick={() => setActiveTab("okr-management")}
-          >
-            OKR Management
-          </Button>
-          <Button
-            variant={activeTab === "lean-canvas" ? "default" : "ghost"}
-            className="text-muted-foreground"
-            onClick={() => setActiveTab("lean-canvas")}
-          >
-            Lean Canvas
-          </Button>
-          <Button
-            variant={activeTab === "initiatives" ? "default" : "ghost"}
-            className="text-muted-foreground"
-            onClick={() => setActiveTab("initiatives")}
-          >
-            Initiatives
-          </Button>
+        <div>
+          <h1 className="text-2xl font-semibold text-foreground">OKRs</h1>
+          <p className="text-sm text-muted-foreground mt-1">
+            Track objectives and key results for Q4 2024
+          </p>
         </div>
-      </div>
-
-      {/* Header */}
-      <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-semibold text-foreground">Objectives & Key Results</h1>
         <Button className="bg-accent hover:bg-accent/90 text-accent-foreground">
-          Add Objective
-        </Button>
-      </div>
-
-      {/* Time Period Tabs */}
-      <div className="flex items-center gap-4 mb-6 border-b border-border">
-        <Button
-          variant="ghost"
-          className={activeTab === "current" ? "text-accent border-b-2 border-accent rounded-none" : "text-muted-foreground"}
-          onClick={() => setActiveTab("current")}
-        >
-          Current Quarter
-        </Button>
-        <Button
-          variant="ghost"
-          className="text-muted-foreground"
-          onClick={() => setActiveTab("past")}
-        >
-          Past
-        </Button>
-        <Button
-          variant="ghost"
-          className="text-muted-foreground"
-          onClick={() => setActiveTab("future")}
-        >
-          Future
+          + New OKR
         </Button>
       </div>
 

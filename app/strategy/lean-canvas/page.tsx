@@ -3,11 +3,8 @@
 import { PageWrapper } from "@/components/page-wrapper";
 import { Button } from "@/components/ui/button";
 import { InfoIcon, UsersIcon, DownloadIcon, HistoryIcon, PlusIcon } from "lucide-react";
-import { useState } from "react";
 
 export default function LeanCanvasPage() {
-  const [activeTab, setActiveTab] = useState("lean-canvas");
-
   const canvasData = {
     problem: {
       title: "Problem",
@@ -89,23 +86,13 @@ export default function LeanCanvasPage() {
       ]}
       currentPage="Lean Canvas"
     >
-      {/* Tabs and Actions */}
+      {/* Page Header */}
       <div className="flex items-center justify-between mb-6">
-        <div className="flex items-center gap-2">
-          <Button
-            variant={activeTab === "lean-canvas" ? "default" : "ghost"}
-            className={activeTab === "lean-canvas" ? "bg-card text-foreground hover:bg-card" : "text-muted-foreground"}
-            onClick={() => setActiveTab("lean-canvas")}
-          >
-            Lean Canvas
-          </Button>
-          <Button
-            variant={activeTab === "okrs" ? "default" : "ghost"}
-            className="text-muted-foreground"
-            onClick={() => setActiveTab("okrs")}
-          >
-            OKRs
-          </Button>
+        <div>
+          <h1 className="text-2xl font-semibold text-foreground">Lean Canvas</h1>
+          <p className="text-sm text-muted-foreground mt-1">
+            Define your business model on a single page
+          </p>
         </div>
         <div className="flex items-center gap-2">
           <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground">
