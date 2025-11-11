@@ -54,7 +54,7 @@ export default function HomePage() {
   const sectionOverview = [
     {
       name: "Strategy",
-      href: "/",
+      href: "/strategy",
       activeItems: 8,
       completedItems: 15,
       progress: 65,
@@ -165,9 +165,7 @@ export default function HomePage() {
 
   return (
     <PageWrapper
-      breadcrumbs={[
-        { label: "Home" },
-      ]}
+      breadcrumbs={[]}
       currentPage="Dashboard"
     >
       {/* Page Header */}

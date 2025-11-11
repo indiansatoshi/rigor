@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { ChevronRightIcon, HomeIcon } from "lucide-react";
+import { useWorkspace } from "@/components/workspace-context";
 
 interface BreadcrumbItem {
   label: string;
@@ -13,6 +14,8 @@ interface PageBreadcrumbsProps {
 }
 
 export function PageBreadcrumbs({ items }: PageBreadcrumbsProps) {
+  const { selectedWorkspace } = useWorkspace();
+
   return (
     <nav className="flex items-center gap-2 text-sm mb-4">
       <Link 
@@ -21,6 +24,8 @@ export function PageBreadcrumbs({ items }: PageBreadcrumbsProps) {
       >
         <HomeIcon className="h-4 w-4" />
       </Link>
+      <ChevronRightIcon className="h-4 w-4 text-muted-foreground" />
+      <span className="text-muted-foreground">{selectedWorkspace.name}</span>
       {items.map((item, index) => (
         <div key={index} className="flex items-center gap-2">
           <ChevronRightIcon className="h-4 w-4 text-muted-foreground" />

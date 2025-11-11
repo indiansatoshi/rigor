@@ -5,13 +5,22 @@ import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
-import { SearchIcon, BellIcon, HelpCircleIcon, SettingsIcon } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { SearchIcon, BellIcon, HelpCircleIcon, SettingsIcon, ChevronDownIcon, CheckIcon, PlusIcon } from "lucide-react";
+import { useWorkspace } from "@/components/workspace-context";
 
 export function TopNav() {
   const pathname = usePathname();
+  const { selectedWorkspace, setSelectedWorkspace, workspaces } = useWorkspace();
 
   const navItems = [
-    { title: "Home", href: "/home" },
     { title: "Strategy", href: "/strategy" },
     { title: "Discovery", href: "/discovery" },
     { title: "Planning", href: "/planning" },
@@ -20,6 +29,8 @@ export function TopNav() {
   ];
 
   const isActive = (href: string) => {
+    // Exact match for root path
+    if (href === "/" && pathname === "/") return false;
     return pathname.startsWith(href);
   };
 
@@ -27,18 +38,48 @@ export function TopNav() {
     <div className="border-b border-border bg-card sticky top-0 z-50">
       <div className="flex h-14 items-center px-4 gap-4">
         {/* Logo and Brand */}
-        <Link href="/" className="flex items-center gap-2 mr-2">
+        <Link href="/" className="flex items-center gap-2">
           <div className="flex items-center justify-center w-7 h-7 rounded bg-accent">
-            <svg
-              className="w-4 h-4 text-accent-foreground"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-            </svg>
+            <span className="text-sm font-bold text-accent-foreground">R</span>
           </div>
-          <span className="text-base font-semibold text-foreground">Strate-Align</span>
+          <span className="text-base font-semibold text-foreground">RiGoR</span>
         </Link>
+
+        {/* Workspace Selector */}
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" className="h-8 px-2 gap-1 text-sm font-medium">
+              {selectedWorkspace.name}
+              <ChevronDownIcon className="h-4 w-4 text-muted-foreground" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="start" className="w-64">
+            <DropdownMenuLabel className="text-xs text-muted-foreground font-normal">
+              Workspaces
+            </DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            {workspaces.map((workspace) => (
+              <DropdownMenuItem
+                key={workspace.id}
+                onClick={() => setSelectedWorkspace(workspace)}
+                className="flex items-center justify-between cursor-pointer"
+              >
+                <div className="flex flex-col">
+                  <span className="font-medium">{workspace.name}</span>
+                  <span className="text-xs text-muted-foreground">{workspace.role}</span>
+                </div>
+                {selectedWorkspace.id === workspace.id && (
+                  <CheckIcon className="h-4 w-4 text-accent" />
+                )}
+              </DropdownMenuItem>
+            ))}
+            <DropdownMenuSeparator />
+            <DropdownMenuItem className="cursor-pointer">
+              <PlusIcon className="h-4 w-4 mr-2" />
+              Create workspace
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
 
         {/* Main Navigation */}
         <nav className="flex items-center gap-0 flex-1">

@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { TopNav } from "@/components/top-nav";
 import { TeamProvider } from "@/components/team-context";
+import { WorkspaceProvider } from "@/components/workspace-context";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,8 +16,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Strate-Align",
-  description: "Strategic alignment and product management platform",
+  title: "RiGoR",
+  description: "Rigorous product management and strategic alignment platform",
 };
 
 export default function RootLayout({
@@ -29,14 +30,16 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <TeamProvider>
-          <div className="flex flex-col h-screen">
-            <TopNav />
-            <div className="flex flex-1 overflow-hidden">
-              {children}
+        <WorkspaceProvider>
+          <TeamProvider>
+            <div className="flex flex-col h-screen">
+              <TopNav />
+              <div className="flex flex-1 overflow-hidden">
+                {children}
+              </div>
             </div>
-          </div>
-        </TeamProvider>
+          </TeamProvider>
+        </WorkspaceProvider>
       </body>
     </html>
   );
