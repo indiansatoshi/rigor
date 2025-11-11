@@ -59,89 +59,89 @@ const data = {
   navMain: [
     {
       title: "Strategy",
-      url: "#",
+      url: "/strategy",
       icon: LandPlot,
       isActive: true,
       items: [
         {
           title: "Lean Canvas",
-          url: "#",
+          url: "/strategy/lean-canvas",
         },
         {
           title: "OKRs",
-          url: "#",
+          url: "/strategy/okrs",
         },
       ],
     },
     {
       title: "Discovery",
-      url: "#",
+      url: "/discovery",
       icon: FlaskConical,
       items: [
         {
           title: "OST",
-          url: "#",
+          url: "/discovery/ost",
         },
         {
           title: "Hypotheses",
-          url: "#",
+          url: "/discovery/hypotheses",
         },
       ],
     },
     {
       title: "Planning",
-      url: "#",
+      url: "/planning",
       icon: Route,
       items: [
         {
           title: "Roadmaps",
-          url: "#",
+          url: "/planning/roadmaps",
         },
         {
           title: "PI Plans",
-          url: "#",
+          url: "/planning/pi-plans",
         },
         {
           title: "Release Tracker",
-          url: "#",
+          url: "/planning/release-tracker",
         },
       ],
     },
     {
       title: "Delivery",
-      url: "#",
+      url: "/delivery",
       icon: CircleCheck,
       items: [
         {
           title: "Development",
-          url: "#",
+          url: "/delivery/development",
         },
         {
           title: "Testing",
-          url: "#",
+          url: "/delivery/testing",
         },
         {
           title: "Deployment",
-          url: "#",
+          url: "/delivery/deployment",
         },
       ],
     },
     {
       title: "Governance",
-      url: "#",
+      url: "/governance",
       icon: EyeIcon,
       items: [
         {
           title: "Operations",
-          url: "#",
+          url: "/governance/operations",
         },
         {
           title: "Customer Support",
-          url: "#",
+          url: "/governance/customer-support",
         },
         {
           title: "Feedback Loop",
-          url: "#",
+          url: "/governance/feedback-loop",
         },
       ],
     },
