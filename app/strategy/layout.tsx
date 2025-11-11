@@ -1,7 +1,7 @@
 "use client";
 
 import { SideNav } from "@/components/side-nav";
-import { LayoutDashboardIcon, TargetIcon, LayoutGridIcon } from "lucide-react";
+import { LayoutDashboardIcon, TargetIcon, LayoutGridIcon, KanbanSquareIcon } from "lucide-react";
 
 export default function StrategyLayout({
   children,
@@ -10,6 +10,7 @@ export default function StrategyLayout({
 }) {
   const sideNavItems = [
     { title: "Dashboard", href: "/", icon: <LayoutDashboardIcon className="h-4 w-4" /> },
+    { title: "Boards", href: "/strategy/boards", icon: <KanbanSquareIcon className="h-4 w-4" /> },
     { title: "Lean Canvas", href: "/strategy/lean-canvas", icon: <LayoutGridIcon className="h-4 w-4" /> },
     { title: "OKRs", href: "/strategy/okrs", icon: <TargetIcon className="h-4 w-4" /> },
   ];
