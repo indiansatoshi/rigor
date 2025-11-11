@@ -1,192 +1,293 @@
 "use client";
 
 import { PageWrapper } from "@/components/page-wrapper";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Input } from "@/components/ui/input";
+import { Progress } from "@/components/ui/progress";
+import { 
+  SearchIcon, 
+  PlusIcon,
+  SettingsIcon,
+  BellIcon,
+  GridIcon,
+  ListIcon,
+  MoreVerticalIcon,
+  ChevronDownIcon
+} from "lucide-react";
+import { useState } from "react";
 
 export default function ReleaseTrackerPage() {
+  const [activeTab, setActiveTab] = useState("release-tracker");
+  const [viewMode, setViewMode] = useState("list");
+
   const releases = [
     {
-      version: "v2.5.0",
-      name: "Winter Release",
-      status: "deployed",
-      environment: "production",
-      date: "Nov 10, 2024",
-      features: 12,
-      bugFixes: 8,
-      deployedBy: "DevOps Team",
+      id: 1,
+      version: "v3.2.0",
+      product: "Core API",
+      description: "Search & Discovery",
+      status: "In Progress",
+      statusColor: "bg-accent",
+      progress: 65,
+      owner: { name: "Jane Cooper", initials: "JC", avatar: "/avatars/01.png" },
+      targetDate: "Dec 15, 2023"
     },
     {
-      version: "v2.5.1",
-      name: "Hotfix Release",
-      status: "in-staging",
-      environment: "staging",
-      date: "Nov 11, 2024",
-      features: 0,
-      bugFixes: 3,
-      deployedBy: "Backend Team",
+      id: 2,
+      version: "v1.5.2",
+      product: "Analytics",
+      description: "Dashboard Revamp",
+      status: "Blocked",
+      statusColor: "bg-destructive",
+      progress: 35,
+      owner: { name: "John Doe", initials: "JD", avatar: "/avatars/02.png" },
+      targetDate: "Dec 20, 2023"
     },
     {
-      version: "v2.6.0",
-      name: "Holiday Feature Release",
-      status: "in-progress",
-      environment: "development",
-      date: "Nov 25, 2024 (planned)",
-      features: 15,
-      bugFixes: 5,
-      deployedBy: "TBD",
+      id: 3,
+      version: "v2.1.0",
+      product: "Mobile App",
+      description: "Android Release",
+      status: "In QA",
+      statusColor: "bg-yellow-500",
+      progress: 75,
+      owner: { name: "Sarah Smith", initials: "SS", avatar: "/avatars/03.png" },
+      targetDate: "Dec 22, 2023"
     },
     {
-      version: "v2.4.0",
-      name: "Autumn Release",
-      status: "deployed",
-      environment: "production",
-      date: "Oct 15, 2024",
-      features: 10,
-      bugFixes: 12,
-      deployedBy: "DevOps Team",
-    },
+      id: 4,
+      version: "v3.1.5",
+      product: "Core API",
+      description: "Performance Tweaks",
+      status: "Shipped",
+      statusColor: "bg-chart-1",
+      progress: 100,
+      owner: { name: "Mark Johnson", initials: "MJ", avatar: "/avatars/04.png" },
+      targetDate: "Nov 30, 2023"
+    }
   ];
 
-  const deploymentPipeline = [
+  const metrics = [
     {
-      stage: "Development",
-      version: "v2.6.0",
-      status: "active",
-      lastDeployed: "2 hours ago",
-      health: "healthy",
+      title: "In Progress",
+      value: 12,
+      change: "+5%",
+      changeType: "positive",
+      period: "vs last quarter"
     },
     {
-      stage: "Staging",
-      version: "v2.5.1",
-      status: "active",
-      lastDeployed: "4 hours ago",
-      health: "healthy",
+      title: "Scheduled",
+      value: 8,
+      change: "-2%",
+      changeType: "negative",
+      period: "vs last quarter"
     },
     {
-      stage: "Production",
-      version: "v2.5.0",
-      status: "active",
-      lastDeployed: "1 day ago",
-      health: "healthy",
+      title: "Overdue",
+      value: 2,
+      change: "+1%",
+      changeType: "positive",
+      period: "vs last quarter"
     },
+    {
+      title: "Completed This Q",
+      value: 24,
+      change: "+10%",
+      changeType: "positive",
+      period: "vs last quarter"
+    }
   ];
-
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case "deployed":
-        return "bg-chart-1 text-white";
-      case "in-staging":
-        return "bg-chart-2 text-white";
-      case "in-progress":
-        return "bg-chart-3 text-white";
-      case "failed":
-        return "bg-destructive text-white";
-      default:
-        return "bg-muted text-muted-foreground";
-    }
-  };
-
-  const getHealthColor = (health: string) => {
-    switch (health) {
-      case "healthy":
-        return "bg-chart-1 text-white";
-      case "warning":
-        return "bg-chart-2 text-white";
-      case "critical":
-        return "bg-destructive text-white";
-      default:
-        return "bg-muted";
-    }
-  };
 
   return (
     <PageWrapper
       breadcrumbs={[
-        { label: "Planning", href: "/planning" },
+        { label: "Delivery", href: "/delivery" },
       ]}
       currentPage="Release Tracker"
     >
-      <div className="space-y-6">
-        {/* Deployment Pipeline */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Deployment Pipeline</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid gap-4 md:grid-cols-3">
-              {deploymentPipeline.map((stage) => (
-                <div key={stage.stage} className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <h4 className="font-semibold">{stage.stage}</h4>
-                    <Badge className={getHealthColor(stage.health)}>
-                      {stage.health}
-                    </Badge>
-                  </div>
-                  <div className="p-4 rounded-md bg-muted/50 space-y-2">
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm text-muted-foreground">Version</span>
-                      <span className="text-sm font-medium">{stage.version}</span>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm text-muted-foreground">Status</span>
-                      <Badge variant="outline">{stage.status}</Badge>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm text-muted-foreground">Last Deploy</span>
-                      <span className="text-xs text-muted-foreground">{stage.lastDeployed}</span>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Release History */}
-        <div className="space-y-4">
-          <h3 className="text-lg font-semibold">Release History</h3>
-          <div className="grid gap-4">
-            {releases.map((release) => (
-              <Card key={release.version}>
-                <CardHeader>
-                  <div className="flex items-start justify-between">
-                    <div className="space-y-1">
-                      <div className="flex items-center gap-2">
-                        <CardTitle className="text-lg">{release.version}</CardTitle>
-                        <Badge className={getStatusColor(release.status)}>
-                          {release.status}
-                        </Badge>
-                      </div>
-                      <p className="text-sm text-muted-foreground">{release.name}</p>
-                    </div>
-                    <Badge variant="outline">{release.environment}</Badge>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <div className="grid gap-4 md:grid-cols-4">
-                    <div>
-                      <p className="text-xs text-muted-foreground">Release Date</p>
-                      <p className="text-sm font-medium">{release.date}</p>
-                    </div>
-                    <div>
-                      <p className="text-xs text-muted-foreground">Features</p>
-                      <p className="text-sm font-medium">{release.features}</p>
-                    </div>
-                    <div>
-                      <p className="text-xs text-muted-foreground">Bug Fixes</p>
-                      <p className="text-sm font-medium">{release.bugFixes}</p>
-                    </div>
-                    <div>
-                      <p className="text-xs text-muted-foreground">Deployed By</p>
-                      <p className="text-sm font-medium">{release.deployedBy}</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+      {/* Top Navigation */}
+      <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center gap-2">
+          <Button
+            variant="ghost"
+            className="text-muted-foreground"
+            onClick={() => setActiveTab("roadmap")}
+          >
+            Roadmap
+          </Button>
+          <Button
+            variant={activeTab === "release-tracker" ? "default" : "ghost"}
+            className={activeTab === "release-tracker" ? "bg-card text-accent hover:bg-card" : "text-muted-foreground"}
+            onClick={() => setActiveTab("release-tracker")}
+          >
+            Release Tracker
+          </Button>
+          <Button
+            variant="ghost"
+            className="text-muted-foreground"
+            onClick={() => setActiveTab("ci-cd")}
+          >
+            CI/CD
+          </Button>
+          <Button
+            variant="ghost"
+            className="text-muted-foreground"
+            onClick={() => setActiveTab("metrics")}
+          >
+            Metrics
+          </Button>
         </div>
+        <div className="flex items-center gap-2">
+          <div className="relative">
+            <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <Input 
+              placeholder="Search..." 
+              className="pl-9 w-64 bg-muted/30 border-border"
+            />
+          </div>
+          <Button variant="ghost" size="icon">
+            <SettingsIcon className="h-5 w-5" />
+          </Button>
+          <Button variant="ghost" size="icon">
+            <BellIcon className="h-5 w-5" />
+          </Button>
+          <Avatar className="h-8 w-8">
+            <AvatarImage src="/avatars/user.png" />
+            <AvatarFallback className="bg-accent text-accent-foreground text-xs">
+              U
+            </AvatarFallback>
+          </Avatar>
+        </div>
+      </div>
+
+      {/* Page Title */}
+      <h1 className="text-2xl font-semibold text-foreground mb-6">Release Tracker</h1>
+
+      {/* Metrics Cards */}
+      <div className="grid grid-cols-4 gap-4 mb-6">
+        {metrics.map((metric, index) => (
+          <div key={index} className="bg-card border border-border rounded-lg p-6">
+            <p className="text-sm text-muted-foreground mb-2">{metric.title}</p>
+            <p className="text-4xl font-bold text-foreground mb-2">{metric.value}</p>
+            <p className="text-sm">
+              <span className={metric.changeType === "positive" ? "text-chart-1" : "text-destructive"}>
+                {metric.change}
+              </span>
+              <span className="text-muted-foreground ml-1">{metric.period}</span>
+            </p>
+          </div>
+        ))}
+      </div>
+
+      {/* Filters and View Toggle */}
+      <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center gap-2">
+          <Button variant="outline" size="sm">
+            Status: In Progress
+            <ChevronDownIcon className="h-4 w-4 ml-1" />
+          </Button>
+          <Button variant="outline" size="sm">
+            Team: All
+            <ChevronDownIcon className="h-4 w-4 ml-1" />
+          </Button>
+          <Button variant="outline" size="sm">
+            Date: This Quarter
+            <ChevronDownIcon className="h-4 w-4 ml-1" />
+          </Button>
+        </div>
+        <div className="flex items-center gap-2">
+          <Button
+            variant={viewMode === "grid" ? "default" : "ghost"}
+            size="icon"
+            onClick={() => setViewMode("grid")}
+          >
+            <GridIcon className="h-4 w-4" />
+          </Button>
+          <Button
+            variant={viewMode === "list" ? "default" : "ghost"}
+            size="icon"
+            onClick={() => setViewMode("list")}
+          >
+            <ListIcon className="h-4 w-4" />
+          </Button>
+          <Button className="bg-accent hover:bg-accent/90 text-accent-foreground ml-2">
+            <PlusIcon className="h-4 w-4 mr-2" />
+            New Release
+          </Button>
+        </div>
+      </div>
+
+      {/* Table */}
+      <div className="bg-card border border-border rounded-lg overflow-hidden">
+        {/* Table Header */}
+        <div className="grid grid-cols-[40px_1fr_1fr_120px_200px_120px_120px_40px] gap-4 p-4 border-b border-border bg-muted/30">
+          <div className="flex items-center">
+            <input type="checkbox" className="rounded" />
+          </div>
+          <div className="text-xs font-semibold text-muted-foreground uppercase">
+            RELEASE / PRODUCT
+          </div>
+          <div className="text-xs font-semibold text-muted-foreground uppercase">
+            STATUS
+          </div>
+          <div className="text-xs font-semibold text-muted-foreground uppercase">
+            PROGRESS
+          </div>
+          <div className="text-xs font-semibold text-muted-foreground uppercase">
+            OWNER
+          </div>
+          <div className="text-xs font-semibold text-muted-foreground uppercase">
+            TARGET DATE
+          </div>
+          <div></div>
+          <div></div>
+        </div>
+
+        {/* Table Rows */}
+        {releases.map((release) => (
+          <div
+            key={release.id}
+            className="grid grid-cols-[40px_1fr_1fr_120px_200px_120px_120px_40px] gap-4 p-4 border-b border-border hover:bg-muted/5 transition-colors"
+          >
+            <div className="flex items-center">
+              <input type="checkbox" className="rounded" />
+            </div>
+            <div className="flex flex-col justify-center">
+              <p className="text-sm font-semibold text-foreground">{release.version}</p>
+              <p className="text-xs text-muted-foreground">{release.product}</p>
+              <p className="text-xs text-muted-foreground">{release.description}</p>
+            </div>
+            <div className="flex items-center">
+              <Badge className={`${release.statusColor} text-white`}>
+                {release.status}
+              </Badge>
+            </div>
+            <div className="flex flex-col justify-center gap-2">
+              <Progress value={release.progress} className="h-2" />
+              <span className="text-xs text-muted-foreground">{release.progress}%</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Avatar className="h-6 w-6">
+                <AvatarImage src={release.owner.avatar} />
+                <AvatarFallback className="bg-accent text-accent-foreground text-[10px]">
+                  {release.owner.initials}
+                </AvatarFallback>
+              </Avatar>
+              <span className="text-sm text-foreground">{release.owner.name}</span>
+            </div>
+            <div className="flex items-center">
+              <span className="text-sm text-foreground">{release.targetDate}</span>
+            </div>
+            <div></div>
+            <div className="flex items-center justify-center">
+              <Button variant="ghost" size="icon">
+                <MoreVerticalIcon className="h-4 w-4" />
+              </Button>
+            </div>
+          </div>
+        ))}
       </div>
     </PageWrapper>
   );

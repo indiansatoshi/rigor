@@ -1,103 +1,139 @@
 "use client";
 
 import { PageWrapper } from "@/components/page-wrapper";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Input } from "@/components/ui/input";
 import { Progress } from "@/components/ui/progress";
+import { 
+  SearchIcon, 
+  ShareIcon,
+  DownloadIcon,
+  HelpCircleIcon,
+  PlusIcon,
+  AlertCircleIcon,
+  ChevronDownIcon
+} from "lucide-react";
+import { useState } from "react";
 
 export default function PIPlanPage() {
-  const piData = {
-    name: "PI 2024.4",
-    startDate: "Nov 1, 2024",
-    endDate: "Dec 20, 2024",
-    objectives: [
-      {
-        id: "PI-OBJ-1",
-        title: "Launch mobile app MVP",
-        businessValue: 10,
-        progress: 75,
-        teams: ["Mobile", "Backend", "QA"],
-        status: "on-track",
-      },
-      {
-        id: "PI-OBJ-2",
-        title: "Implement real-time collaboration",
-        businessValue: 8,
-        progress: 60,
-        teams: ["Platform", "Frontend"],
-        status: "on-track",
-      },
-      {
-        id: "PI-OBJ-3",
-        title: "Enhance security infrastructure",
-        businessValue: 9,
-        progress: 40,
-        teams: ["Security", "DevOps"],
-        status: "at-risk",
-      },
-      {
-        id: "PI-OBJ-4",
-        title: "Improve system performance by 30%",
-        businessValue: 7,
-        progress: 85,
-        teams: ["Platform", "Backend"],
-        status: "on-track",
-      },
-    ],
-  };
+  const [activeTab, setActiveTab] = useState("pi-plan");
 
-  const teams = [
+  const backlogFeatures = [
     {
-      name: "Mobile Team",
-      capacity: 120,
-      allocated: 95,
-      features: 8,
-      status: "healthy",
+      id: "FE-120",
+      title: "New User Onboarding Flow",
+      epic: "User Growth Q3",
+      label: "UX",
+      storyPoints: 8
     },
     {
-      name: "Backend Team",
-      capacity: 150,
-      allocated: 145,
-      features: 12,
-      status: "at-capacity",
+      id: "FE-121",
+      title: "API Performance Improvements",
+      epic: "Platform Stability",
+      label: "Backend",
+      storyPoints: 13
     },
     {
-      name: "Frontend Team",
-      capacity: 100,
-      allocated: 75,
-      features: 6,
-      status: "healthy",
-    },
-    {
-      name: "Platform Team",
-      capacity: 130,
-      allocated: 125,
-      features: 10,
-      status: "healthy",
-    },
+      id: "FE-122",
+      title: "Reporting Dashboard V2",
+      epic: "Data Insights",
+      label: "Frontend",
+      storyPoints: 21
+    }
   ];
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case "on-track":
-        return "bg-chart-1 text-white";
-      case "at-risk":
-        return "bg-chart-2 text-white";
-      case "blocked":
-        return "bg-destructive text-white";
-      default:
-        return "bg-muted";
+  const sprints = [
+    {
+      name: "Sprint 1 (July 1 - July 14)",
+      teams: [
+        {
+          name: "Team Phoenix",
+          capacity: "45/50 SP",
+          progress: 90,
+          features: [
+            {
+              id: "PHX-431",
+              title: "Setup CI/CD pipeline",
+              label: "Backend",
+              storyPoints: 5,
+              assignee: { initials: "JD", avatar: "/avatars/01.png" }
+            },
+            {
+              id: "PHX-432",
+              title: "Initial database schema",
+              label: "Backend",
+              storyPoints: 8,
+              assignee: { initials: "JS", avatar: "/avatars/02.png" },
+              atRisk: true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      name: "Sprint 2 (July 15 - July 28)",
+      teams: [
+        {
+          name: "Team Phoenix",
+          capacity: "38/50 SP",
+          progress: 76,
+          features: [
+            {
+              id: "PHX-435",
+              title: "User authentication service",
+              label: "Backend",
+              storyPoints: 13,
+              assignee: { initials: "AB", avatar: "/avatars/03.png" }
+            }
+          ]
+        },
+        {
+          name: "Team Raptors",
+          capacity: "25/40 SP",
+          progress: 62,
+          features: [
+            {
+              id: "RAP-210",
+              title: "Design mockups for dashboard",
+              label: "UX",
+              storyPoints: 8,
+              assignee: { initials: "CD", avatar: "/avatars/04.png" }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      name: "Sprint 3 (July 29 - Aug 11)",
+      teams: [
+        {
+          name: "Team Raptors",
+          capacity: "",
+          progress: 0,
+          features: [
+            {
+              id: "RAP-212",
+              title: "Build dashboard",
+              label: "Frontend",
+              storyPoints: 0,
+              assignee: null
+            }
+          ]
+        }
+      ]
     }
-  };
+  ];
 
-  const getTeamStatusColor = (status: string) => {
-    switch (status) {
-      case "healthy":
-        return "bg-chart-1 text-white";
-      case "at-capacity":
-        return "bg-chart-2 text-white";
-      case "over-capacity":
-        return "bg-destructive text-white";
+  const getLabelColor = (label: string) => {
+    switch (label) {
+      case "Backend":
+        return "bg-secondary/80";
+      case "Frontend":
+        return "bg-chart-1";
+      case "UX":
+        return "bg-accent";
       default:
         return "bg-muted";
     }
@@ -108,106 +144,210 @@ export default function PIPlanPage() {
       breadcrumbs={[
         { label: "Planning", href: "/planning" },
       ]}
-      currentPage="PI Plans"
+      currentPage="PI Plan"
     >
-      <div className="space-y-6">
-        {/* PI Header */}
-        <Card>
-          <CardHeader>
-            <div className="flex items-center justify-between">
-              <div>
-                <CardTitle className="text-2xl">{piData.name}</CardTitle>
-                <p className="text-sm text-muted-foreground mt-1">
-                  {piData.startDate} - {piData.endDate}
-                </p>
+      {/* Top Navigation */}
+      <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center gap-2">
+          <Button
+            variant="ghost"
+            className="text-muted-foreground"
+            onClick={() => setActiveTab("capacity")}
+          >
+            Capacity
+          </Button>
+          <Button
+            variant={activeTab === "pi-plan" ? "default" : "ghost"}
+            className={activeTab === "pi-plan" ? "bg-card text-accent hover:bg-card" : "text-muted-foreground"}
+            onClick={() => setActiveTab("pi-plan")}
+          >
+            PI Plan
+          </Button>
+          <Button
+            variant="ghost"
+            className="text-muted-foreground"
+            onClick={() => setActiveTab("roadmap")}
+          >
+            Roadmap
+          </Button>
+          <Button
+            variant="ghost"
+            className="text-muted-foreground"
+            onClick={() => setActiveTab("objectives")}
+          >
+            Objectives
+          </Button>
+        </div>
+        <div className="flex items-center gap-2">
+          <Button className="bg-accent hover:bg-accent/90 text-accent-foreground">
+            <ShareIcon className="h-4 w-4 mr-2" />
+            Share
+          </Button>
+          <Button variant="outline">
+            <DownloadIcon className="h-4 w-4 mr-2" />
+            Export
+          </Button>
+          <Button variant="ghost" size="icon">
+            <HelpCircleIcon className="h-5 w-5" />
+          </Button>
+          <Avatar className="h-8 w-8">
+            <AvatarImage src="/avatars/user.png" />
+            <AvatarFallback className="bg-accent text-accent-foreground text-xs">
+              U
+            </AvatarFallback>
+          </Avatar>
+        </div>
+      </div>
+
+      {/* Main Content */}
+      <div className="flex gap-4 h-[calc(100vh-16rem)]">
+        {/* Left Sidebar - PI Backlog */}
+        <div className="w-64 bg-card border border-border rounded-lg flex flex-col">
+          <div className="p-4 border-b border-border">
+            <h2 className="text-lg font-semibold text-foreground mb-2">PI Backlog</h2>
+            <p className="text-xs text-muted-foreground mb-4">Drag items onto the board</p>
+            <div className="relative">
+              <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+              <Input 
+                placeholder="Search features..." 
+                className="pl-9 bg-background border-border text-sm"
+              />
+            </div>
+          </div>
+
+          <div className="flex-1 overflow-y-auto p-4 space-y-3">
+            {backlogFeatures.map((feature) => (
+              <div
+                key={feature.id}
+                className="bg-background border border-border rounded-lg p-3 cursor-move hover:border-accent transition-colors"
+              >
+                <div className="flex items-start justify-between mb-2">
+                  <span className="text-xs font-semibold text-foreground">{feature.id}</span>
+                  <span className="text-xs text-muted-foreground">{feature.storyPoints} SP</span>
+                </div>
+                <h4 className="text-sm font-medium text-foreground mb-2">{feature.title}</h4>
+                <div className="space-y-1">
+                  <p className="text-xs text-muted-foreground">Epic: {feature.epic}</p>
+                  <Badge className={`${getLabelColor(feature.label)} text-white text-xs`}>
+                    {feature.label}
+                  </Badge>
+                </div>
               </div>
-              <div className="text-right">
-                <p className="text-sm text-muted-foreground">Overall Progress</p>
-                <p className="text-3xl font-bold">
-                  {Math.round(
-                    piData.objectives.reduce((acc, obj) => acc + obj.progress, 0) /
-                      piData.objectives.length
-                  )}
-                  %
-                </p>
+            ))}
+          </div>
+        </div>
+
+        {/* Main Board Area */}
+        <div className="flex-1 overflow-x-auto">
+          {/* Header */}
+          <div className="mb-6">
+            <h1 className="text-2xl font-semibold text-foreground mb-4">
+              FY24-Q3 Program Increment (July 1 - Sep 30)
+            </h1>
+            
+            {/* Metrics */}
+            <div className="grid grid-cols-3 gap-4 mb-4">
+              <div className="bg-card border border-border rounded-lg p-4">
+                <p className="text-sm text-muted-foreground mb-1">Capacity Load</p>
+                <p className="text-3xl font-bold text-foreground">82%</p>
+              </div>
+              <div className="bg-card border border-border rounded-lg p-4">
+                <p className="text-sm text-muted-foreground mb-1">Progress</p>
+                <p className="text-3xl font-bold text-foreground">15%</p>
+              </div>
+              <div className="bg-card border border-border rounded-lg p-4">
+                <p className="text-sm text-muted-foreground mb-1">Risks</p>
+                <p className="text-3xl font-bold text-destructive">3 At-Risk</p>
               </div>
             </div>
-          </CardHeader>
-        </Card>
 
-        {/* PI Objectives */}
-        <div className="space-y-4">
-          <h3 className="text-lg font-semibold">PI Objectives</h3>
-          {piData.objectives.map((objective) => (
-            <Card key={objective.id}>
-              <CardHeader>
-                <div className="flex items-start justify-between">
-                  <div className="space-y-2 flex-1">
-                    <div className="flex items-center gap-2">
-                      <span className="text-xs text-muted-foreground">{objective.id}</span>
-                      <Badge className={getStatusColor(objective.status)}>
-                        {objective.status}
-                      </Badge>
-                      <Badge variant="outline">BV: {objective.businessValue}</Badge>
+            {/* Filters */}
+            <div className="flex items-center gap-2">
+              <span className="text-sm text-muted-foreground">Team:</span>
+              <Button variant="outline" size="sm">
+                All
+                <ChevronDownIcon className="h-4 w-4 ml-1" />
+              </Button>
+              <span className="text-sm text-muted-foreground ml-2">Epic:</span>
+              <Button variant="outline" size="sm">
+                All
+                <ChevronDownIcon className="h-4 w-4 ml-1" />
+              </Button>
+              <span className="text-sm text-muted-foreground ml-2">Labels:</span>
+              <Button variant="outline" size="sm">
+                <ChevronDownIcon className="h-4 w-4 ml-1" />
+              </Button>
+            </div>
+          </div>
+
+          {/* Sprint Columns */}
+          <div className="grid grid-cols-3 gap-4">
+            {sprints.map((sprint, sprintIndex) => (
+              <div key={sprintIndex} className="space-y-4">
+                <h3 className="text-sm font-semibold text-foreground">{sprint.name}</h3>
+                
+                {sprint.teams.map((team, teamIndex) => (
+                  <div key={teamIndex} className="bg-card border border-border rounded-lg p-4 space-y-3">
+                    <div className="flex items-center justify-between">
+                      <h4 className="text-sm font-semibold text-foreground">{team.name}</h4>
+                      {team.capacity && (
+                        <span className="text-xs text-muted-foreground">{team.capacity}</span>
+                      )}
                     </div>
-                    <CardTitle className="text-base">{objective.title}</CardTitle>
-                    <div className="flex gap-2">
-                      {objective.teams.map((team) => (
-                        <Badge key={team} variant="outline" className="text-xs">
-                          {team}
-                        </Badge>
+                    
+                    {team.capacity && (
+                      <Progress value={team.progress} className="h-1" />
+                    )}
+
+                    <div className="space-y-2">
+                      {team.features.map((feature) => (
+                        <div
+                          key={feature.id}
+                          className={`bg-background border rounded-lg p-3 ${
+                            feature.atRisk ? 'border-destructive' : 'border-border'
+                          }`}
+                        >
+                          {feature.atRisk && (
+                            <AlertCircleIcon className="h-4 w-4 text-destructive mb-2" />
+                          )}
+                          <div className="flex items-start justify-between mb-2">
+                            <span className="text-xs font-semibold text-foreground">{feature.id}</span>
+                            {feature.storyPoints > 0 && (
+                              <span className="text-xs text-muted-foreground">{feature.storyPoints}</span>
+                            )}
+                          </div>
+                          <h5 className="text-sm text-foreground mb-2">{feature.title}</h5>
+                          <div className="flex items-center justify-between">
+                            <Badge className={`${getLabelColor(feature.label)} text-white text-xs`}>
+                              {feature.label}
+                            </Badge>
+                            {feature.assignee && (
+                              <Avatar className="h-5 w-5">
+                                <AvatarImage src={feature.assignee.avatar} />
+                                <AvatarFallback className="bg-accent text-accent-foreground text-[10px]">
+                                  {feature.assignee.initials}
+                                </AvatarFallback>
+                              </Avatar>
+                            )}
+                          </div>
+                        </div>
                       ))}
                     </div>
                   </div>
-                  <div className="text-right">
-                    <p className="text-2xl font-bold">{objective.progress}%</p>
-                  </div>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <Progress value={objective.progress} />
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-
-        {/* Team Capacity */}
-        <div className="space-y-4">
-          <h3 className="text-lg font-semibold">Team Capacity</h3>
-          <div className="grid gap-4 md:grid-cols-2">
-            {teams.map((team) => {
-              const utilizationPercent = (team.allocated / team.capacity) * 100;
-              return (
-                <Card key={team.name}>
-                  <CardHeader>
-                    <div className="flex items-center justify-between">
-                      <CardTitle className="text-base">{team.name}</CardTitle>
-                      <Badge className={getTeamStatusColor(team.status)}>
-                        {team.status}
-                      </Badge>
-                    </div>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <div className="space-y-2">
-                      <div className="flex items-center justify-between text-sm">
-                        <span className="text-muted-foreground">Capacity Utilization</span>
-                        <span className="font-medium">
-                          {team.allocated} / {team.capacity} pts
-                        </span>
-                      </div>
-                      <Progress value={utilizationPercent} />
-                    </div>
-                    <div className="flex items-center justify-between text-sm">
-                      <span className="text-muted-foreground">Features</span>
-                      <span className="font-medium">{team.features}</span>
-                    </div>
-                  </CardContent>
-                </Card>
-              );
-            })}
+                ))}
+              </div>
+            ))}
           </div>
         </div>
       </div>
+
+      {/* Floating Add Button */}
+      <Button 
+        className="fixed bottom-8 right-8 rounded-full h-14 w-14 shadow-lg bg-accent hover:bg-accent/90 text-accent-foreground"
+        size="icon"
+      >
+        <PlusIcon className="h-6 w-6" />
+      </Button>
     </PageWrapper>
   );
 }

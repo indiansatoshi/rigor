@@ -79,6 +79,25 @@ export const appData = {
       ],
     },
     {
+      title: "Delivery",
+      url: "/delivery",
+      icon: undefined,
+      items: [
+        {
+          title: "Deployment",
+          url: "/delivery/deployment",
+        },
+        {
+          title: "Development",
+          url: "/delivery/development",
+        },
+        {
+          title: "Testing",
+          url: "/delivery/testing",
+        },
+      ],
+    },
+    {
       title: "Governance",
       url: "/governance",
       icon: undefined,
