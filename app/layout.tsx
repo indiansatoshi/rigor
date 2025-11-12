@@ -4,6 +4,7 @@ import "./globals.css";
 import { TopNav } from "@/components/top-nav";
 import { TeamProvider } from "@/components/team-context";
 import { WorkspaceProvider } from "@/components/workspace-context";
+import { SidebarProvider } from "@/components/sidebar-context";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,12 +33,14 @@ export default function RootLayout({
       >
         <WorkspaceProvider>
           <TeamProvider>
-            <div className="flex flex-col h-screen">
-              <TopNav />
-              <div className="flex flex-1 overflow-hidden">
-                {children}
+            <SidebarProvider>
+              <div className="flex flex-col h-screen">
+                <TopNav />
+                <div className="flex flex-1 overflow-hidden">
+                  {children}
+                </div>
               </div>
-            </div>
+            </SidebarProvider>
           </TeamProvider>
         </WorkspaceProvider>
       </body>
