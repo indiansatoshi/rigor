@@ -17,30 +17,48 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 
+interface TeamMember {
+  initials: string;
+  avatar: string;
+}
+
+interface Feature {
+  id: string;
+  title: string;
+  label: string;
+  storyPoints: number;
+  epic?: string;
+  assignee?: TeamMember | null;
+  atRisk?: boolean;
+}
+
 export default function PIPlanPage() {
   const [activeTab, setActiveTab] = useState("pi-plan");
 
-  const backlogFeatures = [
+  const backlogFeatures: Feature[] = [
     {
       id: "FE-120",
       title: "New User Onboarding Flow",
       epic: "User Growth Q3",
       label: "UX",
-      storyPoints: 8
+      storyPoints: 8,
+      atRisk: false
     },
     {
       id: "FE-121",
       title: "API Performance Improvements",
       epic: "Platform Stability",
       label: "Backend",
-      storyPoints: 13
+      storyPoints: 13,
+      atRisk: false
     },
     {
       id: "FE-122",
       title: "Reporting Dashboard V2",
       epic: "Data Insights",
       label: "Frontend",
-      storyPoints: 21
+      storyPoints: 21,
+      atRisk: false
     }
   ];
 
