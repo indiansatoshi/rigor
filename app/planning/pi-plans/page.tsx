@@ -304,10 +304,10 @@ export default function PIPlanPage() {
                         <div
                           key={feature.id}
                           className={`bg-background border rounded-lg p-3 ${
-                            feature.atRisk ? 'border-destructive' : 'border-border'
+                            (feature.atRisk ?? false) ? 'border-destructive' : 'border-border'
                           }`}
                         >
-                          {feature.atRisk && (
+                          {(feature.atRisk ?? false) && (
                             <AlertCircleIcon className="h-4 w-4 text-destructive mb-2" />
                           )}
                           <div className="flex items-start justify-between mb-2">
