@@ -32,6 +32,18 @@ interface Feature {
   atRisk?: boolean;
 }
 
+interface SprintTeam {
+  name: string;
+  capacity: string;
+  progress: number;
+  features: Feature[];
+}
+
+interface Sprint {
+  name: string;
+  teams: SprintTeam[];
+}
+
 export default function PIPlanPage() {
   const [activeTab, setActiveTab] = useState("pi-plan");
 
@@ -62,7 +74,7 @@ export default function PIPlanPage() {
     }
   ];
 
-  const sprints = [
+  const sprints: Sprint[] = [
     {
       name: "Sprint 1 (July 1 - July 14)",
       teams: [

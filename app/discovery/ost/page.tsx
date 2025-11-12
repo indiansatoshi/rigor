@@ -22,7 +22,7 @@ import { useState } from "react";
 
 export default function OSTPage() {
   const [activeTab, setActiveTab] = useState("opportunity-solution-tree");
-  const [selectedNode, setSelectedNode] = useState<any>(null);
+  const [selectedNode, setSelectedNode] = useState<unknown>(null);
   const [showSidePanel, setShowSidePanel] = useState(true);
 
   const ostData = {
@@ -66,10 +66,21 @@ export default function OSTPage() {
     ]
   };
 
-  const handleNodeClick = (node: any) => {
+  const handleNodeClick = (node: unknown) => {
     setSelectedNode(node);
     setShowSidePanel(true);
   };
+
+  // Safely read title/description from selectedNode (unknown) without using `any`.
+  const selectedTitle =
+    selectedNode && typeof selectedNode === "object" && "title" in selectedNode
+      ? (selectedNode as { title?: string }).title
+      : undefined;
+
+  const selectedDescription =
+    selectedNode && typeof selectedNode === "object" && "description" in selectedNode
+      ? (selectedNode as { description?: string }).description
+      : undefined;
 
   return (
     <PageWrapper
@@ -281,7 +292,7 @@ export default function OSTPage() {
                 </Avatar>
                 <div className="flex-1">
                   <h3 className="text-base font-semibold text-foreground">
-                    {selectedNode?.title || ostData.outcome.title}
+                    {selectedTitle || ostData.outcome.title}
                   </h3>
                   <p className="text-xs text-muted-foreground">
                     Owner: {ostData.outcome.owner.name}
@@ -295,7 +306,7 @@ export default function OSTPage() {
               </div>
               
               <p className="text-sm text-foreground">
-                {selectedNode?.description || "Personalized content recommendation engine"}
+                {selectedDescription || "Personalized content recommendation engine"}
               </p>
             </div>
 
