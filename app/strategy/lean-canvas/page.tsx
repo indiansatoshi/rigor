@@ -4,6 +4,39 @@ import { PageWrapper } from "@/components/page-wrapper";
 import { Button } from "@/components/ui/button";
 import { InfoIcon, UsersIcon, DownloadIcon, HistoryIcon, PlusIcon } from "lucide-react";
 
+interface CanvasSectionProps {
+  section: {
+    title: string;
+    description?: string;
+    content: string[];
+  };
+  className?: string;
+}
+
+function CanvasSection({ section, className = "" }: CanvasSectionProps) {
+  return (
+    <div className={`bg-card border border-border rounded-lg p-6 min-h-[200px] ${className}`}>
+      <div className="flex items-start justify-between mb-3">
+        <h3 className="text-base font-semibold text-foreground">{section.title}</h3>
+        <InfoIcon className="h-4 w-4 text-muted-foreground shrink-0" />
+      </div>
+      {section.description && (
+        <p className="text-sm text-muted-foreground mb-4">{section.description}</p>
+      )}
+      {section.content.length > 0 && (
+        <div className="space-y-2">
+          {section.content.map((item: string, i: number) => (
+            <div key={i} className="flex items-start gap-2">
+              <span className="text-foreground text-sm">•</span>
+              <p className="text-sm text-foreground">{item}</p>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function LeanCanvasPage() {
   const canvasData = {
     problem: {
@@ -57,27 +90,7 @@ export default function LeanCanvasPage() {
     }
   };
 
-  const CanvasSection = ({ section, className = "" }: { section: any; className?: string }) => (
-    <div className={`bg-card border border-border rounded-lg p-6 min-h-[200px] ${className}`}>
-      <div className="flex items-start justify-between mb-3">
-        <h3 className="text-base font-semibold text-foreground">{section.title}</h3>
-        <InfoIcon className="h-4 w-4 text-muted-foreground flex-shrink-0" />
-      </div>
-      {section.description && (
-        <p className="text-sm text-muted-foreground mb-4">{section.description}</p>
-      )}
-      {section.content.length > 0 && (
-        <div className="space-y-2">
-          {section.content.map((item: string, i: number) => (
-            <div key={i} className="flex items-start gap-2">
-              <span className="text-foreground text-sm">•</span>
-              <p className="text-sm text-foreground">{item}</p>
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
-  );
+  
 
   return (
     <PageWrapper
