@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { ChevronRightIcon } from "lucide-react";
 import { useSidebar } from "@/components/sidebar-context";
+import { HoverLabel } from "./hover-label";
 
 interface NavItem {
   title: string;
@@ -98,13 +99,7 @@ export function SideNav({ items, title }: SideNavProps) {
                   />
                 </Button>
                 {/* Hover Label for Collapsed State */}
-                <div 
-                  className={`absolute left-full top-1/2 -translate-y-1/2 ml-2 px-2 py-1 bg-popover text-popover-foreground text-sm rounded-md shadow-md border border-border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 whitespace-nowrap z-50 ${
-                    isCollapsed ? "" : "hidden"
-                  }`}
-                >
-                  {item.title}
-                </div>
+                <HoverLabel title={item.title} isCollapsed={isCollapsed} />
               </div>
             </Link>
           ))}
