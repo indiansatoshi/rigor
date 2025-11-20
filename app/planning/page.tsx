@@ -26,7 +26,7 @@ export default function PlanningDashboard() {
 
       <PageSection>
         {/* Metrics Cards */}
-        <div className="grid gap-6 md:grid-cols-4">
+        <div className="grid gap-4 md:grid-cols-4">
           {planningMetrics.map((metric, index) => (
             <MetricCard key={index} metric={metric} />
           ))}
@@ -36,15 +36,15 @@ export default function PlanningDashboard() {
         <div className="grid gap-6 md:grid-cols-2">
           {/* Upcoming Milestones */}
           <Card>
-            <CardHeader>
-              <CardTitle className="text-lg font-semibold">Upcoming Milestones</CardTitle>
+            <CardHeader className="pb-3">
+              <CardTitle className="text-base font-semibold">Upcoming Milestones</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4">
+            <CardContent className="p-4 space-y-3">
               {upcomingMilestones.map((milestone, index) => (
-                <div key={index} className="border-b border-border pb-4 last:border-0 last:pb-0">
-                  <div className="flex items-start justify-between mb-2">
+                <div key={index} className="border-b border-border/50 pb-3 last:border-0 last:pb-0">
+                  <div className="flex items-start justify-between mb-1.5">
                     <div className="flex-1">
-                      <p className="text-sm font-medium text-foreground mb-1">{milestone.title}</p>
+                      <p className="text-sm font-medium text-foreground leading-snug mb-1">{milestone.title}</p>
                       <div className="flex items-center gap-2 text-xs text-muted-foreground">
                         <CalendarIcon className="h-3 w-3" />
                         <span>{milestone.date}</span>
@@ -61,12 +61,12 @@ export default function PlanningDashboard() {
 
           {/* PI Progress */}
           <Card>
-            <CardHeader>
-              <CardTitle className="text-lg font-semibold">PI Progress</CardTitle>
+            <CardHeader className="pb-3">
+              <CardTitle className="text-base font-semibold">PI Progress</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4">
+            <CardContent className="p-4 space-y-3">
               {piProgress.map((pi, index) => (
-                <div key={index} className="space-y-2">
+                <div key={index} className="space-y-1.5">
                   <div className="flex items-center justify-between">
                     <span className="text-sm font-medium text-foreground">{pi.name}</span>
                     <span className="text-sm font-semibold text-foreground">{pi.progress}%</span>
@@ -90,12 +90,12 @@ export default function PlanningDashboard() {
 
         {/* Roadmap Items */}
         <Card>
-          <CardHeader>
-            <CardTitle className="text-lg font-semibold">Roadmap Highlights</CardTitle>
+          <CardHeader className="pb-3">
+            <CardTitle className="text-base font-semibold">Roadmap Highlights</CardTitle>
           </CardHeader>
-          <CardContent className="space-y-3">
+          <CardContent className="p-4 space-y-2">
             {roadmapItems.map((item) => (
-              <div key={item.id} className="flex items-center justify-between border-b border-border pb-3 last:border-0 last:pb-0">
+              <div key={item.id} className="flex items-center justify-between border-b border-border/50 pb-2 last:border-0 last:pb-0">
                 <div className="flex items-center gap-3 flex-1">
                   <span className="text-xs font-semibold text-muted-foreground">{item.id}</span>
                   <span className="text-sm font-medium text-foreground">{item.title}</span>

@@ -17,18 +17,18 @@ export function KanbanBoard({ columns, tasks }: KanbanBoardProps) {
     };
 
     return (
-        <div className={`grid grid-cols-${columns.length} gap-6`}>
+        <div className={`grid grid-cols-${columns.length} gap-4 h-full`}>
             {columns.map((column) => (
-                <div key={column.id} className="space-y-4">
+                <div key={column.id} className="flex flex-col h-full bg-secondary/20 rounded-lg p-2 transition-colors">
                     {/* Column Header */}
-                    <div className="flex items-center justify-between">
-                        <h3 className="text-sm font-semibold text-foreground">
-                            {column.title} <span className="text-muted-foreground ml-1">{column.count}</span>
+                    <div className="flex items-center justify-between mb-3 pl-1">
+                        <h3 className="text-xs font-semibold uppercase text-muted-foreground tracking-wide">
+                            {column.title} <span className="ml-1 opacity-70">{column.count}</span>
                         </h3>
                     </div>
 
                     {/* Task Cards */}
-                    <div className="space-y-3">
+                    <div className="space-y-2 flex-1">
                         {getTasksByStatus(column.id).map((task) => (
                             <KanbanCard
                                 key={task.id}

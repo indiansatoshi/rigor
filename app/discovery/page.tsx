@@ -5,9 +5,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { TrendingUpIcon, TrendingDownIcon, FlaskConicalIcon, LightbulbIcon, UsersIcon, CheckCircleIcon, PlusIcon } from "lucide-react";
+import { PlusIcon } from "lucide-react";
 import { DashboardHeader } from "@/components/dashboard/dashboard-header";
 import { PageSection } from "@/components/layout/page-section";
+import { MetricCard } from "@/components/dashboard/metric-card";
 
 export default function DiscoveryDashboard() {
   const metrics = [
@@ -15,28 +16,28 @@ export default function DiscoveryDashboard() {
       title: "Active Hypotheses",
       value: "12",
       change: "+3",
-      changeType: "positive",
+      changeType: "positive" as const,
       period: "vs last month"
     },
     {
       title: "Validated",
       value: "8",
       change: "+2",
-      changeType: "positive",
+      changeType: "positive" as const,
       period: "this quarter"
     },
     {
       title: "In Testing",
       value: "4",
       change: "0",
-      changeType: "neutral",
+      changeType: "neutral" as const,
       period: "currently"
     },
     {
       title: "Success Rate",
       value: "67%",
       change: "+5%",
-      changeType: "positive",
+      changeType: "positive" as const,
       period: "vs last quarter"
     }
   ];
@@ -108,26 +109,9 @@ export default function DiscoveryDashboard() {
 
       <PageSection>
         {/* Metrics Cards */}
-        <div className="grid gap-6 md:grid-cols-4">
+        <div className="grid gap-4 md:grid-cols-4">
           {metrics.map((metric, index) => (
-            <Card key={index}>
-              <CardContent className="p-6">
-                <p className="text-sm text-muted-foreground mb-2">{metric.title}</p>
-                <p className="text-3xl font-bold text-foreground mb-2">{metric.value}</p>
-                <div className="flex items-center gap-1 text-sm">
-                  {metric.changeType === "positive" && (
-                    <TrendingUpIcon className="h-4 w-4 text-chart-1" />
-                  )}
-                  {metric.changeType === "negative" && (
-                    <TrendingDownIcon className="h-4 w-4 text-destructive" />
-                  )}
-                  <span className={metric.changeType === "positive" ? "text-chart-1" : metric.changeType === "negative" ? "text-destructive" : "text-muted-foreground"}>
-                    {metric.change}
-                  </span>
-                  <span className="text-muted-foreground ml-1">{metric.period}</span>
-                </div>
-              </CardContent>
-            </Card>
+            <MetricCard key={index} metric={metric} />
           ))}
         </div>
 
@@ -135,12 +119,12 @@ export default function DiscoveryDashboard() {
         <div className="grid gap-4 md:grid-cols-2">
           {/* Recent Hypotheses */}
           <Card>
-            <CardHeader>
-              <CardTitle className="text-lg font-semibold">Recent Hypotheses</CardTitle>
+            <CardHeader className="pb-3">
+              <CardTitle className="text-base font-semibold">Recent Hypotheses</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4">
+            <CardContent className="p-4 space-y-3">
               {recentHypotheses.map((hypothesis) => (
-                <div key={hypothesis.id} className="border-b border-border pb-4 last:border-0 last:pb-0">
+                <div key={hypothesis.id} className="border-b border-border/50 pb-3 last:border-0 last:pb-0">
                   <div className="flex items-start justify-between mb-2">
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-1">
@@ -149,7 +133,7 @@ export default function DiscoveryDashboard() {
                           {hypothesis.status}
                         </Badge>
                       </div>
-                      <p className="text-sm font-medium text-foreground">{hypothesis.title}</p>
+                      <p className="text-sm font-medium text-foreground leading-snug">{hypothesis.title}</p>
                     </div>
                   </div>
                   <div className="flex items-center justify-between mt-2">
@@ -167,12 +151,12 @@ export default function DiscoveryDashboard() {
 
           {/* OST Progress */}
           <Card>
-            <CardHeader>
-              <CardTitle className="text-lg font-semibold">OST Progress</CardTitle>
+            <CardHeader className="pb-3">
+              <CardTitle className="text-base font-semibold">OST Progress</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4">
+            <CardContent className="p-4 space-y-3">
               {ostProgress.map((ost, index) => (
-                <div key={index} className="space-y-2">
+                <div key={index} className="space-y-1.5">
                   <div className="flex items-center justify-between">
                     <span className="text-sm font-medium text-foreground">{ost.outcome}</span>
                     <span className="text-sm font-semibold text-foreground">{ost.progress}%</span>

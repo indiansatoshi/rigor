@@ -147,10 +147,10 @@ export default function GovernanceDashboard() {
           <div className="grid gap-6 md:grid-cols-3">
             {/* Operations Summary */}
             <Card>
-              <CardHeader>
-                <CardTitle className="text-lg font-semibold">Operations Summary</CardTitle>
+              <CardHeader className="pb-3">
+                <CardTitle className="text-base font-semibold">Operations Summary</CardTitle>
               </CardHeader>
-              <CardContent className="space-y-3">
+              <CardContent className="p-4 space-y-2">
                 <div className="flex items-center justify-between text-sm">
                   <span className="text-muted-foreground">System Uptime</span>
                   <span className="font-medium text-chart-1">99.98%</span>
@@ -168,10 +168,10 @@ export default function GovernanceDashboard() {
 
             {/* Support Summary */}
             <Card>
-              <CardHeader>
-                <CardTitle className="text-lg font-semibold">Support Summary</CardTitle>
+              <CardHeader className="pb-3">
+                <CardTitle className="text-base font-semibold">Support Summary</CardTitle>
               </CardHeader>
-              <CardContent className="space-y-3">
+              <CardContent className="p-4 space-y-2">
                 <div className="flex items-center justify-between text-sm">
                   <span className="text-muted-foreground">Open Tickets</span>
                   <span className="font-medium text-chart-3">{supportMetrics.open}</span>
@@ -189,10 +189,10 @@ export default function GovernanceDashboard() {
 
             {/* Feedback Summary */}
             <Card>
-              <CardHeader>
-                <CardTitle className="text-lg font-semibold">Feedback Summary</CardTitle>
+              <CardHeader className="pb-3">
+                <CardTitle className="text-base font-semibold">Feedback Summary</CardTitle>
               </CardHeader>
-              <CardContent className="space-y-3">
+              <CardContent className="p-4 space-y-2">
                 <div className="flex items-center justify-between text-sm">
                   <span className="text-muted-foreground">NPS Score</span>
                   <span className="font-medium text-chart-1">{feedbackMetrics.nps}</span>

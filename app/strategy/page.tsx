@@ -23,7 +23,7 @@ export default function StrategyDashboard() {
       />
 
       {/* Metrics Cards */}
-      <div className="grid gap-6 md:grid-cols-3 mb-6">
+      <div className="grid gap-4 md:grid-cols-3 mb-6">
         {strategyMetrics.map((metric, index) => (
           <MetricCard key={index} metric={metric} />
         ))}
@@ -33,20 +33,20 @@ export default function StrategyDashboard() {
       <div className="grid gap-6 md:grid-cols-2 mb-6">
         {/* Company OKRs */}
         <Card>
-          <CardHeader>
+          <CardHeader className="pb-3">
             <div className="flex items-center justify-between">
-              <CardTitle className="text-lg font-semibold">Company OKRs - Q4 2024</CardTitle>
+              <CardTitle className="text-base font-semibold">Company OKRs - Q4 2024</CardTitle>
             </div>
           </CardHeader>
-          <CardContent className="space-y-4">
+          <CardContent className="p-4 space-y-3">
             {companyOKRs.map((okr, index) => (
-              <div key={index} className="space-y-3">
+              <div key={index} className="space-y-2">
                 <div className="flex items-center justify-between">
                   <h4 className="text-sm font-semibold text-foreground">{okr.objective}</h4>
                   <span className="text-sm font-semibold text-foreground">{okr.progress}%</span>
                 </div>
                 <Progress value={okr.progress} />
-                <div className="space-y-2">
+                <div className="space-y-1.5">
                   {okr.keyResults.map((kr, krIndex) => (
                     <div key={krIndex} className="text-xs text-muted-foreground pl-4 border-l-2 border-border">
                       <p>{kr.description}</p>
@@ -65,20 +65,20 @@ export default function StrategyDashboard() {
 
         {/* Lean Canvas Summary */}
         <Card>
-          <CardHeader>
-            <CardTitle className="text-lg font-semibold">Lean Canvas Summary</CardTitle>
+          <CardHeader className="pb-3">
+            <CardTitle className="text-base font-semibold">Lean Canvas Summary</CardTitle>
           </CardHeader>
-          <CardContent className="space-y-3">
+          <CardContent className="p-4 space-y-2">
             {leanCanvasSections.map((section, index) => (
-              <div key={index} className="flex items-center justify-between border-b border-border pb-3 last:border-0 last:pb-0">
+              <div key={index} className="flex items-center justify-between border-b border-border/50 pb-2 last:border-0 last:pb-0">
                 <div>
                   <p className="text-sm font-medium text-foreground">{section.title}</p>
-                  <p className="text-xs text-muted-foreground mt-1">{section.items} items</p>
+                  <p className="text-xs text-muted-foreground mt-0.5">{section.items} items</p>
                 </div>
                 <StatusBadge status={section.status} />
               </div>
             ))}
-            <Button variant="outline" className="w-full mt-4">
+            <Button variant="outline" className="w-full mt-3">
               View Full Canvas
             </Button>
           </CardContent>

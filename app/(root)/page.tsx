@@ -36,7 +36,7 @@ export default function HomePage() {
 
       <PageSection>
         {/* Overall Metrics */}
-        <div className="grid gap-6 md:grid-cols-4">
+        <div className="grid gap-4 md:grid-cols-4">
           {homeMetrics.map((metric, index) => (
             <MetricCard key={index} metric={metric} />
           ))}
@@ -44,12 +44,12 @@ export default function HomePage() {
 
         {/* Section Overview */}
         <Card>
-          <CardHeader>
-            <CardTitle className="text-lg font-semibold">Section Overview</CardTitle>
+          <CardHeader className="pb-3">
+            <CardTitle className="text-base font-semibold">Section Overview</CardTitle>
           </CardHeader>
-          <CardContent className="space-y-4">
+          <CardContent className="p-4 space-y-3">
             {sectionOverview.map((section, index) => (
-              <div key={index} className="border-b border-border pb-4 last:border-0 last:pb-0">
+              <div key={index} className="border-b border-border/50 pb-3 last:border-0 last:pb-0">
                 <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center gap-3">
                     <Link href={section.href}>
@@ -62,13 +62,13 @@ export default function HomePage() {
                     </Badge>
                   </div>
                   <Link href={section.href}>
-                    <Button variant="ghost" size="sm" className="text-accent">
+                    <Button variant="ghost" size="sm" className="text-accent h-8">
                       View Details
                       <ArrowRightIcon className="h-4 w-4 ml-1" />
                     </Button>
                   </Link>
                 </div>
-                <div className="space-y-2">
+                <div className="space-y-1.5">
                   <div className="flex items-center justify-between text-sm">
                     <span className="text-muted-foreground">Progress</span>
                     <span className="font-medium text-foreground">{section.progress}%</span>
@@ -88,19 +88,19 @@ export default function HomePage() {
         <div className="grid gap-6 md:grid-cols-2">
           {/* Recent Activity */}
           <Card>
-            <CardHeader>
-              <CardTitle className="text-lg font-semibold">Recent Activity</CardTitle>
+            <CardHeader className="pb-3">
+              <CardTitle className="text-base font-semibold">Recent Activity</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4">
+            <CardContent className="p-4 space-y-2">
               {recentActivity.map((activity, index) => (
-                <div key={index} className="flex items-start gap-3 border-b border-border pb-3 last:border-0 last:pb-0">
+                <div key={index} className="flex items-start gap-3 border-b border-border/50 pb-2 last:border-0 last:pb-0">
                   <div className="mt-0.5">
                     {activity.iconType === "check" && <CheckCircleIcon className="h-4 w-4 text-chart-1" />}
                     {activity.iconType === "alert" && <AlertCircleIcon className="h-4 w-4 text-destructive" />}
                     {activity.iconType === "clock" && <ClockIcon className="h-4 w-4 text-chart-3" />}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 mb-1">
+                    <div className="flex items-center gap-2 mb-0.5">
                       <Badge variant="outline" className="text-xs">
                         {activity.section}
                       </Badge>
@@ -118,15 +118,15 @@ export default function HomePage() {
 
           {/* Upcoming Deadlines */}
           <Card>
-            <CardHeader>
-              <CardTitle className="text-lg font-semibold">Upcoming Deadlines</CardTitle>
+            <CardHeader className="pb-3">
+              <CardTitle className="text-base font-semibold">Upcoming Deadlines</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4">
+            <CardContent className="p-4 space-y-3">
               {upcomingDeadlines.map((deadline, index) => (
-                <div key={index} className="border-b border-border pb-4 last:border-0 last:pb-0">
-                  <div className="flex items-start justify-between mb-2">
+                <div key={index} className="border-b border-border/50 pb-3 last:border-0 last:pb-0">
+                  <div className="flex items-start justify-between mb-1.5">
                     <div className="flex-1">
-                      <p className="text-sm font-medium text-foreground mb-1">{deadline.title}</p>
+                      <p className="text-sm font-medium text-foreground leading-snug mb-1">{deadline.title}</p>
                       <div className="flex items-center gap-2">
                         <Badge variant="outline" className="text-xs">
                           {deadline.section}

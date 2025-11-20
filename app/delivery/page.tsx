@@ -11,6 +11,7 @@ import { cn } from "@/lib/utils";
 import { DashboardHeader } from "@/components/dashboard/dashboard-header";
 import { PageSection } from "@/components/layout/page-section";
 import { PageTabs, type PageTab } from "@/components/layout/page-tabs";
+import { MetricCard } from "@/components/dashboard/metric-card";
 
 export default function DeliveryDashboard() {
   const [activeTab, setActiveTab] = useState("overview");
@@ -27,24 +28,28 @@ export default function DeliveryDashboard() {
       title: "Active Tasks",
       value: "47",
       change: "+8",
+      changeType: "positive" as const,
       period: "vs last week"
     },
     {
       title: "Deployments Today",
       value: "5",
       change: "+2",
+      changeType: "positive" as const,
       period: "vs yesterday"
     },
     {
       title: "Test Pass Rate",
       value: "95.4%",
       change: "+1.2%",
+      changeType: "positive" as const,
       period: "vs last run"
     },
     {
       title: "Test Coverage",
       value: "87%",
       change: "+2%",
+      changeType: "positive" as const,
       period: "vs last sprint"
     }
   ];
@@ -259,16 +264,7 @@ export default function DeliveryDashboard() {
           {/* Metrics Cards */}
           <div className="grid gap-4 md:grid-cols-4">
             {overviewMetrics.map((metric, index) => (
-              <Card key={index}>
-                <CardContent className="p-6">
-                  <p className="text-sm text-muted-foreground mb-2">{metric.title}</p>
-                  <p className="text-3xl font-bold text-foreground mb-2">{metric.value}</p>
-                  <div className="flex items-center gap-1 text-sm">
-                    <span className="text-muted-foreground">{metric.change}</span>
-                    <span className="text-muted-foreground ml-1">{metric.period}</span>
-                  </div>
-                </CardContent>
-              </Card>
+              <MetricCard key={index} metric={metric} />
             ))}
           </div>
 
@@ -276,11 +272,11 @@ export default function DeliveryDashboard() {
           <div className="grid gap-4 md:grid-cols-2">
             {/* Deployment Summary */}
             <Card>
-              <CardHeader>
-                <CardTitle className="text-lg font-semibold">Deployment Summary</CardTitle>
+              <CardHeader className="pb-3">
+                <CardTitle className="text-base font-semibold">Deployment Summary</CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="grid grid-cols-2 gap-4">
+              <CardContent className="p-4 space-y-3">
+                <div className="grid grid-cols-2 gap-3">
                   <div>
                     <p className="text-sm text-muted-foreground">Total Deployments</p>
                     <p className="text-2xl font-bold">{deploymentStats.totalDeployments}</p>
@@ -290,7 +286,7 @@ export default function DeliveryDashboard() {
                     <p className="text-2xl font-bold text-chart-1">{deploymentStats.successRate}%</p>
                   </div>
                 </div>
-                <div className="space-y-2">
+                <div className="space-y-1.5">
                   {environments.map((env) => (
                     <div key={env.name} className="flex items-center justify-between text-sm">
                       <span className="text-muted-foreground">{env.name}</span>
@@ -308,11 +304,11 @@ export default function DeliveryDashboard() {
 
             {/* Testing Summary */}
             <Card>
-              <CardHeader>
-                <CardTitle className="text-lg font-semibold">Testing Summary</CardTitle>
+              <CardHeader className="pb-3">
+                <CardTitle className="text-base font-semibold">Testing Summary</CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="grid grid-cols-3 gap-4">
+              <CardContent className="p-4 space-y-3">
+                <div className="grid grid-cols-3 gap-3">
                   <div>
                     <p className="text-sm text-muted-foreground">Total</p>
                     <p className="text-2xl font-bold">{testMetrics.totalTests}</p>
@@ -326,7 +322,7 @@ export default function DeliveryDashboard() {
                     <p className="text-2xl font-bold text-destructive">{testMetrics.failed}</p>
                   </div>
                 </div>
-                <div className="space-y-2">
+                <div className="space-y-1.5">
                   <div className="flex items-center justify-between text-sm">
                     <span className="text-muted-foreground">Pass Rate</span>
                     <span className="font-medium">{passRate.toFixed(1)}%</span>
