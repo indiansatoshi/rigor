@@ -20,7 +20,7 @@ export function PageWrapper({ children, breadcrumbs = [], currentPage }: PageWra
   return (
     <div className="flex flex-col flex-1 bg-background">
       <PageBreadcrumbs items={allBreadcrumbs} />
-      <div className="p-8 space-y-8">
+      <div className="p-8 space-y-8 bg-gradient-to-br from-accent/20 via-accent/5 to-background">
         {children}
       </div>
     </div>

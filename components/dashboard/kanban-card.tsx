@@ -40,7 +40,7 @@ export function KanbanCard({
 
     return (
         <Card
-            className="group hover:shadow-md transition-all duration-200 cursor-pointer border-border/50 hover:border-border/80 bg-card/50 hover:bg-card"
+            className="group hover:shadow-md transition-all duration-200 cursor-pointer border-border/50 hover:border-border/80 bg-card"
             onClick={onClick}
         >
             <CardContent className="p-3 space-y-2">
