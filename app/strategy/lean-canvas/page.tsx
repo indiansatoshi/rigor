@@ -2,6 +2,8 @@
 
 import { PageWrapper } from "@/components/page-wrapper";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { DashboardHeader } from "@/components/dashboard/dashboard-header";
 import { InfoIcon, UsersIcon, DownloadIcon, HistoryIcon, PlusIcon } from "lucide-react";
 
 interface CanvasSectionProps {
@@ -15,29 +17,31 @@ interface CanvasSectionProps {
 
 function CanvasSection({ section, className = "" }: CanvasSectionProps) {
   return (
-    <div className={`bg-card border border-border rounded-[3px] shadow-sm p-4 min-h-[180px] flex flex-col ${className}`}>
-      <div className="flex items-start justify-between mb-2">
-        <h3 className="text-sm font-bold uppercase tracking-wide text-muted-foreground">{section.title}</h3>
-        <InfoIcon className="h-3.5 w-3.5 text-muted-foreground/70 shrink-0" />
-      </div>
-      {section.description && (
-        <p className="text-xs text-muted-foreground mb-3 italic">{section.description}</p>
-      )}
-      {section.content.length > 0 ? (
-        <div className="space-y-2 flex-1">
-          {section.content.map((item: string, i: number) => (
-            <div key={i} className="flex items-start gap-2 bg-secondary/30 p-2 rounded-[3px]">
-              <span className="text-primary text-xs mt-0.5">•</span>
-              <p className="text-sm text-foreground leading-snug">{item}</p>
-            </div>
-          ))}
+    <Card className={`min-h-[180px] flex flex-col ${className}`}>
+      <CardContent className="p-4 flex-1 flex flex-col">
+        <div className="flex items-start justify-between mb-2">
+          <h3 className="text-sm font-bold uppercase tracking-wide text-muted-foreground">{section.title}</h3>
+          <InfoIcon className="h-3.5 w-3.5 text-muted-foreground/70 shrink-0" />
         </div>
-      ) : (
-        <div className="flex-1 flex items-center justify-center opacity-20 hover:opacity-40 transition-opacity cursor-pointer border-2 border-dashed border-muted-foreground/20 rounded-[3px] m-1">
-          <PlusIcon className="h-6 w-6 text-muted-foreground" />
-        </div>
-      )}
-    </div>
+        {section.description && (
+          <p className="text-xs text-muted-foreground mb-3 italic">{section.description}</p>
+        )}
+        {section.content.length > 0 ? (
+          <div className="space-y-2 flex-1">
+            {section.content.map((item: string, i: number) => (
+              <div key={i} className="flex items-start gap-2 bg-secondary/30 p-2 rounded-[3px]">
+                <span className="text-primary text-xs mt-0.5">•</span>
+                <p className="text-sm text-foreground leading-snug">{item}</p>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="flex-1 flex items-center justify-center opacity-20 hover:opacity-40 transition-opacity cursor-pointer border-2 border-dashed border-muted-foreground/20 rounded-[3px] m-1">
+            <PlusIcon className="h-6 w-6 text-muted-foreground" />
+          </div>
+        )}
+      </CardContent>
+    </Card>
   );
 }
 
@@ -94,8 +98,6 @@ export default function LeanCanvasPage() {
     }
   };
 
-
-
   return (
     <PageWrapper
       breadcrumbs={[
@@ -103,14 +105,10 @@ export default function LeanCanvasPage() {
       ]}
       currentPage="Lean Canvas"
     >
-      {/* Page Header */}
-      <div className="flex items-center justify-between mb-6">
-        <div>
-          <h1 className="text-2xl font-semibold text-foreground">Lean Canvas</h1>
-          <p className="text-sm text-muted-foreground mt-1">
-            Define your business model on a single page
-          </p>
-        </div>
+      <DashboardHeader
+        title="Lean Canvas"
+        description="Define your business model on a single page"
+      >
         <div className="flex items-center gap-2">
           <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground">
             <UsersIcon className="h-5 w-5" />
@@ -121,8 +119,12 @@ export default function LeanCanvasPage() {
           <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground">
             <HistoryIcon className="h-5 w-5" />
           </Button>
+          <Button className="bg-accent hover:bg-accent/90 text-accent-foreground ml-2">
+            <PlusIcon className="h-4 w-4 mr-2" />
+            Add Note
+          </Button>
         </div>
-      </div>
+      </DashboardHeader>
 
       {/* Canvas Grid */}
       <div className="space-y-4">
@@ -154,14 +156,6 @@ export default function LeanCanvasPage() {
           <CanvasSection section={canvasData.revenueStreams} />
         </div>
       </div>
-
-      {/* Floating Add Note Button */}
-      <Button
-        className="fixed bottom-8 right-8 rounded-full h-14 w-14 shadow-lg bg-accent hover:bg-accent/90 text-accent-foreground"
-        size="icon"
-      >
-        <PlusIcon className="h-6 w-6" />
-      </Button>
     </PageWrapper>
   );
 }

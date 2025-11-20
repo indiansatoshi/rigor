@@ -12,7 +12,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "RiGoR",
+  title: "Outliv",
   description: "Rigorous product management and strategic alignment platform",
 };
 

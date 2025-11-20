@@ -33,13 +33,21 @@ export function SideNav({ items, title }: SideNavProps) {
 
   return (
     <div
-      className={`border-r border-border bg-card transition-all duration-200 ${isCollapsed ? "w-12" : "w-60"
+      className={`border-r border-border bg-card transition-all duration-200 ${isCollapsed ? "w-12" : "w-56"
         }`}
       suppressHydrationWarning
     >
       <div className="flex flex-col h-full" suppressHydrationWarning>
         {/* Collapse Toggle - Moved to Top */}
-        <div className="border-b border-border p-2 flex items-center justify-between" suppressHydrationWarning>
+        <div className={cn("border-b border-border p-2 flex items-center", isCollapsed ? "justify-center" : "justify-between")} suppressHydrationWarning>
+          {title && !isCollapsed && (
+            <h2
+              className="text-sm font-semibold text-foreground ml-2"
+              suppressHydrationWarning
+            >
+              {title}
+            </h2>
+          )}
           <Button
             variant="ghost"
             size="icon"
@@ -53,15 +61,6 @@ export function SideNav({ items, title }: SideNavProps) {
               suppressHydrationWarning
             />
           </Button>
-          {title && (
-            <h2
-              className={`text-sm font-semibold text-foreground flex-1 ml-2 ${isCollapsed ? "hidden" : ""
-                }`}
-              suppressHydrationWarning
-            >
-              {title}
-            </h2>
-          )}
         </div>
 
         {/* Navigation Items */}
@@ -73,7 +72,7 @@ export function SideNav({ items, title }: SideNavProps) {
                   variant="ghost"
                   size="sm"
                   className={cn(
-                    "w-full justify-start px-3 h-9",
+                    "w-full justify-start px-3 h-8",
                     isCollapsed ? "px-2" : "",
                     isActive(item.href)
                       ? "bg-blue-100 text-primary hover:bg-blue-200" // Atlassian active state

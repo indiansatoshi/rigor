@@ -4,6 +4,8 @@ import { PageWrapper } from "@/components/page-wrapper";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Card, CardContent } from "@/components/ui/card";
+import { DashboardHeader } from "@/components/dashboard/dashboard-header";
 import { ChevronUpIcon, ChevronDownIcon } from "lucide-react";
 import { useState } from "react";
 
@@ -19,17 +21,17 @@ export default function OKRsPage() {
         { name: "Jane Smith", avatar: "/avatars/02.png", initials: "JS" }
       ],
       keyResults: [
-        { 
-          description: "Increase user activation rate from 20% to 40%", 
-          current: 30, 
-          target: 40, 
+        {
+          description: "Increase user activation rate from 20% to 40%",
+          current: 30,
+          target: 40,
           unit: "%",
           owner: { name: "John Doe", avatar: "/avatars/01.png", initials: "JD" }
         },
-        { 
-          description: "Achieve a Net Promoter Score (NPS) of 50", 
-          current: 40, 
-          target: 50, 
+        {
+          description: "Achieve a Net Promoter Score (NPS) of 50",
+          current: 40,
+          target: 50,
           unit: "",
           owner: { name: "Jane Smith", avatar: "/avatars/02.png", initials: "JS" }
         },
@@ -46,8 +48,8 @@ export default function OKRsPage() {
   ];
 
   const toggleObjective = (index: number) => {
-    setExpandedObjectives(prev => 
-      prev.includes(index) 
+    setExpandedObjectives(prev =>
+      prev.includes(index)
         ? prev.filter(i => i !== index)
         : [...prev, index]
     );
@@ -60,26 +62,19 @@ export default function OKRsPage() {
       ]}
       currentPage="OKR Management"
     >
-      {/* Page Header */}
-      <div className="flex items-center justify-between mb-6">
-        <div>
-          <h1 className="text-2xl font-semibold text-foreground">OKRs</h1>
-          <p className="text-sm text-muted-foreground mt-1">
-            Track objectives and key results for Q4 2024
-          </p>
-        </div>
+      <DashboardHeader
+        title="OKRs"
+        description="Track objectives and key results for Q4 2024"
+      >
         <Button className="bg-accent hover:bg-accent/90 text-accent-foreground">
           + New OKR
         </Button>
-      </div>
+      </DashboardHeader>
 
       {/* OKRs List */}
       <div className="space-y-4">
         {okrs.map((okr, index) => (
-          <div 
-            key={index} 
-            className="bg-card border border-border rounded-lg overflow-hidden"
-          >
+          <Card key={index} className="overflow-hidden">
             {/* Objective Header */}
             <div className="p-6">
               <div className="flex items-start justify-between mb-4">
@@ -118,12 +113,9 @@ export default function OKRsPage() {
                   <span className="text-muted-foreground">Overall Progress</span>
                   <span className="text-foreground font-medium">{okr.progress}%</span>
                 </div>
-                <Progress 
-                  value={okr.progress} 
-                  className="h-2"
-                  style={{
-                    backgroundColor: "hsl(var(--muted))"
-                  }}
+                <Progress
+                  value={okr.progress}
+                  className="h-2 bg-muted"
                 />
               </div>
             </div>
@@ -132,10 +124,10 @@ export default function OKRsPage() {
             {expandedObjectives.includes(index) && okr.keyResults.length > 0 && (
               <div className="px-6 pb-6 space-y-4 border-t border-border pt-6">
                 {okr.keyResults.map((kr, krIndex) => {
-                  const krProgress = kr.unit === "%" 
-                    ? kr.current 
+                  const krProgress = kr.unit === "%"
+                    ? kr.current
                     : (kr.current / kr.target) * 100;
-                  
+
                   return (
                     <div key={krIndex} className="space-y-2">
                       <div className="flex items-center justify-between">
@@ -152,19 +144,16 @@ export default function OKRsPage() {
                           </Avatar>
                         </div>
                       </div>
-                      <Progress 
-                        value={krProgress} 
-                        className="h-2"
-                        style={{
-                          backgroundColor: "hsl(var(--muted))"
-                        }}
+                      <Progress
+                        value={krProgress}
+                        className="h-2 bg-muted"
                       />
                     </div>
                   );
                 })}
               </div>
             )}
-          </div>
+          </Card>
         ))}
       </div>
     </PageWrapper>

@@ -40,10 +40,7 @@ export function TopNav() {
       <div className="flex h-14 items-center px-4 gap-4">
         {/* Logo and Brand */}
         <Link href="/" className="flex items-center gap-2">
-          <div className="flex items-center justify-center w-7 h-7 rounded bg-accent">
-            <span className="text-sm font-bold text-accent-foreground">R</span>
-          </div>
-          <span className="text-base font-semibold text-foreground">RiGoR</span>
+          <span className="text-base font-semibold text-foreground">Outliv</span>
         </Link>
 
         {/* Workspace Selector */}
