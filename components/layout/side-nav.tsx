@@ -72,8 +72,8 @@ export function SideNav({ items, title }: SideNavProps) {
                   variant="ghost"
                   size="sm"
                   className={cn(
-                    "w-full justify-start px-3 h-8",
-                    isCollapsed ? "px-2" : "",
+                    "w-full h-8",
+                    isCollapsed ? "justify-center px-0" : "justify-start px-3",
                     isActive(item.href)
                       ? "bg-accent text-primary hover:bg-accent"
                       : "text-muted-foreground hover:text-foreground hover:bg-muted"

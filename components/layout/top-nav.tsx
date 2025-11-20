@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -37,10 +38,10 @@ export function TopNav() {
 
   return (
     <div className="border-b border-border bg-card sticky top-0 z-50">
-      <div className="flex h-14 items-center px-4 gap-4">
+      <div className="flex h-14 items-center pl-2 pr-4 gap-4">
         {/* Logo and Brand */}
         <Link href="/" className="flex items-center gap-2">
-          <span className="text-base font-semibold text-foreground">Outliv</span>
+          <img src="/logo.png" alt="Outliv" className="w-12 h-12" />
         </Link>
 
         {/* Workspace Selector */}
