@@ -88,7 +88,7 @@ export function TopNav() {
                   "h-full flex items-center px-3 text-sm font-medium transition-colors border-b-2",
                   isActive(item.href)
                     ? "border-primary text-primary"
-                    : "border-transparent text-muted-foreground hover:text-primary hover:border-primary/30"
+                    : "border-transparent text-muted-foreground hover:text-primary hover:border-primary"
                 )}
               >
                 {item.title}
@@ -104,7 +104,7 @@ export function TopNav() {
             <SearchIcon className="absolute left-2.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <Input
               placeholder="Search..."
-              className="pl-8 w-48 h-8 bg-muted/50 border-border text-sm"
+              className="pl-8 w-48 h-8 text-sm"
             />
           </div>
 

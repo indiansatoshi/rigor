@@ -12,6 +12,7 @@ import {
   ChevronDownIcon
 } from "lucide-react";
 import { useState } from "react";
+import { cn } from "@/lib/utils";
 
 export default function RoadmapsPage() {
   const [activeTab, setActiveTab] = useState("roadmaps");
@@ -105,35 +106,40 @@ export default function RoadmapsPage() {
     >
       {/* Top Navigation */}
       <div className="flex items-center justify-between mb-6">
-        <div className="flex items-center gap-2">
-          <Button
-            variant="ghost"
-            className="text-muted-foreground"
-            onClick={() => setActiveTab("initiatives")}
-          >
-            Initiatives
-          </Button>
-          <Button
-            variant={activeTab === "roadmaps" ? "default" : "ghost"}
-            className={activeTab === "roadmaps" ? "bg-card text-accent hover:bg-card" : "text-muted-foreground"}
+        <div className="flex items-center gap-6 border-b border-border px-1">
+          <button
+            className={cn(
+              "pb-3 text-sm font-medium transition-colors border-b-2",
+              activeTab === "roadmaps"
+                ? "border-primary text-primary"
+                : "border-transparent text-muted-foreground hover:text-foreground hover:border-border"
+            )}
             onClick={() => setActiveTab("roadmaps")}
           >
             Roadmaps
-          </Button>
-          <Button
-            variant="ghost"
-            className="text-muted-foreground"
+          </button>
+          <button
+            className={cn(
+              "pb-3 text-sm font-medium transition-colors border-b-2",
+              activeTab === "gantt"
+                ? "border-primary text-primary"
+                : "border-transparent text-muted-foreground hover:text-foreground hover:border-border"
+            )}
+            onClick={() => setActiveTab("gantt")}
+          >
+            Gantt View
+          </button>
+          <button
+            className={cn(
+              "pb-3 text-sm font-medium transition-colors border-b-2",
+              activeTab === "dependencies"
+                ? "border-primary text-primary"
+                : "border-transparent text-muted-foreground hover:text-foreground hover:border-border"
+            )}
             onClick={() => setActiveTab("dependencies")}
           >
             Dependencies
-          </Button>
-          <Button
-            variant="ghost"
-            className="text-muted-foreground"
-            onClick={() => setActiveTab("reports")}
-          >
-            Reports
-          </Button>
+          </button>
         </div>
         <div className="flex items-center gap-2">
           <div className="relative">
@@ -235,8 +241,8 @@ export default function RoadmapsPage() {
                       width: `${(item.duration * 25) - 4}%`,
                       backgroundColor: `hsl(var(--card))`,
                       border: `2px solid ${item.statusColor === 'bg-chart-1' ? 'hsl(var(--chart-1))' :
-                          item.statusColor === 'bg-yellow-500' ? '#eab308' :
-                            'hsl(var(--muted))'
+                        item.statusColor === 'bg-yellow-500' ? '#eab308' :
+                          'hsl(var(--muted))'
                         }`
                     }}
                   >

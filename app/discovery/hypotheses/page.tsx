@@ -14,6 +14,7 @@ import {
   PlusIcon
 } from "lucide-react";
 import { useState } from "react";
+import { cn } from "@/lib/utils";
 
 export default function HypothesesPage() {
   const [activeTab, setActiveTab] = useState("hypotheses");
@@ -101,28 +102,40 @@ export default function HypothesesPage() {
       currentPage="Hypotheses"
     >
       {/* Top Navigation */}
-      <div className="flex items-center gap-2 mb-6">
-        <Button
-          variant="ghost"
-          className="text-muted-foreground"
+      <div className="flex items-center gap-6 mb-6 border-b border-border px-1">
+        <button
+          className={cn(
+            "pb-3 text-sm font-medium transition-colors border-b-2",
+            activeTab === "ideation"
+              ? "border-primary text-primary"
+              : "border-transparent text-muted-foreground hover:text-foreground hover:border-border"
+          )}
           onClick={() => setActiveTab("ideation")}
         >
           Ideation
-        </Button>
-        <Button
-          variant={activeTab === "hypotheses" ? "default" : "ghost"}
-          className={activeTab === "hypotheses" ? "bg-card text-accent hover:bg-card" : "text-muted-foreground"}
+        </button>
+        <button
+          className={cn(
+            "pb-3 text-sm font-medium transition-colors border-b-2",
+            activeTab === "hypotheses"
+              ? "border-primary text-primary"
+              : "border-transparent text-muted-foreground hover:text-foreground hover:border-border"
+          )}
           onClick={() => setActiveTab("hypotheses")}
         >
           Hypotheses
-        </Button>
-        <Button
-          variant="ghost"
-          className="text-muted-foreground"
+        </button>
+        <button
+          className={cn(
+            "pb-3 text-sm font-medium transition-colors border-b-2",
+            activeTab === "insights"
+              ? "border-primary text-primary"
+              : "border-transparent text-muted-foreground hover:text-foreground hover:border-border"
+          )}
           onClick={() => setActiveTab("insights")}
         >
           Insights
-        </Button>
+        </button>
       </div>
 
       {/* Main Content */}
@@ -210,19 +223,18 @@ export default function HypothesesPage() {
             </div>
 
             {/* Tabs */}
-            <div className="flex items-center gap-4 border-b border-border -mb-px">
-              <Button
-                variant="ghost"
-                className="text-accent border-b-2 border-accent rounded-none pb-3"
+            <div className="flex items-center gap-6 border-b border-border -mb-px">
+              <button
+                className="text-primary border-b-2 border-primary rounded-none pb-3 text-sm font-medium transition-colors"
               >
                 Definition
-              </Button>
-              <Button variant="ghost" className="text-muted-foreground pb-3">
+              </button>
+              <button className="text-muted-foreground pb-3 text-sm font-medium transition-colors border-b-2 border-transparent hover:text-foreground hover:border-border">
                 Experiment Plan
-              </Button>
-              <Button variant="ghost" className="text-muted-foreground pb-3">
+              </button>
+              <button className="text-muted-foreground pb-3 text-sm font-medium transition-colors border-b-2 border-transparent hover:text-foreground hover:border-border">
                 Results & Analysis
-              </Button>
+              </button>
             </div>
           </div>
 

@@ -19,6 +19,7 @@ import {
   SettingsIcon
 } from "lucide-react";
 import { useState } from "react";
+import { cn } from "@/lib/utils";
 
 export default function OSTPage() {
   const [activeTab, setActiveTab] = useState("opportunity-solution-tree");
@@ -91,35 +92,51 @@ export default function OSTPage() {
     >
       {/* Top Navigation */}
       <div className="flex items-center justify-between mb-6">
-        <div className="flex items-center gap-2">
-          <Button
-            variant="ghost"
-            className="text-muted-foreground"
+        <div className="flex items-center gap-6 border-b border-border px-1">
+          <button
+            className={cn(
+              "pb-3 text-sm font-medium transition-colors border-b-2",
+              activeTab === "user-research"
+                ? "border-primary text-primary"
+                : "border-transparent text-muted-foreground hover:text-foreground hover:border-border"
+            )}
             onClick={() => setActiveTab("user-research")}
           >
             User Research
-          </Button>
-          <Button
-            variant={activeTab === "opportunity-solution-tree" ? "default" : "ghost"}
-            className={activeTab === "opportunity-solution-tree" ? "bg-card text-accent hover:bg-card" : "text-muted-foreground"}
+          </button>
+          <button
+            className={cn(
+              "pb-3 text-sm font-medium transition-colors border-b-2",
+              activeTab === "opportunity-solution-tree"
+                ? "border-primary text-primary"
+                : "border-transparent text-muted-foreground hover:text-foreground hover:border-border"
+            )}
             onClick={() => setActiveTab("opportunity-solution-tree")}
           >
             Opportunity Solution Tree
-          </Button>
-          <Button
-            variant="ghost"
-            className="text-muted-foreground"
+          </button>
+          <button
+            className={cn(
+              "pb-3 text-sm font-medium transition-colors border-b-2",
+              activeTab === "customer-journey"
+                ? "border-primary text-primary"
+                : "border-transparent text-muted-foreground hover:text-foreground hover:border-border"
+            )}
             onClick={() => setActiveTab("customer-journey")}
           >
             Customer Journey Maps
-          </Button>
-          <Button
-            variant="ghost"
-            className="text-muted-foreground"
+          </button>
+          <button
+            className={cn(
+              "pb-3 text-sm font-medium transition-colors border-b-2",
+              activeTab === "ideation"
+                ? "border-primary text-primary"
+                : "border-transparent text-muted-foreground hover:text-foreground hover:border-border"
+            )}
             onClick={() => setActiveTab("ideation")}
           >
             Ideation Board
-          </Button>
+          </button>
         </div>
         <div className="flex items-center gap-2">
           <div className="relative">

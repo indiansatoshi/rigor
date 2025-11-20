@@ -75,7 +75,7 @@ export function SideNav({ items, title }: SideNavProps) {
                     "w-full justify-start px-3 h-8",
                     isCollapsed ? "px-2" : "",
                     isActive(item.href)
-                      ? "bg-accent/50 text-primary hover:bg-accent/70"
+                      ? "bg-accent text-primary hover:bg-accent"
                       : "text-muted-foreground hover:text-foreground hover:bg-muted"
                   )}
                   suppressHydrationWarning
