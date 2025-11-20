@@ -113,22 +113,23 @@ export default function DiscoveryBoardsPage() {
       {/* Filters */}
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-2">
-          <Button variant="default" size="sm" className="bg-accent text-accent-foreground">
-            All
+          <Button variant="ghost" size="sm" className="font-medium text-foreground">
+            All issues
           </Button>
-          <Button variant="outline" size="sm">
+          <Button variant="outline" size="sm" className="bg-background hover:bg-secondary/50 border-dashed">
             Assignee
-            <ChevronDownIcon className="h-4 w-4 ml-1" />
+            <ChevronDownIcon className="h-3 w-3 ml-2 opacity-50" />
           </Button>
-          <Button variant="outline" size="sm">
+          <Button variant="outline" size="sm" className="bg-background hover:bg-secondary/50 border-dashed">
             Priority
-            <ChevronDownIcon className="h-4 w-4 ml-1" />
+            <ChevronDownIcon className="h-3 w-3 ml-2 opacity-50" />
           </Button>
-          <Button variant="outline" size="sm">
+          <Button variant="outline" size="sm" className="bg-background hover:bg-secondary/50 border-dashed">
             Labels
-            <ChevronDownIcon className="h-4 w-4 ml-1" />
+            <ChevronDownIcon className="h-3 w-3 ml-2 opacity-50" />
           </Button>
-          <Button variant="ghost" size="sm" className="text-accent">
+          <div className="h-4 w-px bg-border mx-2" />
+          <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground">
             Clear filters
           </Button>
         </div>
@@ -166,15 +167,6 @@ export default function DiscoveryBoardsPage() {
         ))}
 
       </div >
-
-      {/* Floating Add Button */}
-      < Button
-        className="fixed bottom-8 right-8 rounded-full h-14 w-14 shadow-lg"
-        variant="default"
-        size="icon"
-      >
-        <PlusIcon className="h-6 w-6" />
-      </Button >
     </PageWrapper >
   );
 }
