@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
+import { SearchInput } from "@/components/ui/search-input";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -101,13 +102,10 @@ export function TopNav() {
         {/* Right Side Actions */}
         <div className="flex items-center gap-2">
           {/* Search */}
-          <div className="relative">
-            <SearchIcon className="absolute left-2.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-            <Input
-              placeholder="Search..."
-              className="pl-8 w-48 h-8 text-sm"
-            />
-          </div>
+          <SearchInput
+            placeholder="Search..."
+            className="w-48 h-8 text-sm"
+          />
 
           {/* Settings */}
           <Button variant="ghost" size="icon" className="h-8 w-8">

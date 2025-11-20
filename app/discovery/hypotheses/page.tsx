@@ -1,10 +1,12 @@
 "use client";
 
 import { PageWrapper } from "@/components/layout/page-wrapper";
+import { DashboardHeader } from "@/components/dashboard/dashboard-header";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
+import { SearchInput } from "@/components/ui/search-input";
 import {
   SearchIcon,
   FlaskConicalIcon,
@@ -101,6 +103,16 @@ export default function HypothesesPage() {
       ]}
       currentPage="Hypotheses"
     >
+      <DashboardHeader
+        title="Hypotheses"
+        description="Test and validate your product assumptions"
+      >
+        <Button variant="default">
+          <PlusIcon className="h-4 w-4 mr-2" />
+          New Hypothesis
+        </Button>
+      </DashboardHeader>
+
       {/* Top Navigation */}
       <div className="flex items-center gap-6 mb-6 border-b border-border px-1">
         <button
@@ -144,13 +156,10 @@ export default function HypothesesPage() {
         <div className="w-80 bg-card border border-border rounded-lg flex flex-col">
           {/* Search */}
           <div className="p-4 border-b border-border">
-            <div className="relative">
-              <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-              <Input
-                placeholder="Search hypotheses..."
-                className="pl-9 bg-background border-border"
-              />
-            </div>
+            <SearchInput
+              placeholder="Search hypotheses..."
+              className="bg-background border-border"
+            />
           </div>
 
           {/* Hypothesis List */}

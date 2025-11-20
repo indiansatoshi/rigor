@@ -1,9 +1,11 @@
 "use client";
 
 import { PageWrapper } from "@/components/layout/page-wrapper";
+import { DashboardHeader } from "@/components/dashboard/dashboard-header";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
+import { SearchInput } from "@/components/ui/search-input";
 import {
   SearchIcon,
   ShareIcon,
@@ -90,6 +92,21 @@ export default function OSTPage() {
       ]}
       currentPage="Opportunity Solution Tree"
     >
+      <DashboardHeader
+        title="Opportunity Solution Tree"
+        description="Visualize and map your discovery opportunities"
+      >
+        <div className="flex items-center gap-2">
+          <SearchInput
+            placeholder="Search..."
+            className="w-64"
+          />
+          <Button variant="default">
+            Share
+          </Button>
+        </div>
+      </DashboardHeader>
+
       {/* Top Navigation */}
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-6 border-b border-border px-1">
@@ -139,13 +156,10 @@ export default function OSTPage() {
           </button>
         </div>
         <div className="flex items-center gap-2">
-          <div className="relative">
-            <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-            <Input
-              placeholder="Search..."
-              className="pl-9 w-64"
-            />
-          </div>
+          <SearchInput
+            placeholder="Search..."
+            className="w-64"
+          />
           <Button variant="default">
             Share
           </Button>

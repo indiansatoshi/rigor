@@ -1,10 +1,12 @@
 "use client";
 
 import { PageWrapper } from "@/components/layout/page-wrapper";
+import { DashboardHeader } from "@/components/dashboard/dashboard-header";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
+import { SearchInput } from "@/components/ui/search-input";
 import {
   SearchIcon,
   PlusIcon,
@@ -94,28 +96,19 @@ export default function DeliveryBoardsPage() {
       ]}
       currentPage="Boards"
     >
-      {/* Page Header */}
-      <div className="flex items-center justify-between mb-6">
-        <div>
-          <h1 className="text-2xl font-semibold text-foreground">Delivery Boards</h1>
-          <p className="text-sm text-muted-foreground mt-1">
-            Track deployment, development, and testing tasks
-          </p>
-        </div>
-        <div className="flex items-center gap-2">
-          <div className="relative">
-            <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-            <Input
-              placeholder="Search..."
-              className="pl-9 w-64"
-            />
-          </div>
-          <Button variant="default">
-            <PlusIcon className="h-4 w-4 mr-2" />
-            New Task
-          </Button>
-        </div>
-      </div>
+      <DashboardHeader
+        title="Delivery Boards"
+        description="Track deployment, development, and testing tasks"
+      >
+        <SearchInput
+          placeholder="Search..."
+          className="w-64"
+        />
+        <Button variant="default">
+          <PlusIcon className="h-4 w-4 mr-2" />
+          New Task
+        </Button>
+      </DashboardHeader>
 
       {/* Filters */}
       <div className="flex items-center justify-between mb-6">

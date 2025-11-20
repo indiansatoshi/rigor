@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
+import { SearchInput } from "@/components/ui/search-input";
 import { Progress } from "@/components/ui/progress";
 import {
   SearchIcon,
@@ -222,13 +223,10 @@ export default function PIPlanPage() {
             <div className="p-4 border-b border-border">
               <h2 className="text-lg font-semibold text-foreground mb-2">PI Backlog</h2>
               <p className="text-xs text-muted-foreground mb-4">Drag items onto the board</p>
-              <div className="relative">
-                <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                <Input
-                  placeholder="Search features..."
-                  className="pl-9 bg-background border-border text-sm"
-                />
-              </div>
+              <SearchInput
+                placeholder="Search features..."
+                className="bg-background border-border text-sm"
+              />
             </div>
 
             <div className="flex-1 overflow-y-auto p-4 space-y-3">
