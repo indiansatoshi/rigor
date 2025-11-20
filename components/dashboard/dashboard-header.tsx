@@ -9,9 +9,9 @@ interface DashboardHeaderProps {
 
 export function DashboardHeader({ title, description, children }: DashboardHeaderProps) {
     return (
-        <div className="flex items-start justify-between gap-4 pb-6 border-b border-border">
+        <div className="flex items-start justify-between gap-4 py-2 px-1.5 border-b border-border bg-background">
             <div className="flex-1">
-                <h1 className="text-3xl font-semibold text-foreground tracking-tight">{title}</h1>
+                <h1 className="text-[32px] font-semibold text-foreground tracking-tight leading-tight">{title}</h1>
                 <p className="text-sm text-muted-foreground mt-2 max-w-3xl">
                     {description}
                 </p>
