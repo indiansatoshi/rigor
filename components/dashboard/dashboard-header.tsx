@@ -4,11 +4,10 @@ import { PlusIcon } from "lucide-react";
 interface DashboardHeaderProps {
     title: string;
     description: string;
-    actionLabel?: string;
-    onAction?: () => void;
+    children?: React.ReactNode;
 }
 
-export function DashboardHeader({ title, description, actionLabel = "New Initiative", onAction }: DashboardHeaderProps) {
+export function DashboardHeader({ title, description, children }: DashboardHeaderProps) {
     return (
         <div className="flex items-center justify-between mb-6">
             <div>
@@ -17,13 +16,11 @@ export function DashboardHeader({ title, description, actionLabel = "New Initiat
                     {description}
                 </p>
             </div>
-            <Button
-                className="bg-accent hover:bg-accent/90 text-accent-foreground"
-                onClick={onAction}
-            >
-                <PlusIcon className="h-4 w-4 mr-2" />
-                {actionLabel}
-            </Button>
+            {children && (
+                <div className="flex items-center gap-2">
+                    {children}
+                </div>
+            )}
         </div>
     );
 }

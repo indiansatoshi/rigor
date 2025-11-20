@@ -15,22 +15,26 @@ interface CanvasSectionProps {
 
 function CanvasSection({ section, className = "" }: CanvasSectionProps) {
   return (
-    <div className={`bg-card border border-border rounded-lg p-6 min-h-[200px] ${className}`}>
-      <div className="flex items-start justify-between mb-3">
-        <h3 className="text-base font-semibold text-foreground">{section.title}</h3>
-        <InfoIcon className="h-4 w-4 text-muted-foreground shrink-0" />
+    <div className={`bg-card border border-border rounded-[3px] shadow-sm p-4 min-h-[180px] flex flex-col ${className}`}>
+      <div className="flex items-start justify-between mb-2">
+        <h3 className="text-sm font-bold uppercase tracking-wide text-muted-foreground">{section.title}</h3>
+        <InfoIcon className="h-3.5 w-3.5 text-muted-foreground/70 shrink-0" />
       </div>
       {section.description && (
-        <p className="text-sm text-muted-foreground mb-4">{section.description}</p>
+        <p className="text-xs text-muted-foreground mb-3 italic">{section.description}</p>
       )}
-      {section.content.length > 0 && (
-        <div className="space-y-2">
+      {section.content.length > 0 ? (
+        <div className="space-y-2 flex-1">
           {section.content.map((item: string, i: number) => (
-            <div key={i} className="flex items-start gap-2">
-              <span className="text-foreground text-sm">•</span>
-              <p className="text-sm text-foreground">{item}</p>
+            <div key={i} className="flex items-start gap-2 bg-secondary/30 p-2 rounded-[3px]">
+              <span className="text-primary text-xs mt-0.5">•</span>
+              <p className="text-sm text-foreground leading-snug">{item}</p>
             </div>
           ))}
+        </div>
+      ) : (
+        <div className="flex-1 flex items-center justify-center opacity-20 hover:opacity-40 transition-opacity cursor-pointer border-2 border-dashed border-muted-foreground/20 rounded-[3px] m-1">
+          <PlusIcon className="h-6 w-6 text-muted-foreground" />
         </div>
       )}
     </div>
@@ -90,7 +94,7 @@ export default function LeanCanvasPage() {
     }
   };
 
-  
+
 
   return (
     <PageWrapper
@@ -131,9 +135,9 @@ export default function LeanCanvasPage() {
 
         {/* Row 2: UVP (highlighted), Unfair Advantage, Channels */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <CanvasSection 
-            section={canvasData.uniqueValue} 
-            className="bg-accent/10 border-accent/30" 
+          <CanvasSection
+            section={canvasData.uniqueValue}
+            className="bg-accent/10 border-accent/30"
           />
           <CanvasSection section={canvasData.unfairAdvantage} />
           <CanvasSection section={canvasData.channels} />
@@ -152,7 +156,7 @@ export default function LeanCanvasPage() {
       </div>
 
       {/* Floating Add Note Button */}
-      <Button 
+      <Button
         className="fixed bottom-8 right-8 rounded-full h-14 w-14 shadow-lg bg-accent hover:bg-accent/90 text-accent-foreground"
         size="icon"
       >

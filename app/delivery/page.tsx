@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { PlusIcon, CheckCircleIcon, AlertCircleIcon } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export default function DeliveryDashboard() {
   const [activeTab, setActiveTab] = useState("overview");
@@ -246,28 +247,40 @@ export default function DeliveryDashboard() {
       </div>
 
       {/* Tabs */}
-      <div className="flex items-center gap-2 mb-6 border-b border-border">
-        <Button
-          variant="ghost"
-          className={activeTab === "overview" ? "text-accent border-b-2 border-accent rounded-none" : "text-muted-foreground"}
+      <div className="flex items-center gap-6 mb-6 border-b border-border px-1">
+        <button
+          className={cn(
+            "pb-3 text-sm font-medium transition-colors border-b-2",
+            activeTab === "overview"
+              ? "border-primary text-primary"
+              : "border-transparent text-muted-foreground hover:text-foreground hover:border-border"
+          )}
           onClick={() => setActiveTab("overview")}
         >
           Overview
-        </Button>
-        <Button
-          variant="ghost"
-          className={activeTab === "deployment" ? "text-accent border-b-2 border-accent rounded-none" : "text-muted-foreground"}
+        </button>
+        <button
+          className={cn(
+            "pb-3 text-sm font-medium transition-colors border-b-2",
+            activeTab === "deployment"
+              ? "border-primary text-primary"
+              : "border-transparent text-muted-foreground hover:text-foreground hover:border-border"
+          )}
           onClick={() => setActiveTab("deployment")}
         >
           Deployment
-        </Button>
-        <Button
-          variant="ghost"
-          className={activeTab === "testing" ? "text-accent border-b-2 border-accent rounded-none" : "text-muted-foreground"}
+        </button>
+        <button
+          className={cn(
+            "pb-3 text-sm font-medium transition-colors border-b-2",
+            activeTab === "testing"
+              ? "border-primary text-primary"
+              : "border-transparent text-muted-foreground hover:text-foreground hover:border-border"
+          )}
           onClick={() => setActiveTab("testing")}
         >
           Testing
-        </Button>
+        </button>
       </div>
 
       {/* Overview Tab */}
@@ -276,7 +289,7 @@ export default function DeliveryDashboard() {
           {/* Metrics Cards */}
           <div className="grid gap-4 md:grid-cols-4">
             {overviewMetrics.map((metric, index) => (
-              <Card key={index} className="bg-card border-border">
+              <Card key={index}>
                 <CardContent className="p-6">
                   <p className="text-sm text-muted-foreground mb-2">{metric.title}</p>
                   <p className="text-3xl font-bold text-foreground mb-2">{metric.value}</p>
@@ -292,7 +305,7 @@ export default function DeliveryDashboard() {
           {/* Quick Stats Grid */}
           <div className="grid gap-4 md:grid-cols-2">
             {/* Deployment Summary */}
-            <Card className="bg-card border-border">
+            <Card>
               <CardHeader>
                 <CardTitle className="text-lg font-semibold">Deployment Summary</CardTitle>
               </CardHeader>
@@ -324,7 +337,7 @@ export default function DeliveryDashboard() {
             </Card>
 
             {/* Testing Summary */}
-            <Card className="bg-card border-border">
+            <Card>
               <CardHeader>
                 <CardTitle className="text-lg font-semibold">Testing Summary</CardTitle>
               </CardHeader>

@@ -17,7 +17,7 @@ export function MetricCard({ metric }: MetricCardProps) {
     const Icon = isPositive ? ArrowUpIcon : isNegative ? ArrowDownIcon : null;
 
     return (
-        <Card className="bg-card border-border">
+        <Card>
             <CardHeader className="pb-3">
                 <CardTitle className="text-sm font-medium text-muted-foreground">
                     {metric.title}

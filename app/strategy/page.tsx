@@ -23,16 +23,16 @@ export default function StrategyDashboard() {
       />
 
       {/* Metrics Cards */}
-      <div className="grid gap-4 md:grid-cols-3 mb-6">
+      <div className="grid gap-6 md:grid-cols-3 mb-6">
         {strategyMetrics.map((metric, index) => (
           <MetricCard key={index} metric={metric} />
         ))}
       </div>
 
       {/* Main Content Grid */}
-      <div className="grid gap-4 md:grid-cols-2 mb-6">
+      <div className="grid gap-6 md:grid-cols-2 mb-6">
         {/* Company OKRs */}
-        <Card className="bg-card border-border">
+        <Card>
           <CardHeader>
             <div className="flex items-center justify-between">
               <CardTitle className="text-lg font-semibold">Company OKRs - Q4 2024</CardTitle>
@@ -64,7 +64,7 @@ export default function StrategyDashboard() {
         </Card>
 
         {/* Lean Canvas Summary */}
-        <Card className="bg-card border-border">
+        <Card>
           <CardHeader>
             <CardTitle className="text-lg font-semibold">Lean Canvas Summary</CardTitle>
           </CardHeader>

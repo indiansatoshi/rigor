@@ -24,16 +24,16 @@ export default function PlanningDashboard() {
       />
 
       {/* Metrics Cards */}
-      <div className="grid gap-4 md:grid-cols-4 mb-6">
+      <div className="grid gap-6 md:grid-cols-4 mb-6">
         {planningMetrics.map((metric, index) => (
           <MetricCard key={index} metric={metric} />
         ))}
       </div>
 
       {/* Main Content Grid */}
-      <div className="grid gap-4 md:grid-cols-2 mb-6">
+      <div className="grid gap-6 md:grid-cols-2 mb-6">
         {/* Upcoming Milestones */}
-        <Card className="bg-card border-border">
+        <Card>
           <CardHeader>
             <CardTitle className="text-lg font-semibold">Upcoming Milestones</CardTitle>
           </CardHeader>
@@ -58,7 +58,7 @@ export default function PlanningDashboard() {
         </Card>
 
         {/* PI Progress */}
-        <Card className="bg-card border-border">
+        <Card>
           <CardHeader>
             <CardTitle className="text-lg font-semibold">PI Progress</CardTitle>
           </CardHeader>
@@ -87,7 +87,7 @@ export default function PlanningDashboard() {
       </div>
 
       {/* Roadmap Items */}
-      <Card className="bg-card border-border">
+      <Card>
         <CardHeader>
           <CardTitle className="text-lg font-semibold">Roadmap Highlights</CardTitle>
         </CardHeader>

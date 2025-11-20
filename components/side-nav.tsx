@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { ChevronRightIcon } from "lucide-react";
 import { useSidebar } from "@/components/sidebar-context";
 import { HoverLabel } from "./hover-label";
+import { cn } from "@/lib/utils";
 
 interface NavItem {
   title: string;
@@ -32,9 +33,8 @@ export function SideNav({ items, title }: SideNavProps) {
 
   return (
     <div
-      className={`border-r border-border bg-card transition-all duration-200 ${
-        isCollapsed ? "w-12" : "w-60"
-      }`}
+      className={`border-r border-border bg-card transition-all duration-200 ${isCollapsed ? "w-12" : "w-60"
+        }`}
       suppressHydrationWarning
     >
       <div className="flex flex-col h-full" suppressHydrationWarning>
@@ -48,17 +48,15 @@ export function SideNav({ items, title }: SideNavProps) {
             suppressHydrationWarning
           >
             <ChevronRightIcon
-              className={`h-4 w-4 transition-transform ${
-                isCollapsed ? "" : "rotate-180"
-              }`}
+              className={`h-4 w-4 transition-transform ${isCollapsed ? "" : "rotate-180"
+                }`}
               suppressHydrationWarning
             />
           </Button>
           {title && (
-            <h2 
-              className={`text-sm font-semibold text-foreground flex-1 ml-2 ${
-                isCollapsed ? "hidden" : ""
-              }`}
+            <h2
+              className={`text-sm font-semibold text-foreground flex-1 ml-2 ${isCollapsed ? "hidden" : ""
+                }`}
               suppressHydrationWarning
             >
               {title}
@@ -74,13 +72,13 @@ export function SideNav({ items, title }: SideNavProps) {
                 <Button
                   variant="ghost"
                   size="sm"
-                  className={`w-full justify-start px-3 h-9 ${
-                    isCollapsed ? "px-2" : ""
-                  } ${
+                  className={cn(
+                    "w-full justify-start px-3 h-9",
+                    isCollapsed ? "px-2" : "",
                     isActive(item.href)
-                      ? "bg-accent/10 text-accent font-medium hover:bg-accent/20"
+                      ? "bg-blue-100 text-primary hover:bg-blue-200" // Atlassian active state
                       : "text-muted-foreground hover:text-foreground hover:bg-muted"
-                  }`}
+                  )}
                   suppressHydrationWarning
                 >
                   {item.icon && (
@@ -88,14 +86,15 @@ export function SideNav({ items, title }: SideNavProps) {
                       {item.icon}
                     </span>
                   )}
-                  <span className={`text-sm ${isCollapsed ? "hidden" : ""}`} suppressHydrationWarning>
+                  <span className={cn("text-sm", isCollapsed ? "hidden" : "")} suppressHydrationWarning>
                     {item.title}
                   </span>
-                  <div 
-                    className={`ml-auto w-1 h-4 bg-accent rounded-full ${
+                  {/* Active indicator bar */}
+                  <div
+                    className={cn(
+                      "ml-auto w-1 h-4 bg-primary rounded-full",
                       isActive(item.href) && !isCollapsed ? "" : "hidden"
-                    }`}
-                    suppressHydrationWarning
+                    )}
                   />
                 </Button>
                 {/* Hover Label for Collapsed State */}
@@ -104,7 +103,7 @@ export function SideNav({ items, title }: SideNavProps) {
             </Link>
           ))}
         </nav>
-      </div>
-    </div>
+      </div >
+    </div >
   );
 }

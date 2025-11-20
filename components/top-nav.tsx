@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { SearchIcon, BellIcon, HelpCircleIcon, SettingsIcon, ChevronDownIcon, CheckIcon, PlusIcon } from "lucide-react";
 import { useWorkspace } from "@/components/workspace-context";
+import { cn } from "@/lib/utils";
 
 export function TopNav() {
   const pathname = usePathname();
@@ -82,20 +83,19 @@ export function TopNav() {
         </DropdownMenu>
 
         {/* Main Navigation */}
-        <nav className="flex items-center gap-0 flex-1">
+        <nav className="flex items-center gap-1 flex-1 h-full">
           {navItems.map((item) => (
-            <Link key={item.href} href={item.href}>
-              <Button
-                variant="ghost"
-                size="sm"
-                className={
+            <Link key={item.href} href={item.href} className="h-full flex items-center">
+              <div
+                className={cn(
+                  "h-full flex items-center px-3 text-sm font-medium transition-colors border-b-2",
                   isActive(item.href)
-                    ? "bg-accent/10 text-accent font-medium hover:bg-accent/20"
-                    : "text-muted-foreground hover:text-foreground hover:bg-muted"
-                }
+                    ? "border-primary text-primary"
+                    : "border-transparent text-muted-foreground hover:text-primary hover:border-primary/30"
+                )}
               >
                 {item.title}
-              </Button>
+              </div>
             </Link>
           ))}
         </nav>

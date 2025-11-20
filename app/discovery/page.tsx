@@ -111,7 +111,7 @@ export default function DiscoveryDashboard() {
       {/* Metrics Cards */}
       <div className="grid gap-4 md:grid-cols-4 mb-6">
         {metrics.map((metric, index) => (
-          <Card key={index} className="bg-card border-border">
+          <Card key={index}>
             <CardContent className="p-6">
               <p className="text-sm text-muted-foreground mb-2">{metric.title}</p>
               <p className="text-3xl font-bold text-foreground mb-2">{metric.value}</p>
@@ -135,7 +135,7 @@ export default function DiscoveryDashboard() {
       {/* Main Content Grid */}
       <div className="grid gap-4 md:grid-cols-2">
         {/* Recent Hypotheses */}
-        <Card className="bg-card border-border">
+        <Card>
           <CardHeader>
             <CardTitle className="text-lg font-semibold">Recent Hypotheses</CardTitle>
           </CardHeader>
@@ -167,7 +167,7 @@ export default function DiscoveryDashboard() {
         </Card>
 
         {/* OST Progress */}
-        <Card className="bg-card border-border">
+        <Card>
           <CardHeader>
             <CardTitle className="text-lg font-semibold">OST Progress</CardTitle>
           </CardHeader>
