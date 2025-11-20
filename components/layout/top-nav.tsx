@@ -41,15 +41,15 @@ export function TopNav() {
       <div className="flex h-14 items-center pl-2 pr-4 gap-4">
         {/* Logo and Brand */}
         <Link href="/" className="flex items-center gap-2">
-          <img src="/logo.png" alt="Outliv" className="w-12 h-12" />
+          <img src="/logo.png" alt="Outliv" className="h-14" />
         </Link>
 
         {/* Workspace Selector */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 px-2 gap-1 text-sm font-medium w-40 justify-between">
-              <span className="truncate">{selectedWorkspace.name}</span>
-              <ChevronDownIcon className="h-4 w-4 text-muted-foreground flex-shrink-0" />
+            <Button variant="ghost" className="h-8 px-2 gap-1 text-sm font-medium w-40 justify-between bg-accent text-primary hover:bg-accent/80 border border-primary/20">
+              <span className="truncate font-semibold">{selectedWorkspace.name}</span>
+              <ChevronDownIcon className="h-4 w-4 flex-shrink-0" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="start" className="w-64">
