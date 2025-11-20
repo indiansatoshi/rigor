@@ -1,9 +1,9 @@
 "use client";
 
-import { SideNav } from "@/components/side-nav";
-import { 
-  LayoutDashboardIcon, 
-  TrendingUpIcon, 
+import { SideNav } from "@/components/layout/side-nav";
+import {
+  LayoutDashboardIcon,
+  TrendingUpIcon,
   BellIcon,
   CalendarIcon,
   UsersIcon

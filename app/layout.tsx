@@ -1,23 +1,18 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
-import { TopNav } from "@/components/top-nav";
-import { TeamProvider } from "@/components/team-context";
-import { WorkspaceProvider } from "@/components/workspace-context";
-import { SidebarProvider } from "@/components/sidebar-context";
+import { TopNav } from "@/components/layout/top-nav";
+import { TeamProvider } from "@/components/providers/team-context";
+import { WorkspaceProvider } from "@/components/providers/workspace-context";
+import { SidebarProvider } from "@/components/layout/sidebar-context";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const inter = Inter({
+  variable: "--font-sans",
   subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: "RiGoR",
+  title: "Outliv",
   description: "Rigorous product management and strategic alignment platform",
 };
 
@@ -27,9 +22,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${inter.variable} antialiased font-sans`}
+        suppressHydrationWarning
       >
         <WorkspaceProvider>
           <TeamProvider>

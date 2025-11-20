@@ -1,22 +1,33 @@
 "use client";
 
-import { PageWrapper } from "@/components/page-wrapper";
+import { PageWrapper } from "@/components/layout/page-wrapper";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
-import { 
-  SearchIcon, 
+import { SearchInput } from "@/components/ui/search-input";
+import {
+  SearchIcon,
   PlusIcon,
   BellIcon,
   ChevronDownIcon
 } from "lucide-react";
 import { useState } from "react";
+import { cn } from "@/lib/utils";
+import { DashboardHeader } from "@/components/dashboard/dashboard-header";
+import { PageSection } from "@/components/layout/page-section";
+import { PageTabs, type PageTab } from "@/components/layout/page-tabs";
 
 export default function RoadmapsPage() {
   const [activeTab, setActiveTab] = useState("roadmaps");
   const [statusFilter, setStatusFilter] = useState("all");
   const [timelineFilter, setTimelineFilter] = useState("Q1 2024");
+
+  const tabs: PageTab[] = [
+    { id: "roadmaps", label: "Roadmaps" },
+    { id: "gantt", label: "Gantt View" },
+    { id: "dependencies", label: "Dependencies" },
+  ];
 
   const initiatives = [
     {
@@ -103,47 +114,16 @@ export default function RoadmapsPage() {
       ]}
       currentPage="Roadmaps"
     >
-      {/* Top Navigation */}
-      <div className="flex items-center justify-between mb-6">
+      <DashboardHeader
+        title="Roadmaps"
+        description="Manage product roadmaps and timelines"
+      >
         <div className="flex items-center gap-2">
-          <Button
-            variant="ghost"
-            className="text-muted-foreground"
-            onClick={() => setActiveTab("initiatives")}
-          >
-            Initiatives
-          </Button>
-          <Button
-            variant={activeTab === "roadmaps" ? "default" : "ghost"}
-            className={activeTab === "roadmaps" ? "bg-card text-accent hover:bg-card" : "text-muted-foreground"}
-            onClick={() => setActiveTab("roadmaps")}
-          >
-            Roadmaps
-          </Button>
-          <Button
-            variant="ghost"
-            className="text-muted-foreground"
-            onClick={() => setActiveTab("dependencies")}
-          >
-            Dependencies
-          </Button>
-          <Button
-            variant="ghost"
-            className="text-muted-foreground"
-            onClick={() => setActiveTab("reports")}
-          >
-            Reports
-          </Button>
-        </div>
-        <div className="flex items-center gap-2">
-          <div className="relative">
-            <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-            <Input 
-              placeholder="Search..." 
-              className="pl-9 w-64 bg-muted/30 border-border"
-            />
-          </div>
-          <Button className="bg-accent hover:bg-accent/90 text-accent-foreground">
+          <SearchInput
+            placeholder="Search..."
+            className="w-64"
+          />
+          <Button variant="default">
             <PlusIcon className="h-4 w-4 mr-2" />
             Add
           </Button>
@@ -157,110 +137,114 @@ export default function RoadmapsPage() {
             </AvatarFallback>
           </Avatar>
         </div>
-      </div>
+      </DashboardHeader>
 
-      {/* Header and Filters */}
-      <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-semibold text-foreground">Product Initiatives Timeline</h1>
-        <div className="flex items-center gap-2">
-          <span className="text-sm text-muted-foreground">Status:</span>
-          <Button
-            variant={statusFilter === "all" ? "default" : "ghost"}
-            size="sm"
-            className={statusFilter === "all" ? "bg-muted text-foreground" : "text-muted-foreground"}
-            onClick={() => setStatusFilter("all")}
-          >
-            All
-            <ChevronDownIcon className="h-4 w-4 ml-1" />
-          </Button>
-          <Badge className="bg-chart-1 text-white">On Track</Badge>
-          <Badge className="bg-yellow-500 text-white">At Risk</Badge>
-          <Badge className="bg-muted text-muted-foreground">Planned</Badge>
-          <span className="text-sm text-muted-foreground ml-4">Timeline:</span>
-          <Button
-            variant="default"
-            size="sm"
-            className="bg-muted text-foreground hover:bg-muted/80"
-          >
-            {timelineFilter}
-            <ChevronDownIcon className="h-4 w-4 ml-1" />
-          </Button>
-        </div>
-      </div>
+      <PageTabs tabs={tabs} activeTab={activeTab} onTabChange={setActiveTab} />
 
-      {/* Timeline Grid */}
-      <div className="bg-card border border-border rounded-lg overflow-hidden">
-        {/* Quarter Headers */}
-        <div className="grid grid-cols-[250px_repeat(4,1fr)] border-b border-border bg-muted/30">
-          <div className="p-4"></div>
-          {quarters.map((quarter, index) => (
-            <div key={index} className="p-4 text-center border-l border-border">
-              <h3 className="text-sm font-semibold text-foreground">{quarter}</h3>
-            </div>
-          ))}
+      <PageSection>
+
+        {/* Header and Filters */}
+        <div className="flex items-center justify-between mb-6">
+          <h1 className="text-2xl font-semibold text-foreground">Product Initiatives Timeline</h1>
+          <div className="flex items-center gap-2">
+            <span className="text-sm text-muted-foreground">Status:</span>
+            <Button
+              variant={statusFilter === "all" ? "default" : "ghost"}
+              size="sm"
+              className={statusFilter === "all" ? "bg-muted text-foreground" : "text-muted-foreground"}
+              onClick={() => setStatusFilter("all")}
+            >
+              All
+              <ChevronDownIcon className="h-4 w-4 ml-1" />
+            </Button>
+            <Badge className="bg-chart-1 text-white">On Track</Badge>
+            <Badge className="bg-yellow-500 text-white">At Risk</Badge>
+            <Badge className="bg-muted text-muted-foreground">Planned</Badge>
+            <span className="text-sm text-muted-foreground ml-4">Timeline:</span>
+            <Button
+              variant="default"
+              size="sm"
+              className="bg-muted text-foreground hover:bg-secondary"
+            >
+              {timelineFilter}
+              <ChevronDownIcon className="h-4 w-4 ml-1" />
+            </Button>
+          </div>
         </div>
 
-        {/* Initiative Rows */}
-        {initiatives.map((category, categoryIndex) => (
-          <div key={categoryIndex}>
-            {/* Category Header */}
-            <div className="grid grid-cols-[250px_repeat(4,1fr)] border-b border-border bg-muted/10">
-              <div className="p-4">
-                <h3 className="text-sm font-semibold text-foreground">{category.category}</h3>
-              </div>
-              <div className="col-span-4 border-l border-border"></div>
-            </div>
-
-            {/* Initiative Items */}
-            {category.items.map((item, itemIndex) => (
-              <div key={itemIndex} className="grid grid-cols-[250px_repeat(4,1fr)] border-b border-border hover:bg-muted/5 transition-colors">
-                <div className="p-4 flex items-center">
-                  <div className={`w-1 h-12 ${item.statusColor} rounded-full mr-3`}></div>
-                  <span className="text-sm text-foreground">{item.title}</span>
-                </div>
-                
-                {/* Timeline Bars */}
-                <div className="col-span-4 relative border-l border-border">
-                  <div className="absolute inset-0 grid grid-cols-4">
-                    {quarters.map((_, qIndex) => (
-                      <div key={qIndex} className={`${qIndex > 0 ? 'border-l border-border' : ''}`}></div>
-                    ))}
-                  </div>
-                  
-                  {/* Initiative Bar */}
-                  <div 
-                    className="absolute top-1/2 -translate-y-1/2 h-12 rounded-lg flex items-center justify-between px-3"
-                    style={{
-                      left: `${(getQuarterPosition(item.quarter) * 25) + 2}%`,
-                      width: `${(item.duration * 25) - 4}%`,
-                      backgroundColor: `hsl(var(--card))`,
-                      border: `2px solid ${
-                        item.statusColor === 'bg-chart-1' ? 'hsl(var(--chart-1))' :
-                        item.statusColor === 'bg-yellow-500' ? '#eab308' :
-                        'hsl(var(--muted))'
-                      }`
-                    }}
-                  >
-                    <span className="text-xs font-medium text-foreground truncate">
-                      {item.title}
-                    </span>
-                    <div className="flex items-center -space-x-1 ml-2">
-                      {item.team.map((member, memberIndex) => (
-                        <Avatar key={memberIndex} className="h-6 w-6 border-2 border-card">
-                          <AvatarImage src={member.avatar} />
-                          <AvatarFallback className="bg-accent text-accent-foreground text-[10px]">
-                            {member.initials}
-                          </AvatarFallback>
-                        </Avatar>
-                      ))}
-                    </div>
-                  </div>
-                </div>
+        {/* Timeline Grid */}
+        <div className="bg-card border border-border rounded-lg overflow-hidden">
+          {/* Quarter Headers */}
+          <div className="grid grid-cols-[250px_repeat(4,1fr)] border-b border-border bg-muted">
+            <div className="p-4"></div>
+            {quarters.map((quarter, index) => (
+              <div key={index} className="p-4 text-center border-l border-border">
+                <h3 className="text-sm font-semibold text-foreground">{quarter}</h3>
               </div>
             ))}
           </div>
-        ))}
-      </div>
+
+          {/* Initiative Rows */}
+          {initiatives.map((category, categoryIndex) => (
+            <div key={categoryIndex}>
+              {/* Category Header */}
+              <div className="grid grid-cols-[250px_repeat(4,1fr)] border-b border-border bg-secondary">
+                <div className="p-4">
+                  <h3 className="text-sm font-semibold text-foreground">{category.category}</h3>
+                </div>
+                <div className="col-span-4 border-l border-border"></div>
+              </div>
+
+              {/* Initiative Items */}
+              {category.items.map((item, itemIndex) => (
+                <div key={itemIndex} className="grid grid-cols-[250px_repeat(4,1fr)] border-b border-border hover:bg-muted transition-colors">
+                  <div className="p-4 flex items-center">
+                    <div className={`w-1 h-12 ${item.statusColor} rounded-full mr-3`}></div>
+                    <span className="text-sm text-foreground">{item.title}</span>
+                  </div>
+
+                  {/* Timeline Bars */}
+                  <div className="col-span-4 relative border-l border-border">
+                    <div className="absolute inset-0 grid grid-cols-4">
+                      {quarters.map((_, qIndex) => (
+                        <div key={qIndex} className={`${qIndex > 0 ? 'border-l border-border' : ''}`}></div>
+                      ))}
+                    </div>
+
+                    {/* Initiative Bar */}
+                    <div
+                      className="absolute top-1/2 -translate-y-1/2 h-12 rounded-lg flex items-center justify-between px-3"
+                      style={{
+                        left: `${(getQuarterPosition(item.quarter) * 25) + 2}%`,
+                        width: `${(item.duration * 25) - 4}%`,
+                        backgroundColor: `hsl(var(--card))`,
+                        border: `2px solid ${item.statusColor === 'bg-chart-1' ? 'hsl(var(--chart-1))' :
+                          item.statusColor === 'bg-yellow-500' ? '#eab308' :
+                            'hsl(var(--muted))'
+                          }`
+                      }}
+                    >
+                      <span className="text-xs font-medium text-foreground truncate">
+                        {item.title}
+                      </span>
+                      <div className="flex items-center -space-x-1 ml-2">
+                        {item.team.map((member, memberIndex) => (
+                          <Avatar key={memberIndex} className="h-6 w-6 border-2 border-card">
+                            <AvatarImage src={member.avatar} />
+                            <AvatarFallback className="bg-accent text-accent-foreground text-[10px]">
+                              {member.initials}
+                            </AvatarFallback>
+                          </Avatar>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+      </PageSection>
     </PageWrapper>
   );
 }

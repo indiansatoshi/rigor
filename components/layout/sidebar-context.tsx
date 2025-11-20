@@ -10,21 +10,25 @@ interface SidebarContextType {
 const SidebarContext = createContext<SidebarContextType | undefined>(undefined);
 
 // Initialize state synchronously from sessionStorage
-function getInitialState(): boolean {
-  if (typeof window === "undefined") return true;
-  const savedState = sessionStorage.getItem("sidebarCollapsed");
-  return savedState !== null ? savedState === "true" : true;
-}
-
 export function SidebarProvider({ children }: { children: ReactNode }) {
-  const [isCollapsed, setIsCollapsed] = useState(getInitialState);
+  const [isCollapsed, setIsCollapsed] = useState(true);
+  const [isInitialized, setIsInitialized] = useState(false);
 
   useEffect(() => {
-    // Save state to sessionStorage whenever it changes
-    if (typeof window !== "undefined") {
+    // Load state from sessionStorage on mount
+    const savedState = sessionStorage.getItem("sidebarCollapsed");
+    if (savedState !== null) {
+      setIsCollapsed(savedState === "true");
+    }
+    setIsInitialized(true);
+  }, []);
+
+  useEffect(() => {
+    // Save state to sessionStorage whenever it changes, but only after initialization
+    if (isInitialized) {
       sessionStorage.setItem("sidebarCollapsed", String(isCollapsed));
     }
-  }, [isCollapsed]);
+  }, [isCollapsed, isInitialized]);
 
   return (
     <SidebarContext.Provider value={{ isCollapsed, setIsCollapsed }}>

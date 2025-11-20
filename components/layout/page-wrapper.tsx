@@ -1,7 +1,7 @@
 "use client"
 
-import { useTeam } from "@/components/team-context";
-import { PageBreadcrumbs } from "@/components/page-breadcrumbs";
+import { useTeam } from "@/components/providers/team-context";
+import { PageBreadcrumbs } from "@/components/layout/page-breadcrumbs";
 
 interface PageWrapperProps {
   children: React.ReactNode;
@@ -19,8 +19,8 @@ export function PageWrapper({ children, breadcrumbs = [], currentPage }: PageWra
 
   return (
     <div className="flex flex-col flex-1 bg-background">
-      <div className="p-6 space-y-6">
-        <PageBreadcrumbs items={allBreadcrumbs} />
+      <PageBreadcrumbs items={allBreadcrumbs} />
+      <div className="p-8 space-y-8 bg-gradient-to-br from-accent/20 via-accent/5 to-background">
         {children}
       </div>
     </div>

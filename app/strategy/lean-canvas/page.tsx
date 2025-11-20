@@ -1,7 +1,9 @@
 "use client";
 
-import { PageWrapper } from "@/components/page-wrapper";
+import { PageWrapper } from "@/components/layout/page-wrapper";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { DashboardHeader } from "@/components/dashboard/dashboard-header";
 import { InfoIcon, UsersIcon, DownloadIcon, HistoryIcon, PlusIcon } from "lucide-react";
 
 interface CanvasSectionProps {
@@ -15,25 +17,31 @@ interface CanvasSectionProps {
 
 function CanvasSection({ section, className = "" }: CanvasSectionProps) {
   return (
-    <div className={`bg-card border border-border rounded-lg p-6 min-h-[200px] ${className}`}>
-      <div className="flex items-start justify-between mb-3">
-        <h3 className="text-base font-semibold text-foreground">{section.title}</h3>
-        <InfoIcon className="h-4 w-4 text-muted-foreground shrink-0" />
-      </div>
-      {section.description && (
-        <p className="text-sm text-muted-foreground mb-4">{section.description}</p>
-      )}
-      {section.content.length > 0 && (
-        <div className="space-y-2">
-          {section.content.map((item: string, i: number) => (
-            <div key={i} className="flex items-start gap-2">
-              <span className="text-foreground text-sm">•</span>
-              <p className="text-sm text-foreground">{item}</p>
-            </div>
-          ))}
+    <Card className={`min-h-[180px] flex flex-col hover:border-primary transition-colors ${className}`}>
+      <CardContent className="p-6 flex-1 flex flex-col">
+        <div className="flex items-start justify-between mb-2">
+          <h3 className="text-sm font-bold uppercase tracking-wide text-muted-foreground">{section.title}</h3>
+          <InfoIcon className="h-3.5 w-3.5 text-muted-foreground shrink-0" />
         </div>
-      )}
-    </div>
+        {section.description && (
+          <p className="text-xs text-muted-foreground mb-3 italic">{section.description}</p>
+        )}
+        {section.content.length > 0 ? (
+          <div className="space-y-2 flex-1">
+            {section.content.map((item: string, i: number) => (
+              <div key={i} className="flex items-start gap-2 bg-muted p-2 rounded-[3px]">
+                <span className="text-primary text-xs mt-0.5">•</span>
+                <p className="text-sm text-foreground leading-snug">{item}</p>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="flex-1 flex items-center justify-center opacity-20 hover:opacity-40 transition-opacity cursor-pointer border-2 border-dashed border-border rounded-[3px] m-1">
+            <PlusIcon className="h-6 w-6 text-muted-foreground" />
+          </div>
+        )}
+      </CardContent>
+    </Card>
   );
 }
 
@@ -90,8 +98,6 @@ export default function LeanCanvasPage() {
     }
   };
 
-  
-
   return (
     <PageWrapper
       breadcrumbs={[
@@ -99,14 +105,10 @@ export default function LeanCanvasPage() {
       ]}
       currentPage="Lean Canvas"
     >
-      {/* Page Header */}
-      <div className="flex items-center justify-between mb-6">
-        <div>
-          <h1 className="text-2xl font-semibold text-foreground">Lean Canvas</h1>
-          <p className="text-sm text-muted-foreground mt-1">
-            Define your business model on a single page
-          </p>
-        </div>
+      <DashboardHeader
+        title="Lean Canvas"
+        description="Define your business model on a single page"
+      >
         <div className="flex items-center gap-2">
           <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground">
             <UsersIcon className="h-5 w-5" />
@@ -117,47 +119,40 @@ export default function LeanCanvasPage() {
           <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground">
             <HistoryIcon className="h-5 w-5" />
           </Button>
+          <Button variant="default" className="ml-2">
+            <PlusIcon className="h-4 w-4 mr-2" />
+            Add Note
+          </Button>
         </div>
-      </div>
+      </DashboardHeader>
 
       {/* Canvas Grid */}
-      <div className="space-y-4">
+      <div className="space-y-6">
         {/* Row 1: Problem, Solution, Key Metrics */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <CanvasSection section={canvasData.problem} />
           <CanvasSection section={canvasData.solution} />
           <CanvasSection section={canvasData.keyMetrics} />
         </div>
 
         {/* Row 2: UVP (highlighted), Unfair Advantage, Channels */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <CanvasSection 
-            section={canvasData.uniqueValue} 
-            className="bg-accent/10 border-accent/30" 
-          />
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <CanvasSection section={canvasData.uniqueValue} />
           <CanvasSection section={canvasData.unfairAdvantage} />
           <CanvasSection section={canvasData.channels} />
         </div>
 
         {/* Row 3: Customer Segments (spans 2), Cost Structure */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <CanvasSection section={canvasData.customerSegments} className="md:col-span-2" />
           <CanvasSection section={canvasData.costStructure} />
         </div>
 
         {/* Row 4: Revenue Streams (full width) */}
-        <div className="grid grid-cols-1 gap-4">
+        <div className="grid grid-cols-1 gap-6">
           <CanvasSection section={canvasData.revenueStreams} />
         </div>
       </div>
-
-      {/* Floating Add Note Button */}
-      <Button 
-        className="fixed bottom-8 right-8 rounded-full h-14 w-14 shadow-lg bg-accent hover:bg-accent/90 text-accent-foreground"
-        size="icon"
-      >
-        <PlusIcon className="h-6 w-6" />
-      </Button>
     </PageWrapper>
   );
 }

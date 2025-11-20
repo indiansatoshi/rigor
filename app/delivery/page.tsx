@@ -1,15 +1,26 @@
 "use client";
 
 import { useState } from "react";
-import { PageWrapper } from "@/components/page-wrapper";
+import { PageWrapper } from "@/components/layout/page-wrapper";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { PlusIcon, CheckCircleIcon, AlertCircleIcon } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { DashboardHeader } from "@/components/dashboard/dashboard-header";
+import { PageSection } from "@/components/layout/page-section";
+import { PageTabs, type PageTab } from "@/components/layout/page-tabs";
+import { MetricCard } from "@/components/dashboard/metric-card";
 
 export default function DeliveryDashboard() {
   const [activeTab, setActiveTab] = useState("overview");
+
+  const tabs: PageTab[] = [
+    { id: "overview", label: "Overview" },
+    { id: "deployment", label: "Deployment" },
+    { id: "testing", label: "Testing" },
+  ];
 
   // Overview data
   const overviewMetrics = [
@@ -17,24 +28,28 @@ export default function DeliveryDashboard() {
       title: "Active Tasks",
       value: "47",
       change: "+8",
+      changeType: "positive" as const,
       period: "vs last week"
     },
     {
       title: "Deployments Today",
       value: "5",
       change: "+2",
+      changeType: "positive" as const,
       period: "vs yesterday"
     },
     {
       title: "Test Pass Rate",
       value: "95.4%",
       change: "+1.2%",
+      changeType: "positive" as const,
       period: "vs last run"
     },
     {
       title: "Test Coverage",
       value: "87%",
       change: "+2%",
+      changeType: "positive" as const,
       period: "vs last sprint"
     }
   ];
@@ -231,73 +246,37 @@ export default function DeliveryDashboard() {
       ]}
       currentPage="Dashboard"
     >
-      {/* Page Header */}
-      <div className="flex items-center justify-between mb-6">
-        <div>
-          <h1 className="text-2xl font-semibold text-foreground">Delivery Dashboard</h1>
-          <p className="text-sm text-muted-foreground mt-1">
-            Track deployment, testing, and delivery metrics
-          </p>
-        </div>
-        <Button className="bg-accent hover:bg-accent/90 text-accent-foreground">
+      <DashboardHeader
+        title="Delivery Dashboard"
+        description="Track deployment, testing, and delivery metrics"
+      >
+        <Button variant="default">
           <PlusIcon className="h-4 w-4 mr-2" />
           New Deployment
         </Button>
-      </div>
+      </DashboardHeader>
 
-      {/* Tabs */}
-      <div className="flex items-center gap-2 mb-6 border-b border-border">
-        <Button
-          variant="ghost"
-          className={activeTab === "overview" ? "text-accent border-b-2 border-accent rounded-none" : "text-muted-foreground"}
-          onClick={() => setActiveTab("overview")}
-        >
-          Overview
-        </Button>
-        <Button
-          variant="ghost"
-          className={activeTab === "deployment" ? "text-accent border-b-2 border-accent rounded-none" : "text-muted-foreground"}
-          onClick={() => setActiveTab("deployment")}
-        >
-          Deployment
-        </Button>
-        <Button
-          variant="ghost"
-          className={activeTab === "testing" ? "text-accent border-b-2 border-accent rounded-none" : "text-muted-foreground"}
-          onClick={() => setActiveTab("testing")}
-        >
-          Testing
-        </Button>
-      </div>
+      <PageTabs tabs={tabs} activeTab={activeTab} onTabChange={setActiveTab} />
 
       {/* Overview Tab */}
       {activeTab === "overview" && (
-        <div className="space-y-6">
+        <PageSection>
           {/* Metrics Cards */}
           <div className="grid gap-4 md:grid-cols-4">
             {overviewMetrics.map((metric, index) => (
-              <Card key={index} className="bg-card border-border">
-                <CardContent className="p-6">
-                  <p className="text-sm text-muted-foreground mb-2">{metric.title}</p>
-                  <p className="text-3xl font-bold text-foreground mb-2">{metric.value}</p>
-                  <div className="flex items-center gap-1 text-sm">
-                    <span className="text-muted-foreground">{metric.change}</span>
-                    <span className="text-muted-foreground ml-1">{metric.period}</span>
-                  </div>
-                </CardContent>
-              </Card>
+              <MetricCard key={index} metric={metric} />
             ))}
           </div>
 
           {/* Quick Stats Grid */}
           <div className="grid gap-4 md:grid-cols-2">
             {/* Deployment Summary */}
-            <Card className="bg-card border-border">
-              <CardHeader>
-                <CardTitle className="text-lg font-semibold">Deployment Summary</CardTitle>
+            <Card>
+              <CardHeader className="pb-3">
+                <CardTitle className="text-base font-semibold">Deployment Summary</CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="grid grid-cols-2 gap-4">
+              <CardContent className="p-4 space-y-3">
+                <div className="grid grid-cols-2 gap-3">
                   <div>
                     <p className="text-sm text-muted-foreground">Total Deployments</p>
                     <p className="text-2xl font-bold">{deploymentStats.totalDeployments}</p>
@@ -307,7 +286,7 @@ export default function DeliveryDashboard() {
                     <p className="text-2xl font-bold text-chart-1">{deploymentStats.successRate}%</p>
                   </div>
                 </div>
-                <div className="space-y-2">
+                <div className="space-y-1.5">
                   {environments.map((env) => (
                     <div key={env.name} className="flex items-center justify-between text-sm">
                       <span className="text-muted-foreground">{env.name}</span>
@@ -324,12 +303,12 @@ export default function DeliveryDashboard() {
             </Card>
 
             {/* Testing Summary */}
-            <Card className="bg-card border-border">
-              <CardHeader>
-                <CardTitle className="text-lg font-semibold">Testing Summary</CardTitle>
+            <Card>
+              <CardHeader className="pb-3">
+                <CardTitle className="text-base font-semibold">Testing Summary</CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="grid grid-cols-3 gap-4">
+              <CardContent className="p-4 space-y-3">
+                <div className="grid grid-cols-3 gap-3">
                   <div>
                     <p className="text-sm text-muted-foreground">Total</p>
                     <p className="text-2xl font-bold">{testMetrics.totalTests}</p>
@@ -343,7 +322,7 @@ export default function DeliveryDashboard() {
                     <p className="text-2xl font-bold text-destructive">{testMetrics.failed}</p>
                   </div>
                 </div>
-                <div className="space-y-2">
+                <div className="space-y-1.5">
                   <div className="flex items-center justify-between text-sm">
                     <span className="text-muted-foreground">Pass Rate</span>
                     <span className="font-medium">{passRate.toFixed(1)}%</span>
@@ -353,12 +332,12 @@ export default function DeliveryDashboard() {
               </CardContent>
             </Card>
           </div>
-        </div>
+        </PageSection>
       )}
 
       {/* Deployment Tab */}
       {activeTab === "deployment" && (
-        <div className="space-y-6">
+        <PageSection>
           {/* Deployment Stats */}
           <div className="grid gap-4 md:grid-cols-4">
             <Card>
@@ -469,7 +448,7 @@ export default function DeliveryDashboard() {
             <CardContent>
               <div className="space-y-3">
                 {recentDeployments.map((deployment) => (
-                  <div key={deployment.id} className="flex items-center justify-between p-3 rounded-md bg-muted/50">
+                  <div key={deployment.id} className="flex items-center justify-between p-3 rounded-md bg-muted">
                     <div className="space-y-1">
                       <div className="flex items-center gap-2">
                         <span className="text-xs text-muted-foreground">{deployment.id}</span>
@@ -491,12 +470,12 @@ export default function DeliveryDashboard() {
               </div>
             </CardContent>
           </Card>
-        </div>
+        </PageSection>
       )}
 
       {/* Testing Tab */}
       {activeTab === "testing" && (
-        <div className="space-y-6">
+        <PageSection>
           {/* Test Metrics Overview */}
           <div className="grid gap-4 md:grid-cols-5">
             <Card>
@@ -611,7 +590,7 @@ export default function DeliveryDashboard() {
             <CardContent>
               <div className="space-y-3">
                 {recentFailures.map((failure, index) => (
-                  <div key={index} className="p-3 rounded-md bg-muted/50 space-y-2">
+                  <div key={index} className="p-3 rounded-md bg-muted space-y-2">
                     <div className="flex items-start justify-between">
                       <div className="space-y-1 flex-1">
                         <p className="text-sm font-medium">{failure.test}</p>
@@ -625,7 +604,7 @@ export default function DeliveryDashboard() {
               </div>
             </CardContent>
           </Card>
-        </div>
+        </PageSection>
       )}
     </PageWrapper>
   );

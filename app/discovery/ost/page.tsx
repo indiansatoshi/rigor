@@ -1,16 +1,18 @@
 "use client";
 
-import { PageWrapper } from "@/components/page-wrapper";
+import { PageWrapper } from "@/components/layout/page-wrapper";
+import { DashboardHeader } from "@/components/dashboard/dashboard-header";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
-import { 
-  SearchIcon, 
-  ShareIcon, 
-  BellIcon, 
-  ZoomInIcon, 
-  ZoomOutIcon, 
-  MaximizeIcon, 
+import { SearchInput } from "@/components/ui/search-input";
+import {
+  SearchIcon,
+  ShareIcon,
+  BellIcon,
+  ZoomInIcon,
+  ZoomOutIcon,
+  MaximizeIcon,
   PlusIcon,
   InfoIcon,
   SlidersHorizontalIcon,
@@ -19,6 +21,7 @@ import {
   SettingsIcon
 } from "lucide-react";
 import { useState } from "react";
+import { cn } from "@/lib/utils";
 
 export default function OSTPage() {
   const [activeTab, setActiveTab] = useState("opportunity-solution-tree");
@@ -89,47 +92,75 @@ export default function OSTPage() {
       ]}
       currentPage="Opportunity Solution Tree"
     >
+      <DashboardHeader
+        title="Opportunity Solution Tree"
+        description="Visualize and map your discovery opportunities"
+      >
+        <div className="flex items-center gap-2">
+          <SearchInput
+            placeholder="Search..."
+            className="w-64"
+          />
+          <Button variant="default">
+            Share
+          </Button>
+        </div>
+      </DashboardHeader>
+
       {/* Top Navigation */}
       <div className="flex items-center justify-between mb-6">
-        <div className="flex items-center gap-2">
-          <Button
-            variant="ghost"
-            className="text-muted-foreground"
+        <div className="flex items-center gap-6 border-b border-border px-1">
+          <button
+            className={cn(
+              "pb-3 text-sm font-medium transition-colors border-b-2",
+              activeTab === "user-research"
+                ? "border-primary text-primary"
+                : "border-transparent text-muted-foreground hover:text-foreground hover:border-border"
+            )}
             onClick={() => setActiveTab("user-research")}
           >
             User Research
-          </Button>
-          <Button
-            variant={activeTab === "opportunity-solution-tree" ? "default" : "ghost"}
-            className={activeTab === "opportunity-solution-tree" ? "bg-card text-accent hover:bg-card" : "text-muted-foreground"}
+          </button>
+          <button
+            className={cn(
+              "pb-3 text-sm font-medium transition-colors border-b-2",
+              activeTab === "opportunity-solution-tree"
+                ? "border-primary text-primary"
+                : "border-transparent text-muted-foreground hover:text-foreground hover:border-border"
+            )}
             onClick={() => setActiveTab("opportunity-solution-tree")}
           >
             Opportunity Solution Tree
-          </Button>
-          <Button
-            variant="ghost"
-            className="text-muted-foreground"
+          </button>
+          <button
+            className={cn(
+              "pb-3 text-sm font-medium transition-colors border-b-2",
+              activeTab === "customer-journey"
+                ? "border-primary text-primary"
+                : "border-transparent text-muted-foreground hover:text-foreground hover:border-border"
+            )}
             onClick={() => setActiveTab("customer-journey")}
           >
             Customer Journey Maps
-          </Button>
-          <Button
-            variant="ghost"
-            className="text-muted-foreground"
+          </button>
+          <button
+            className={cn(
+              "pb-3 text-sm font-medium transition-colors border-b-2",
+              activeTab === "ideation"
+                ? "border-primary text-primary"
+                : "border-transparent text-muted-foreground hover:text-foreground hover:border-border"
+            )}
             onClick={() => setActiveTab("ideation")}
           >
             Ideation Board
-          </Button>
+          </button>
         </div>
         <div className="flex items-center gap-2">
-          <div className="relative">
-            <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-            <Input 
-              placeholder="Search..." 
-              className="pl-9 w-64 bg-muted/30 border-border"
-            />
-          </div>
-          <Button className="bg-accent hover:bg-accent/90 text-accent-foreground">
+          <SearchInput
+            placeholder="Search..."
+            className="w-64"
+          />
+          <Button variant="default">
             Share
           </Button>
           <Button variant="ghost" size="icon" className="text-muted-foreground">
@@ -149,7 +180,7 @@ export default function OSTPage() {
         {/* Canvas Area */}
         <div className="flex-1 bg-card border border-border rounded-lg relative overflow-hidden">
           {/* Dotted Background Pattern */}
-          <div 
+          <div
             className="absolute inset-0 opacity-20"
             style={{
               backgroundImage: 'radial-gradient(circle, hsl(var(--muted-foreground)) 1px, transparent 1px)',
@@ -160,11 +191,11 @@ export default function OSTPage() {
           {/* Canvas Content */}
           <div className="relative h-full p-8">
             {/* Outcome Node */}
-            <div 
+            <div
               className="absolute left-8 top-24 w-64 cursor-pointer"
               onClick={() => handleNodeClick(ostData.outcome)}
             >
-              <div className="bg-accent/20 border-2 border-accent rounded-lg p-4">
+              <div className="bg-accent border-2 border-accent rounded-lg p-4">
                 <div className="flex items-center gap-2 mb-2">
                   <div className="h-2 w-2 rounded-full bg-accent" />
                   <span className="text-xs font-semibold text-accent">Outcome</span>
@@ -179,7 +210,7 @@ export default function OSTPage() {
             </div>
 
             {/* Opportunity Nodes */}
-            <div 
+            <div
               className="absolute left-80 top-8 w-56 cursor-pointer"
               onClick={() => handleNodeClick(ostData.opportunities[0])}
             >
@@ -194,7 +225,7 @@ export default function OSTPage() {
               </div>
             </div>
 
-            <div 
+            <div
               className="absolute left-80 top-52 w-56 cursor-pointer"
               onClick={() => handleNodeClick(ostData.opportunities[1])}
             >
@@ -210,7 +241,7 @@ export default function OSTPage() {
             </div>
 
             {/* Solution Nodes */}
-            <div 
+            <div
               className="absolute left-[38rem] top-4 w-52 cursor-pointer"
               onClick={() => handleNodeClick(ostData.opportunities[0].solutions[0])}
             >
@@ -225,7 +256,7 @@ export default function OSTPage() {
               </div>
             </div>
 
-            <div 
+            <div
               className="absolute left-[38rem] top-32 w-52 cursor-pointer"
               onClick={() => handleNodeClick(ostData.opportunities[0].solutions[1])}
             >
@@ -240,7 +271,7 @@ export default function OSTPage() {
               </div>
             </div>
 
-            <div 
+            <div
               className="absolute left-[38rem] top-56 w-52 cursor-pointer"
               onClick={() => handleNodeClick(ostData.opportunities[1].solutions[0])}
             >
@@ -270,8 +301,9 @@ export default function OSTPage() {
           </div>
 
           {/* Add Node Button */}
-          <Button 
-            className="absolute bottom-4 right-4 rounded-full h-14 w-14 shadow-lg bg-accent hover:bg-accent/90 text-accent-foreground"
+          <Button
+            className="absolute bottom-4 right-4 rounded-full h-14 w-14 shadow-lg"
+            variant="default"
             size="icon"
           >
             <PlusIcon className="h-6 w-6" />
@@ -299,12 +331,12 @@ export default function OSTPage() {
                   </p>
                 </div>
               </div>
-              
+
               <div className="flex items-center gap-2">
                 <div className="h-2 w-2 rounded-full bg-accent" />
                 <span className="text-xs font-semibold text-accent">Solution</span>
               </div>
-              
+
               <p className="text-sm text-foreground">
                 {selectedDescription || "Personalized content recommendation engine"}
               </p>
@@ -332,7 +364,7 @@ export default function OSTPage() {
 
             {/* Bottom Actions */}
             <div className="pt-4 border-t border-border space-y-2">
-              <Button className="w-full bg-accent hover:bg-accent/90 text-accent-foreground">
+              <Button variant="default" className="w-full">
                 Edit Details
               </Button>
               <Button variant="outline" className="w-full justify-start gap-2">

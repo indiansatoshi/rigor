@@ -2,6 +2,13 @@ import {
   AudioWaveform,
   Command,
   GalleryVerticalEnd,
+  LayoutDashboardIcon,
+  TargetIcon,
+  LayoutGridIcon,
+  KanbanSquareIcon,
+  MapIcon,
+  CalendarIcon,
+  RocketIcon,
 } from "lucide-react";
 
 export const appData = {
@@ -84,16 +91,8 @@ export const appData = {
       icon: undefined,
       items: [
         {
-          title: "Deployment",
-          url: "/delivery/deployment",
-        },
-        {
-          title: "Development",
-          url: "/delivery/development",
-        },
-        {
-          title: "Testing",
-          url: "/delivery/testing",
+          title: "Boards",
+          url: "/delivery/boards",
         },
       ],
     },
@@ -103,18 +102,23 @@ export const appData = {
       icon: undefined,
       items: [
         {
-          title: "Operations",
-          url: "/governance/operations",
-        },
-        {
-          title: "Customer Support",
-          url: "/governance/customer-support",
-        },
-        {
-          title: "Feedback Loop",
-          url: "/governance/feedback-loop",
+          title: "Boards",
+          url: "/governance/boards",
         },
       ],
     },
+  ],
+  strategyNav: [
+    { title: "Dashboard", href: "/strategy", icon: LayoutDashboardIcon },
+    { title: "Boards", href: "/strategy/boards", icon: KanbanSquareIcon },
+    { title: "Lean Canvas", href: "/strategy/lean-canvas", icon: LayoutGridIcon },
+    { title: "OKRs", href: "/strategy/okrs", icon: TargetIcon },
+  ],
+  planningNav: [
+    { title: "Dashboard", href: "/planning", icon: LayoutDashboardIcon },
+    { title: "Boards", href: "/planning/boards", icon: KanbanSquareIcon },
+    { title: "Roadmaps", href: "/planning/roadmaps", icon: MapIcon },
+    { title: "PI Plans", href: "/planning/pi-plans", icon: CalendarIcon },
+    { title: "Release Tracker", href: "/planning/release-tracker", icon: RocketIcon },
   ],
 };
