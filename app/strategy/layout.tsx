@@ -1,7 +1,7 @@
 "use client";
 
-import { SideNav } from "@/components/side-nav";
-import { appData } from "@/components/app-data";
+import { SideNav } from "@/components/layout/side-nav";
+import { appData } from "@/lib/app-data";
 
 export default function StrategyLayout({
   children,

@@ -1,6 +1,6 @@
 "use client";
 
-import { SideNav } from "@/components/side-nav";
+import { SideNav } from "@/components/layout/side-nav";
 import { NetworkIcon, FlaskConicalIcon, LayoutDashboardIcon, KanbanSquareIcon } from "lucide-react";
 
 export default function DiscoveryLayout({

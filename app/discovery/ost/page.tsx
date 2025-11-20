@@ -1,6 +1,6 @@
 "use client";
 
-import { PageWrapper } from "@/components/page-wrapper";
+import { PageWrapper } from "@/components/layout/page-wrapper";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";

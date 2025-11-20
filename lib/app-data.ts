@@ -91,16 +91,8 @@ export const appData = {
       icon: undefined,
       items: [
         {
-          title: "Deployment",
-          url: "/delivery/deployment",
-        },
-        {
-          title: "Development",
-          url: "/delivery/development",
-        },
-        {
-          title: "Testing",
-          url: "/delivery/testing",
+          title: "Boards",
+          url: "/delivery/boards",
         },
       ],
     },
@@ -110,16 +102,8 @@ export const appData = {
       icon: undefined,
       items: [
         {
-          title: "Operations",
-          url: "/governance/operations",
-        },
-        {
-          title: "Customer Support",
-          url: "/governance/customer-support",
-        },
-        {
-          title: "Feedback Loop",
-          url: "/governance/feedback-loop",
+          title: "Boards",
+          url: "/governance/boards",
         },
       ],
     },

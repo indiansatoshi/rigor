@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { appData } from "@/components/app-data";
+import { appData } from "@/lib/app-data";
 
 export type Team = {
   name: string;

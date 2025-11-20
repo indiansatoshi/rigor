@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { TopNav } from "@/components/top-nav";
-import { TeamProvider } from "@/components/team-context";
-import { WorkspaceProvider } from "@/components/workspace-context";
-import { SidebarProvider } from "@/components/sidebar-context";
+import { TopNav } from "@/components/layout/top-nav";
+import { TeamProvider } from "@/components/providers/team-context";
+import { WorkspaceProvider } from "@/components/providers/workspace-context";
+import { SidebarProvider } from "@/components/layout/sidebar-context";
 
 const inter = Inter({
   variable: "--font-sans",
@@ -25,6 +25,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${inter.variable} antialiased font-sans`}
+        suppressHydrationWarning
       >
         <WorkspaceProvider>
           <TeamProvider>

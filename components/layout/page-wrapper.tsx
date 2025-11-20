@@ -1,7 +1,7 @@
 "use client"
 
-import { useTeam } from "@/components/team-context";
-import { PageBreadcrumbs } from "@/components/page-breadcrumbs";
+import { useTeam } from "@/components/providers/team-context";
+import { PageBreadcrumbs } from "@/components/layout/page-breadcrumbs";
 
 interface PageWrapperProps {
   children: React.ReactNode;

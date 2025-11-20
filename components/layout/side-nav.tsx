@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { ChevronRightIcon } from "lucide-react";
-import { useSidebar } from "@/components/sidebar-context";
+import { useSidebar } from "@/components/layout/sidebar-context";
 import { HoverLabel } from "./hover-label";
 import { cn } from "@/lib/utils";
 

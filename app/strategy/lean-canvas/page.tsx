@@ -1,6 +1,6 @@
 "use client";
 
-import { PageWrapper } from "@/components/page-wrapper";
+import { PageWrapper } from "@/components/layout/page-wrapper";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { DashboardHeader } from "@/components/dashboard/dashboard-header";

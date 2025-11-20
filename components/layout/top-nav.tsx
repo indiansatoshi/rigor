@@ -14,7 +14,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { SearchIcon, BellIcon, HelpCircleIcon, SettingsIcon, ChevronDownIcon, CheckIcon, PlusIcon } from "lucide-react";
-import { useWorkspace } from "@/components/workspace-context";
+import { useWorkspace } from "@/components/providers/workspace-context";
 import { cn } from "@/lib/utils";
 
 export function TopNav() {
