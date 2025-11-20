@@ -17,30 +17,44 @@ export function PageBreadcrumbs({ items }: PageBreadcrumbsProps) {
   const { selectedWorkspace } = useWorkspace();
 
   return (
-    <nav className="flex items-center gap-2 text-sm mb-4">
-      <Link
-        href="/"
-        className="text-muted-foreground hover:text-foreground transition-colors"
-      >
-        <HomeIcon className="h-4 w-4" />
-      </Link>
-      <ChevronRightIcon className="h-4 w-4 text-muted-foreground" />
-      <span className="text-muted-foreground">{selectedWorkspace.name}</span>
-      {items.map((item, index) => (
-        <div key={index} className="flex items-center gap-2">
-          <ChevronRightIcon className="h-4 w-4 text-muted-foreground" />
-          {item.href ? (
-            <Link
-              href={item.href}
-              className="text-muted-foreground hover:text-foreground transition-colors"
-            >
-              {item.label}
-            </Link>
-          ) : (
-            <span className="text-foreground font-medium">{item.label}</span>
-          )}
-        </div>
-      ))}
+    <nav
+      className="flex items-center gap-1 text-sm px-6 py-3 border-b border-border bg-card"
+      aria-label="Breadcrumb"
+    >
+      <ol className="flex items-center gap-1">
+        <li>
+          <Link
+            href="/"
+            className="text-muted-foreground hover:text-primary transition-colors p-1 rounded hover:bg-accent"
+            aria-label="Home"
+          >
+            <HomeIcon className="h-4 w-4" />
+          </Link>
+        </li>
+        <li>
+          <ChevronRightIcon className="h-4 w-4 text-muted-foreground mx-0.5" aria-hidden="true" />
+        </li>
+        <li>
+          <span className="text-muted-foreground px-1">{selectedWorkspace.name}</span>
+        </li>
+        {items.map((item, index) => (
+          <li key={index} className="flex items-center gap-1">
+            <ChevronRightIcon className="h-4 w-4 text-muted-foreground mx-0.5" aria-hidden="true" />
+            {item.href ? (
+              <Link
+                href={item.href}
+                className="text-muted-foreground hover:text-primary transition-colors px-1 rounded hover:bg-accent"
+              >
+                {item.label}
+              </Link>
+            ) : (
+              <span className="text-foreground font-semibold px-1" aria-current="page">
+                {item.label}
+              </span>
+            )}
+          </li>
+        ))}
+      </ol>
     </nav>
   );
 }

@@ -33,7 +33,7 @@ export function SideNav({ items, title }: SideNavProps) {
 
   return (
     <div
-      className={`border-r border-border bg-card transition-all duration-200 ${isCollapsed ? "w-12" : "w-56"
+      className={`border-r border-border bg-card transition-all duration-200 ${isCollapsed ? "w-12" : "w-48"
         }`}
       suppressHydrationWarning
     >

@@ -19,8 +19,8 @@ export function PageWrapper({ children, breadcrumbs = [], currentPage }: PageWra
 
   return (
     <div className="flex flex-col flex-1 bg-background">
+      <PageBreadcrumbs items={allBreadcrumbs} />
       <div className="p-6 space-y-6">
-        <PageBreadcrumbs items={allBreadcrumbs} />
         {children}
       </div>
     </div>
