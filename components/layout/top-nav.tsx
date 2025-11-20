@@ -47,9 +47,9 @@ export function TopNav() {
         {/* Workspace Selector */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 px-2 gap-1 text-sm font-medium">
-              {selectedWorkspace.name}
-              <ChevronDownIcon className="h-4 w-4 text-muted-foreground" />
+            <Button variant="ghost" className="h-8 px-2 gap-1 text-sm font-medium w-40 justify-between">
+              <span className="truncate">{selectedWorkspace.name}</span>
+              <ChevronDownIcon className="h-4 w-4 text-muted-foreground flex-shrink-0" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="start" className="w-64">
