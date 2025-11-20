@@ -18,10 +18,10 @@ export function PageBreadcrumbs({ items }: PageBreadcrumbsProps) {
 
   return (
     <nav
-      className="flex items-center gap-1 text-sm px-6 py-3 border-b border-border bg-card"
+      className="flex items-center gap-1 text-sm h-12 border-b border-border bg-card"
       aria-label="Breadcrumb"
     >
-      <ol className="flex items-center gap-1">
+      <ol className="flex items-center gap-1 px-3">
         <li>
           <Link
             href="/"
