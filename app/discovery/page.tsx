@@ -102,7 +102,7 @@ export default function DiscoveryDashboard() {
             Track hypotheses validation and opportunity solution trees
           </p>
         </div>
-        <Button className="bg-accent hover:bg-accent/90 text-accent-foreground">
+        <Button variant="default">
           <PlusIcon className="h-4 w-4 mr-2" />
           New Hypothesis
         </Button>

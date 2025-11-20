@@ -7,6 +7,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { DashboardHeader } from "@/components/dashboard/dashboard-header";
+import { StatusBadge } from "@/components/ui/status-badge";
 import {
   SearchIcon,
   PlusIcon,
@@ -21,7 +22,7 @@ export default function StrategyBoardsPage() {
     {
       id: "STR-101",
       title: "Define Q1 2025 OKRs",
-      priority: "High",
+      priority: "High" as const,
       labels: ["Strategy"],
       date: "Dec 15",
       assignee: { initials: "JD", avatar: "/avatars/01.png" },
@@ -30,7 +31,7 @@ export default function StrategyBoardsPage() {
     {
       id: "STR-102",
       title: "Update Lean Canvas for new market",
-      priority: "Medium",
+      priority: "Medium" as const,
       labels: ["Planning"],
       date: "Dec 20",
       assignee: { initials: "SS", avatar: "/avatars/02.png" },
@@ -39,7 +40,7 @@ export default function StrategyBoardsPage() {
     {
       id: "STR-103",
       title: "Competitive analysis report",
-      priority: "High",
+      priority: "High" as const,
       labels: ["Research"],
       date: "Dec 10",
       assignee: { initials: "AB", avatar: "/avatars/03.png" },
@@ -48,7 +49,7 @@ export default function StrategyBoardsPage() {
     {
       id: "STR-104",
       title: "Strategic partnership review",
-      priority: "Medium",
+      priority: "Medium" as const,
       labels: ["Strategy"],
       date: "Dec 5",
       assignees: [
@@ -60,7 +61,7 @@ export default function StrategyBoardsPage() {
     {
       id: "STR-105",
       title: "Market segmentation analysis",
-      priority: "Low",
+      priority: "Low" as const,
       labels: ["Research"],
       date: "Nov 28",
       completed: true,
@@ -76,15 +77,6 @@ export default function StrategyBoardsPage() {
 
   const getTasksByStatus = (status: string) => {
     return tasks.filter(task => task.status === status);
-  };
-
-  const getPriorityColor = (priority: string) => {
-    switch (priority) {
-      case "High": return "bg-destructive text-destructive-foreground";
-      case "Medium": return "bg-yellow-500 text-white";
-      case "Low": return "bg-chart-1 text-white";
-      default: return "bg-muted text-muted-foreground";
-    }
   };
 
   return (
@@ -106,7 +98,7 @@ export default function StrategyBoardsPage() {
               className="pl-9 w-64"
             />
           </div>
-          <Button className="bg-accent hover:bg-accent/90 text-accent-foreground">
+          <Button variant="default">
             <PlusIcon className="h-4 w-4 mr-2" />
             New Task
           </Button>
@@ -161,7 +153,7 @@ export default function StrategyBoardsPage() {
               {getTasksByStatus(column.id).map((task) => (
                 <Card
                   key={task.id}
-                  className="hover:border-accent transition-colors cursor-pointer"
+                  className="hover:border-primary transition-colors cursor-pointer"
                 >
                   <CardContent className="p-4 space-y-3">
                     {/* Task ID */}
@@ -170,16 +162,14 @@ export default function StrategyBoardsPage() {
                     </div>
 
                     {/* Task Title */}
-                    <h4 className="text-sm font-medium text-foreground leading-snug">
+                    <h4 className="text-sm font-medium text-foreground leading-snug line-clamp-2">
                       {task.title}
                     </h4>
 
                     {/* Labels */}
                     <div className="flex flex-wrap gap-2">
                       {task.priority && (
-                        <Badge className={`${getPriorityColor(task.priority)} text-xs`}>
-                          {task.priority}
-                        </Badge>
+                        <StatusBadge priority={task.priority} />
                       )}
                       {task.labels && task.labels.map((label, index) => (
                         <Badge

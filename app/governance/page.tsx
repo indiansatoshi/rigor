@@ -116,7 +116,7 @@ export default function GovernanceDashboard() {
         title="Governance Dashboard"
         description="Monitor operations, support, and customer feedback"
       >
-        <Button className="bg-accent hover:bg-accent/90 text-accent-foreground">
+        <Button variant="default">
           <PlusIcon className="h-4 w-4 mr-2" />
           New Ticket
         </Button>
@@ -281,7 +281,7 @@ export default function GovernanceDashboard() {
             <CardContent>
               <div className="grid gap-3 md:grid-cols-3">
                 {services.map((service, index) => (
-                  <div key={index} className="flex items-center justify-between p-3 rounded-md bg-muted/50">
+                  <div key={index} className="flex items-center justify-between p-3 rounded-md bg-muted">
                     <div>
                       <p className="text-sm font-medium">{service.name}</p>
                       <p className="text-xs text-muted-foreground">{service.latency}</p>
@@ -303,7 +303,7 @@ export default function GovernanceDashboard() {
             <CardContent>
               <div className="space-y-3">
                 {incidents.map((incident) => (
-                  <div key={incident.id} className="flex items-center justify-between p-3 rounded-md bg-muted/50">
+                  <div key={incident.id} className="flex items-center justify-between p-3 rounded-md bg-muted">
                     <div className="space-y-1">
                       <div className="flex items-center gap-2">
                         <span className="text-xs text-muted-foreground">{incident.id}</span>
@@ -386,7 +386,7 @@ export default function GovernanceDashboard() {
             <CardContent>
               <div className="grid gap-3 md:grid-cols-3">
                 {categoryStats.map((category) => (
-                  <div key={category.name} className="flex items-center justify-between p-3 rounded-md bg-muted/50">
+                  <div key={category.name} className="flex items-center justify-between p-3 rounded-md bg-muted">
                     <div>
                       <p className="text-sm font-medium">{category.name}</p>
                       <p className="text-xs text-muted-foreground">{category.trend} this week</p>
@@ -406,7 +406,7 @@ export default function GovernanceDashboard() {
             <CardContent>
               <div className="space-y-3">
                 {tickets.map((ticket) => (
-                  <div key={ticket.id} className="flex items-center justify-between p-3 rounded-md bg-muted/50">
+                  <div key={ticket.id} className="flex items-center justify-between p-3 rounded-md bg-muted">
                     <div className="space-y-2 flex-1">
                       <div className="flex items-center gap-2">
                         <span className="text-xs text-muted-foreground">{ticket.id}</span>
@@ -511,7 +511,7 @@ export default function GovernanceDashboard() {
             <CardContent>
               <div className="grid gap-3 md:grid-cols-3">
                 {topCategories.map((category) => (
-                  <div key={category.name} className="flex items-center justify-between p-3 rounded-md bg-muted/50">
+                  <div key={category.name} className="flex items-center justify-between p-3 rounded-md bg-muted">
                     <span className="text-sm font-medium">{category.name}</span>
                     <span className="text-2xl font-bold">{category.count}</span>
                   </div>
@@ -528,7 +528,7 @@ export default function GovernanceDashboard() {
             <CardContent>
               <div className="space-y-3">
                 {feedbackItems.map((item) => (
-                  <div key={item.id} className="p-4 rounded-md bg-muted/50 space-y-3">
+                  <div key={item.id} className="p-4 rounded-md bg-muted space-y-3">
                     <div className="flex items-start justify-between">
                       <div className="flex items-center gap-2">
                         <span className="text-xs text-muted-foreground">{item.id}</span>

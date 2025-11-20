@@ -75,7 +75,7 @@ export function SideNav({ items, title }: SideNavProps) {
                     "w-full justify-start px-3 h-8",
                     isCollapsed ? "px-2" : "",
                     isActive(item.href)
-                      ? "bg-blue-100 text-primary hover:bg-blue-200" // Atlassian active state
+                      ? "bg-accent/50 text-primary hover:bg-accent/70"
                       : "text-muted-foreground hover:text-foreground hover:bg-muted"
                   )}
                   suppressHydrationWarning

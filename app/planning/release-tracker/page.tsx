@@ -6,8 +6,8 @@ import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
 import { Progress } from "@/components/ui/progress";
-import { 
-  SearchIcon, 
+import {
+  SearchIcon,
   PlusIcon,
   GridIcon,
   ListIcon,
@@ -115,9 +115,9 @@ export default function ReleaseTrackerPage() {
         <div className="flex items-center gap-2">
           <div className="relative">
             <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-            <Input 
-              placeholder="Search..." 
-              className="pl-9 w-64 bg-muted/30 border-border"
+            <Input
+              placeholder="Search..."
+              className="pl-9 w-64"
             />
           </div>
         </div>
@@ -170,7 +170,7 @@ export default function ReleaseTrackerPage() {
           >
             <ListIcon className="h-4 w-4" />
           </Button>
-          <Button className="bg-accent hover:bg-accent/90 text-accent-foreground ml-2">
+          <Button variant="default" className="ml-2">
             <PlusIcon className="h-4 w-4 mr-2" />
             New Release
           </Button>
@@ -180,7 +180,7 @@ export default function ReleaseTrackerPage() {
       {/* Table */}
       <div className="bg-card border border-border rounded-lg overflow-hidden">
         {/* Table Header */}
-        <div className="grid grid-cols-[40px_1fr_1fr_120px_200px_120px_120px_40px] gap-4 p-4 border-b border-border bg-muted/30">
+        <div className="grid grid-cols-[40px_1fr_1fr_120px_200px_120px_120px_40px] gap-4 p-4 border-b border-border bg-muted">
           <div className="flex items-center">
             <input type="checkbox" className="rounded" />
           </div>
@@ -207,7 +207,7 @@ export default function ReleaseTrackerPage() {
         {releases.map((release) => (
           <div
             key={release.id}
-            className="grid grid-cols-[40px_1fr_1fr_120px_200px_120px_120px_40px] gap-4 p-4 border-b border-border hover:bg-muted/5 transition-colors"
+            className="grid grid-cols-[40px_1fr_1fr_120px_200px_120px_120px_40px] gap-4 p-4 border-b border-border hover:bg-muted transition-colors"
           >
             <div className="flex items-center">
               <input type="checkbox" className="rounded" />

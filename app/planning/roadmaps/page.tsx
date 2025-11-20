@@ -5,8 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
-import { 
-  SearchIcon, 
+import {
+  SearchIcon,
   PlusIcon,
   BellIcon,
   ChevronDownIcon
@@ -138,12 +138,12 @@ export default function RoadmapsPage() {
         <div className="flex items-center gap-2">
           <div className="relative">
             <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-            <Input 
-              placeholder="Search..." 
-              className="pl-9 w-64 bg-muted/30 border-border"
+            <Input
+              placeholder="Search..."
+              className="pl-9 w-64"
             />
           </div>
-          <Button className="bg-accent hover:bg-accent/90 text-accent-foreground">
+          <Button variant="default">
             <PlusIcon className="h-4 w-4 mr-2" />
             Add
           </Button>
@@ -180,7 +180,7 @@ export default function RoadmapsPage() {
           <Button
             variant="default"
             size="sm"
-            className="bg-muted text-foreground hover:bg-muted/80"
+            className="bg-muted text-foreground hover:bg-secondary"
           >
             {timelineFilter}
             <ChevronDownIcon className="h-4 w-4 ml-1" />
@@ -191,7 +191,7 @@ export default function RoadmapsPage() {
       {/* Timeline Grid */}
       <div className="bg-card border border-border rounded-lg overflow-hidden">
         {/* Quarter Headers */}
-        <div className="grid grid-cols-[250px_repeat(4,1fr)] border-b border-border bg-muted/30">
+        <div className="grid grid-cols-[250px_repeat(4,1fr)] border-b border-border bg-muted">
           <div className="p-4"></div>
           {quarters.map((quarter, index) => (
             <div key={index} className="p-4 text-center border-l border-border">
@@ -204,7 +204,7 @@ export default function RoadmapsPage() {
         {initiatives.map((category, categoryIndex) => (
           <div key={categoryIndex}>
             {/* Category Header */}
-            <div className="grid grid-cols-[250px_repeat(4,1fr)] border-b border-border bg-muted/10">
+            <div className="grid grid-cols-[250px_repeat(4,1fr)] border-b border-border bg-secondary">
               <div className="p-4">
                 <h3 className="text-sm font-semibold text-foreground">{category.category}</h3>
               </div>
@@ -213,12 +213,12 @@ export default function RoadmapsPage() {
 
             {/* Initiative Items */}
             {category.items.map((item, itemIndex) => (
-              <div key={itemIndex} className="grid grid-cols-[250px_repeat(4,1fr)] border-b border-border hover:bg-muted/5 transition-colors">
+              <div key={itemIndex} className="grid grid-cols-[250px_repeat(4,1fr)] border-b border-border hover:bg-muted transition-colors">
                 <div className="p-4 flex items-center">
                   <div className={`w-1 h-12 ${item.statusColor} rounded-full mr-3`}></div>
                   <span className="text-sm text-foreground">{item.title}</span>
                 </div>
-                
+
                 {/* Timeline Bars */}
                 <div className="col-span-4 relative border-l border-border">
                   <div className="absolute inset-0 grid grid-cols-4">
@@ -226,19 +226,18 @@ export default function RoadmapsPage() {
                       <div key={qIndex} className={`${qIndex > 0 ? 'border-l border-border' : ''}`}></div>
                     ))}
                   </div>
-                  
+
                   {/* Initiative Bar */}
-                  <div 
+                  <div
                     className="absolute top-1/2 -translate-y-1/2 h-12 rounded-lg flex items-center justify-between px-3"
                     style={{
                       left: `${(getQuarterPosition(item.quarter) * 25) + 2}%`,
                       width: `${(item.duration * 25) - 4}%`,
                       backgroundColor: `hsl(var(--card))`,
-                      border: `2px solid ${
-                        item.statusColor === 'bg-chart-1' ? 'hsl(var(--chart-1))' :
-                        item.statusColor === 'bg-yellow-500' ? '#eab308' :
-                        'hsl(var(--muted))'
-                      }`
+                      border: `2px solid ${item.statusColor === 'bg-chart-1' ? 'hsl(var(--chart-1))' :
+                          item.statusColor === 'bg-yellow-500' ? '#eab308' :
+                            'hsl(var(--muted))'
+                        }`
                     }}
                   >
                     <span className="text-xs font-medium text-foreground truncate">

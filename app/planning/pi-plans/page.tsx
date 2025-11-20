@@ -6,8 +6,8 @@ import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
 import { Progress } from "@/components/ui/progress";
-import { 
-  SearchIcon, 
+import {
+  SearchIcon,
   ShareIcon,
   DownloadIcon,
   HelpCircleIcon,
@@ -159,7 +159,7 @@ export default function PIPlanPage() {
   const getLabelColor = (label: string) => {
     switch (label) {
       case "Backend":
-        return "bg-secondary/80";
+        return "bg-secondary";
       case "Frontend":
         return "bg-chart-1";
       case "UX":
@@ -209,7 +209,7 @@ export default function PIPlanPage() {
           </Button>
         </div>
         <div className="flex items-center gap-2">
-          <Button className="bg-accent hover:bg-accent/90 text-accent-foreground">
+          <Button variant="default">
             <ShareIcon className="h-4 w-4 mr-2" />
             Share
           </Button>
@@ -238,8 +238,8 @@ export default function PIPlanPage() {
             <p className="text-xs text-muted-foreground mb-4">Drag items onto the board</p>
             <div className="relative">
               <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-              <Input 
-                placeholder="Search features..." 
+              <Input
+                placeholder="Search features..."
                 className="pl-9 bg-background border-border text-sm"
               />
             </div>
@@ -274,7 +274,7 @@ export default function PIPlanPage() {
             <h1 className="text-2xl font-semibold text-foreground mb-4">
               FY24-Q3 Program Increment (July 1 - Sep 30)
             </h1>
-            
+
             {/* Metrics */}
             <div className="grid grid-cols-3 gap-4 mb-4">
               <div className="bg-card border border-border rounded-lg p-4">
@@ -315,7 +315,7 @@ export default function PIPlanPage() {
             {sprints.map((sprint, sprintIndex) => (
               <div key={sprintIndex} className="space-y-4">
                 <h3 className="text-sm font-semibold text-foreground">{sprint.name}</h3>
-                
+
                 {sprint.teams.map((team, teamIndex) => (
                   <div key={teamIndex} className="bg-card border border-border rounded-lg p-4 space-y-3">
                     <div className="flex items-center justify-between">
@@ -324,7 +324,7 @@ export default function PIPlanPage() {
                         <span className="text-xs text-muted-foreground">{team.capacity}</span>
                       )}
                     </div>
-                    
+
                     {team.capacity && (
                       <Progress value={team.progress} className="h-1" />
                     )}
@@ -333,9 +333,8 @@ export default function PIPlanPage() {
                       {team.features.map((feature) => (
                         <div
                           key={feature.id}
-                          className={`bg-background border rounded-lg p-3 ${
-                            (feature.atRisk ?? false) ? 'border-destructive' : 'border-border'
-                          }`}
+                          className={`bg-background border rounded-lg p-3 ${(feature.atRisk ?? false) ? 'border-destructive' : 'border-border'
+                            }`}
                         >
                           {(feature.atRisk ?? false) && (
                             <AlertCircleIcon className="h-4 w-4 text-destructive mb-2" />
@@ -372,8 +371,9 @@ export default function PIPlanPage() {
       </div>
 
       {/* Floating Add Button */}
-      <Button 
-        className="fixed bottom-8 right-8 rounded-full h-14 w-14 shadow-lg bg-accent hover:bg-accent/90 text-accent-foreground"
+      <Button
+        className="fixed bottom-8 right-8 rounded-full h-14 w-14 shadow-lg"
+        variant="default"
         size="icon"
       >
         <PlusIcon className="h-6 w-6" />

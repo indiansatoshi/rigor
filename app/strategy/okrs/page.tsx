@@ -66,7 +66,7 @@ export default function OKRsPage() {
         title="OKRs"
         description="Track objectives and key results for Q4 2024"
       >
-        <Button className="bg-accent hover:bg-accent/90 text-accent-foreground">
+        <Button variant="default">
           + New OKR
         </Button>
       </DashboardHeader>
@@ -74,11 +74,11 @@ export default function OKRsPage() {
       {/* OKRs List */}
       <div className="space-y-4">
         {okrs.map((okr, index) => (
-          <Card key={index} className="overflow-hidden">
+          <Card key={index} className="overflow-hidden hover:border-primary transition-colors">
             {/* Objective Header */}
             <div className="p-6">
               <div className="flex items-start justify-between mb-4">
-                <h3 className="text-lg font-semibold text-foreground flex-1">
+                <h3 className="text-lg font-semibold text-foreground flex-1 line-clamp-2">
                   {okr.objective}
                 </h3>
                 <div className="flex items-center gap-3">
@@ -131,7 +131,7 @@ export default function OKRsPage() {
                   return (
                     <div key={krIndex} className="space-y-2">
                       <div className="flex items-center justify-between">
-                        <span className="text-sm text-foreground">{kr.description}</span>
+                        <span className="text-sm text-foreground line-clamp-2 flex-1">{kr.description}</span>
                         <div className="flex items-center gap-3">
                           <span className="text-sm text-muted-foreground">
                             {kr.current}{kr.unit} / {kr.target}{kr.unit}

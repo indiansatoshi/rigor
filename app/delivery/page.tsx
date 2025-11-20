@@ -240,7 +240,7 @@ export default function DeliveryDashboard() {
             Track deployment, testing, and delivery metrics
           </p>
         </div>
-        <Button className="bg-accent hover:bg-accent/90 text-accent-foreground">
+        <Button variant="default">
           <PlusIcon className="h-4 w-4 mr-2" />
           New Deployment
         </Button>
@@ -482,7 +482,7 @@ export default function DeliveryDashboard() {
             <CardContent>
               <div className="space-y-3">
                 {recentDeployments.map((deployment) => (
-                  <div key={deployment.id} className="flex items-center justify-between p-3 rounded-md bg-muted/50">
+                  <div key={deployment.id} className="flex items-center justify-between p-3 rounded-md bg-muted">
                     <div className="space-y-1">
                       <div className="flex items-center gap-2">
                         <span className="text-xs text-muted-foreground">{deployment.id}</span>
@@ -624,7 +624,7 @@ export default function DeliveryDashboard() {
             <CardContent>
               <div className="space-y-3">
                 {recentFailures.map((failure, index) => (
-                  <div key={index} className="p-3 rounded-md bg-muted/50 space-y-2">
+                  <div key={index} className="p-3 rounded-md bg-muted space-y-2">
                     <div className="flex items-start justify-between">
                       <div className="space-y-1 flex-1">
                         <p className="text-sm font-medium">{failure.test}</p>

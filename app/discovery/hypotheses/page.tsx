@@ -5,8 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
-import { 
-  SearchIcon, 
+import {
+  SearchIcon,
   FlaskConicalIcon,
   CheckCircleIcon,
   XCircleIcon,
@@ -133,8 +133,8 @@ export default function HypothesesPage() {
           <div className="p-4 border-b border-border">
             <div className="relative">
               <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-              <Input 
-                placeholder="Search hypotheses..." 
+              <Input
+                placeholder="Search hypotheses..."
                 className="pl-9 bg-background border-border"
               />
             </div>
@@ -147,9 +147,8 @@ export default function HypothesesPage() {
               return (
                 <div
                   key={hyp.id}
-                  className={`p-4 border-b border-border cursor-pointer hover:bg-muted/50 transition-colors ${
-                    selectedHypothesis === index ? "bg-accent/10 border-l-4 border-l-accent" : ""
-                  }`}
+                  className={`p-4 border-b border-border cursor-pointer hover:bg-muted transition-colors ${selectedHypothesis === index ? "bg-accent border-l-4 border-l-accent" : ""
+                    }`}
                   onClick={() => setSelectedHypothesis(index)}
                 >
                   <div className="flex items-start gap-3">
@@ -179,7 +178,7 @@ export default function HypothesesPage() {
 
           {/* New Hypothesis Button */}
           <div className="p-4 border-t border-border">
-            <Button className="w-full bg-accent hover:bg-accent/90 text-accent-foreground">
+            <Button variant="default" className="w-full">
               <PlusIcon className="h-4 w-4 mr-2" />
               New Hypothesis
             </Button>
@@ -355,13 +354,13 @@ export default function HypothesesPage() {
             <p className="text-xs font-semibold text-muted-foreground mb-2">Tags</p>
             <div className="flex flex-wrap gap-2">
               {currentHypothesis.tags.map((tag, index) => (
-                <Badge 
-                  key={index} 
+                <Badge
+                  key={index}
                   variant="outline"
                   className={
-                    tag === "Onboarding" ? "bg-accent/10 text-accent border-accent" :
-                    tag === "Q1-2024" ? "bg-secondary/10 text-secondary border-secondary" :
-                    "bg-chart-1/10 text-chart-1 border-chart-1"
+                    tag === "Onboarding" ? "bg-accent text-white border-accent" :
+                      tag === "Q1-2024" ? "bg-secondary text-secondary-foreground border-secondary" :
+                        "bg-chart-1 text-white border-chart-1"
                   }
                 >
                   {tag}
