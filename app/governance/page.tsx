@@ -8,6 +8,8 @@ import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { PlusIcon, TrendingUpIcon, TrendingDownIcon } from "lucide-react";
 import { DashboardHeader } from "@/components/dashboard/dashboard-header";
+import { PageSection } from "@/components/layout/page-section";
+import { PageTabs, type PageTab } from "@/components/layout/page-tabs";
 import { MetricCard } from "@/components/dashboard/metric-card";
 import { cn } from "@/lib/utils";
 import {
@@ -26,6 +28,13 @@ import {
 
 export default function GovernanceDashboard() {
   const [activeTab, setActiveTab] = useState("overview");
+
+  const tabs: PageTab[] = [
+    { id: "overview", label: "Overview" },
+    { id: "operations", label: "Operations" },
+    { id: "support", label: "Customer Support" },
+    { id: "feedback", label: "Feedback Loop" },
+  ];
 
   // Helper functions
   const getSeverityColor = (severity: string) => {
@@ -122,57 +131,11 @@ export default function GovernanceDashboard() {
         </Button>
       </DashboardHeader>
 
-      {/* Tabs */}
-      <div className="flex items-center gap-6 mb-6 border-b border-border px-1">
-        <button
-          className={cn(
-            "pb-3 text-sm font-medium transition-colors border-b-2",
-            activeTab === "overview"
-              ? "border-primary text-primary"
-              : "border-transparent text-muted-foreground hover:text-foreground hover:border-border"
-          )}
-          onClick={() => setActiveTab("overview")}
-        >
-          Overview
-        </button>
-        <button
-          className={cn(
-            "pb-3 text-sm font-medium transition-colors border-b-2",
-            activeTab === "operations"
-              ? "border-primary text-primary"
-              : "border-transparent text-muted-foreground hover:text-foreground hover:border-border"
-          )}
-          onClick={() => setActiveTab("operations")}
-        >
-          Operations
-        </button>
-        <button
-          className={cn(
-            "pb-3 text-sm font-medium transition-colors border-b-2",
-            activeTab === "support"
-              ? "border-primary text-primary"
-              : "border-transparent text-muted-foreground hover:text-foreground hover:border-border"
-          )}
-          onClick={() => setActiveTab("support")}
-        >
-          Customer Support
-        </button>
-        <button
-          className={cn(
-            "pb-3 text-sm font-medium transition-colors border-b-2",
-            activeTab === "feedback"
-              ? "border-primary text-primary"
-              : "border-transparent text-muted-foreground hover:text-foreground hover:border-border"
-          )}
-          onClick={() => setActiveTab("feedback")}
-        >
-          Feedback Loop
-        </button>
-      </div>
+      <PageTabs tabs={tabs} activeTab={activeTab} onTabChange={setActiveTab} />
 
       {/* Overview Tab */}
       {activeTab === "overview" && (
-        <div className="space-y-6">
+        <PageSection>
           {/* Metrics Cards */}
           <div className="grid gap-6 md:grid-cols-4">
             {governanceMetrics.map((metric, index) => (
@@ -245,12 +208,12 @@ export default function GovernanceDashboard() {
               </CardContent>
             </Card>
           </div>
-        </div>
+        </PageSection>
       )}
 
       {/* Operations Tab */}
       {activeTab === "operations" && (
-        <div className="space-y-6">
+        <PageSection>
           {/* Key Metrics */}
           <div className="grid gap-6 md:grid-cols-4">
             {operationsMetrics.map((metric, index) => (
@@ -320,12 +283,12 @@ export default function GovernanceDashboard() {
               </div>
             </CardContent>
           </Card>
-        </div>
+        </PageSection>
       )}
 
       {/* Customer Support Tab */}
       {activeTab === "support" && (
-        <div className="space-y-6">
+        <PageSection>
           {/* Support Metrics */}
           <div className="grid gap-6 md:grid-cols-6">
             <Card>
@@ -434,12 +397,12 @@ export default function GovernanceDashboard() {
               </div>
             </CardContent>
           </Card>
-        </div>
+        </PageSection>
       )}
 
       {/* Feedback Loop Tab */}
       {activeTab === "feedback" && (
-        <div className="space-y-6">
+        <PageSection>
           {/* Feedback Metrics */}
           <div className="grid gap-6 md:grid-cols-4">
             <Card>
@@ -569,7 +532,7 @@ export default function GovernanceDashboard() {
               </div>
             </CardContent>
           </Card>
-        </div>
+        </PageSection>
       )}
     </PageWrapper>
   );

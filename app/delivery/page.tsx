@@ -8,9 +8,18 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { PlusIcon, CheckCircleIcon, AlertCircleIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { DashboardHeader } from "@/components/dashboard/dashboard-header";
+import { PageSection } from "@/components/layout/page-section";
+import { PageTabs, type PageTab } from "@/components/layout/page-tabs";
 
 export default function DeliveryDashboard() {
   const [activeTab, setActiveTab] = useState("overview");
+
+  const tabs: PageTab[] = [
+    { id: "overview", label: "Overview" },
+    { id: "deployment", label: "Deployment" },
+    { id: "testing", label: "Testing" },
+  ];
 
   // Overview data
   const overviewMetrics = [
@@ -232,60 +241,21 @@ export default function DeliveryDashboard() {
       ]}
       currentPage="Dashboard"
     >
-      {/* Page Header */}
-      <div className="flex items-center justify-between mb-6">
-        <div>
-          <h1 className="text-2xl font-semibold text-foreground">Delivery Dashboard</h1>
-          <p className="text-sm text-muted-foreground mt-1">
-            Track deployment, testing, and delivery metrics
-          </p>
-        </div>
+      <DashboardHeader
+        title="Delivery Dashboard"
+        description="Track deployment, testing, and delivery metrics"
+      >
         <Button variant="default">
           <PlusIcon className="h-4 w-4 mr-2" />
           New Deployment
         </Button>
-      </div>
+      </DashboardHeader>
 
-      {/* Tabs */}
-      <div className="flex items-center gap-6 mb-6 border-b border-border px-1">
-        <button
-          className={cn(
-            "pb-3 text-sm font-medium transition-colors border-b-2",
-            activeTab === "overview"
-              ? "border-primary text-primary"
-              : "border-transparent text-muted-foreground hover:text-foreground hover:border-border"
-          )}
-          onClick={() => setActiveTab("overview")}
-        >
-          Overview
-        </button>
-        <button
-          className={cn(
-            "pb-3 text-sm font-medium transition-colors border-b-2",
-            activeTab === "deployment"
-              ? "border-primary text-primary"
-              : "border-transparent text-muted-foreground hover:text-foreground hover:border-border"
-          )}
-          onClick={() => setActiveTab("deployment")}
-        >
-          Deployment
-        </button>
-        <button
-          className={cn(
-            "pb-3 text-sm font-medium transition-colors border-b-2",
-            activeTab === "testing"
-              ? "border-primary text-primary"
-              : "border-transparent text-muted-foreground hover:text-foreground hover:border-border"
-          )}
-          onClick={() => setActiveTab("testing")}
-        >
-          Testing
-        </button>
-      </div>
+      <PageTabs tabs={tabs} activeTab={activeTab} onTabChange={setActiveTab} />
 
       {/* Overview Tab */}
       {activeTab === "overview" && (
-        <div className="space-y-6">
+        <PageSection>
           {/* Metrics Cards */}
           <div className="grid gap-4 md:grid-cols-4">
             {overviewMetrics.map((metric, index) => (
@@ -366,12 +336,12 @@ export default function DeliveryDashboard() {
               </CardContent>
             </Card>
           </div>
-        </div>
+        </PageSection>
       )}
 
       {/* Deployment Tab */}
       {activeTab === "deployment" && (
-        <div className="space-y-6">
+        <PageSection>
           {/* Deployment Stats */}
           <div className="grid gap-4 md:grid-cols-4">
             <Card>
@@ -504,12 +474,12 @@ export default function DeliveryDashboard() {
               </div>
             </CardContent>
           </Card>
-        </div>
+        </PageSection>
       )}
 
       {/* Testing Tab */}
       {activeTab === "testing" && (
-        <div className="space-y-6">
+        <PageSection>
           {/* Test Metrics Overview */}
           <div className="grid gap-4 md:grid-cols-5">
             <Card>
@@ -638,7 +608,7 @@ export default function DeliveryDashboard() {
               </div>
             </CardContent>
           </Card>
-        </div>
+        </PageSection>
       )}
     </PageWrapper>
   );
