@@ -2,108 +2,15 @@
 
 import { PageWrapper } from "@/components/page-wrapper";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { PlusIcon, CalendarIcon, AlertTriangleIcon } from "lucide-react";
+import { CalendarIcon } from "lucide-react";
+import { DashboardHeader } from "@/components/dashboard/dashboard-header";
+import { MetricCard } from "@/components/dashboard/metric-card";
+import { StatusBadge } from "@/components/ui/status-badge";
+import { planningMetrics, upcomingMilestones, piProgress, roadmapItems } from "@/lib/mock-data";
 
 export default function PlanningDashboard() {
-  const metrics = [
-    {
-      title: "Active Initiatives",
-      value: "18",
-      change: "+4",
-      period: "vs last quarter"
-    },
-    {
-      title: "On Track",
-      value: "14",
-      change: "78%",
-      period: "completion rate"
-    },
-    {
-      title: "At Risk",
-      value: "3",
-      change: "-1",
-      period: "vs last month"
-    },
-    {
-      title: "Upcoming Releases",
-      value: "5",
-      change: "Next 30 days",
-      period: ""
-    }
-  ];
-
-  const upcomingMilestones = [
-    {
-      title: "Q1 2025 Planning Complete",
-      date: "Dec 15, 2024",
-      team: "Product",
-      status: "On Track",
-      statusColor: "bg-chart-1"
-    },
-    {
-      title: "Mobile App v2.0 Release",
-      date: "Dec 20, 2024",
-      team: "Engineering",
-      status: "At Risk",
-      statusColor: "bg-destructive"
-    },
-    {
-      title: "Marketing Campaign Launch",
-      date: "Jan 5, 2025",
-      team: "Marketing",
-      status: "On Track",
-      statusColor: "bg-chart-1"
-    }
-  ];
-
-  const piProgress = [
-    {
-      name: "PI 2024.4",
-      progress: 75,
-      features: 24,
-      completed: 18,
-      teams: ["Platform", "Mobile", "Web"]
-    },
-    {
-      name: "PI 2025.1",
-      progress: 15,
-      features: 32,
-      completed: 5,
-      teams: ["Platform", "Mobile", "Web", "Data"]
-    }
-  ];
-
-  const roadmapItems = [
-    {
-      id: "INIT-101",
-      title: "AI-Powered Search",
-      quarter: "Q1 2025",
-      status: "Planning",
-      statusColor: "bg-chart-3",
-      team: "Platform"
-    },
-    {
-      id: "INIT-102",
-      title: "Mobile Offline Mode",
-      quarter: "Q1 2025",
-      status: "In Progress",
-      statusColor: "bg-accent",
-      team: "Mobile"
-    },
-    {
-      id: "INIT-103",
-      title: "Advanced Analytics Dashboard",
-      quarter: "Q2 2025",
-      status: "Planning",
-      statusColor: "bg-chart-3",
-      team: "Data"
-    }
-  ];
-
   return (
     <PageWrapper
       breadcrumbs={[
@@ -111,33 +18,15 @@ export default function PlanningDashboard() {
       ]}
       currentPage="Dashboard"
     >
-      {/* Page Header */}
-      <div className="flex items-center justify-between mb-6">
-        <div>
-          <h1 className="text-2xl font-semibold text-foreground">Planning Dashboard</h1>
-          <p className="text-sm text-muted-foreground mt-1">
-            Track roadmaps, PI plans, and release schedules
-          </p>
-        </div>
-        <Button className="bg-accent hover:bg-accent/90 text-accent-foreground">
-          <PlusIcon className="h-4 w-4 mr-2" />
-          New Initiative
-        </Button>
-      </div>
+      <DashboardHeader
+        title="Planning Dashboard"
+        description="Track roadmaps, PI plans, and release schedules"
+      />
 
       {/* Metrics Cards */}
       <div className="grid gap-4 md:grid-cols-4 mb-6">
-        {metrics.map((metric, index) => (
-          <Card key={index} className="bg-card border-border">
-            <CardContent className="p-6">
-              <p className="text-sm text-muted-foreground mb-2">{metric.title}</p>
-              <p className="text-3xl font-bold text-foreground mb-2">{metric.value}</p>
-              <div className="flex items-center gap-1 text-sm">
-                <span className="text-muted-foreground">{metric.change}</span>
-                {metric.period && <span className="text-muted-foreground ml-1">{metric.period}</span>}
-              </div>
-            </CardContent>
-          </Card>
+        {planningMetrics.map((metric, index) => (
+          <MetricCard key={index} metric={metric} />
         ))}
       </div>
 
@@ -161,9 +50,7 @@ export default function PlanningDashboard() {
                       <span>{milestone.team}</span>
                     </div>
                   </div>
-                  <Badge className={`${milestone.statusColor} text-white text-xs`}>
-                    {milestone.status}
-                  </Badge>
+                  <StatusBadge status={milestone.status} />
                 </div>
               </div>
             ))}
@@ -212,9 +99,7 @@ export default function PlanningDashboard() {
                 <span className="text-sm font-medium text-foreground">{item.title}</span>
               </div>
               <div className="flex items-center gap-3">
-                <Badge className={`${item.statusColor} text-white text-xs`}>
-                  {item.status}
-                </Badge>
+                <StatusBadge status={item.status} />
                 <span className="text-xs text-muted-foreground min-w-[60px]">{item.quarter}</span>
                 <span className="text-xs text-muted-foreground min-w-[80px]">{item.team}</span>
               </div>

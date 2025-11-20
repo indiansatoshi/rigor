@@ -1,18 +1,23 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Plus_Jakarta_Sans, Source_Serif_4, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { TopNav } from "@/components/top-nav";
 import { TeamProvider } from "@/components/team-context";
 import { WorkspaceProvider } from "@/components/workspace-context";
 import { SidebarProvider } from "@/components/sidebar-context";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const sans = Plus_Jakarta_Sans({
+  variable: "--font-sans",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const serif = Source_Serif_4({
+  variable: "--font-serif",
+  subsets: ["latin"],
+});
+
+const mono = JetBrains_Mono({
+  variable: "--font-mono",
   subsets: ["latin"],
 });
 
@@ -29,7 +34,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${sans.variable} ${serif.variable} ${mono.variable} antialiased font-sans`}
       >
         <WorkspaceProvider>
           <TeamProvider>

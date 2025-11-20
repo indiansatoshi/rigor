@@ -2,6 +2,13 @@ import {
   AudioWaveform,
   Command,
   GalleryVerticalEnd,
+  LayoutDashboardIcon,
+  TargetIcon,
+  LayoutGridIcon,
+  KanbanSquareIcon,
+  MapIcon,
+  CalendarIcon,
+  RocketIcon,
 } from "lucide-react";
 
 export const appData = {
@@ -116,5 +123,18 @@ export const appData = {
         },
       ],
     },
+  ],
+  strategyNav: [
+    { title: "Dashboard", href: "/strategy", icon: LayoutDashboardIcon },
+    { title: "Boards", href: "/strategy/boards", icon: KanbanSquareIcon },
+    { title: "Lean Canvas", href: "/strategy/lean-canvas", icon: LayoutGridIcon },
+    { title: "OKRs", href: "/strategy/okrs", icon: TargetIcon },
+  ],
+  planningNav: [
+    { title: "Dashboard", href: "/planning", icon: LayoutDashboardIcon },
+    { title: "Boards", href: "/planning/boards", icon: KanbanSquareIcon },
+    { title: "Roadmaps", href: "/planning/roadmaps", icon: MapIcon },
+    { title: "PI Plans", href: "/planning/pi-plans", icon: CalendarIcon },
+    { title: "Release Tracker", href: "/planning/release-tracker", icon: RocketIcon },
   ],
 };
