@@ -11,11 +11,9 @@ import { DashboardHeader } from "@/components/dashboard/dashboard-header";
 import {
   SearchIcon,
   PlusIcon,
-  ChevronDownIcon,
-  CalendarIcon,
-  GridIcon,
-  ListIcon
 } from "lucide-react";
+import { FilterBar } from "@/components/dashboard/filter-bar";
+import { KanbanBoard } from "@/components/dashboard/kanban-board";
 
 export default function StrategyBoardsPage() {
   const tasks = [
@@ -102,62 +100,10 @@ export default function StrategyBoardsPage() {
         </div>
       </DashboardHeader>
 
-      {/* Filters */}
-      <div className="flex items-center justify-between mb-6">
-        <div className="flex items-center gap-2">
-          <Button variant="default" size="sm" className="bg-accent text-accent-foreground">
-            All
-          </Button>
-          <Button variant="outline" size="sm">
-            Assignee
-            <ChevronDownIcon className="h-4 w-4 ml-1" />
-          </Button>
-          <Button variant="outline" size="sm">
-            Priority
-            <ChevronDownIcon className="h-4 w-4 ml-1" />
-          </Button>
-          <Button variant="outline" size="sm">
-            Labels
-            <ChevronDownIcon className="h-4 w-4 ml-1" />
-          </Button>
-          <Button variant="ghost" size="sm" className="text-accent">
-            Clear filters
-          </Button>
-        </div>
-        <div className="flex items-center gap-2">
-          <Button variant="ghost" size="icon">
-            <GridIcon className="h-4 w-4" />
-          </Button>
-          <Button variant="ghost" size="icon">
-            <ListIcon className="h-4 w-4" />
-          </Button>
-        </div>
-      </div>
+      <FilterBar />
 
       {/* Kanban Board */}
-      <div className="grid grid-cols-3 gap-6">
-        {columns.map((column) => (
-          <div key={column.id} className="space-y-4">
-            {/* Column Header */}
-            <div className="flex items-center justify-between">
-              <h3 className="text-sm font-semibold text-foreground">
-                {column.title} <span className="text-muted-foreground ml-1">{column.count}</span>
-              </h3>
-            </div>
-
-            {/* Task Cards */}
-            <div className="space-y-3">
-              {getTasksByStatus(column.id).map((task) => (
-                <KanbanCard
-                  key={task.id}
-                  {...task}
-                />
-              ))}
-            </div>
-          </div>
-        ))}
-
-      </div >
+      <KanbanBoard columns={columns} tasks={tasks} />
     </PageWrapper >
   );
 }

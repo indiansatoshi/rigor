@@ -11,11 +11,9 @@ import { SearchInput } from "@/components/ui/search-input";
 import {
   SearchIcon,
   PlusIcon,
-  ChevronDownIcon,
-  CalendarIcon,
-  GridIcon,
-  ListIcon
 } from "lucide-react";
+import { FilterBar } from "@/components/dashboard/filter-bar";
+import { KanbanBoard } from "@/components/dashboard/kanban-board";
 
 export default function DiscoveryBoardsPage() {
   const tasks = [
@@ -110,63 +108,10 @@ export default function DiscoveryBoardsPage() {
         </Button>
       </DashboardHeader>
 
-      {/* Filters */}
-      <div className="flex items-center justify-between mb-6">
-        <div className="flex items-center gap-2">
-          <Button variant="ghost" size="sm" className="font-medium text-foreground">
-            All issues
-          </Button>
-          <Button variant="outline" size="sm" className="bg-background hover:bg-secondary/50 border-dashed">
-            Assignee
-            <ChevronDownIcon className="h-3 w-3 ml-2 opacity-50" />
-          </Button>
-          <Button variant="outline" size="sm" className="bg-background hover:bg-secondary/50 border-dashed">
-            Priority
-            <ChevronDownIcon className="h-3 w-3 ml-2 opacity-50" />
-          </Button>
-          <Button variant="outline" size="sm" className="bg-background hover:bg-secondary/50 border-dashed">
-            Labels
-            <ChevronDownIcon className="h-3 w-3 ml-2 opacity-50" />
-          </Button>
-          <div className="h-4 w-px bg-border mx-2" />
-          <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground">
-            Clear filters
-          </Button>
-        </div>
-        <div className="flex items-center gap-2">
-          <Button variant="ghost" size="icon">
-            <GridIcon className="h-4 w-4" />
-          </Button>
-          <Button variant="ghost" size="icon">
-            <ListIcon className="h-4 w-4" />
-          </Button>
-        </div>
-      </div>
+      <FilterBar />
 
       {/* Kanban Board */}
-      <div className="grid grid-cols-3 gap-6">
-        {columns.map((column) => (
-          <div key={column.id} className="space-y-4">
-            {/* Column Header */}
-            <div className="flex items-center justify-between">
-              <h3 className="text-sm font-semibold text-foreground">
-                {column.title} <span className="text-muted-foreground ml-1">{column.count}</span>
-              </h3>
-            </div>
-
-            {/* Task Cards */}
-            <div className="space-y-3">
-              {getTasksByStatus(column.id).map((task) => (
-                <KanbanCard
-                  key={task.id}
-                  {...task}
-                />
-              ))}
-            </div>
-          </div>
-        ))}
-
-      </div >
+      <KanbanBoard columns={columns} tasks={tasks} />
     </PageWrapper >
   );
 }
