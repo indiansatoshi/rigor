@@ -57,6 +57,11 @@ We use **Inter** as the primary font family for its readability and neutrality.
 - **Top Nav**: Clean white bar, active items marked with `border-b-2 border-primary` and `text-primary`.
 - **Side Nav**: Vertical list, active items highlighted with `bg-accent text-primary`.
 
+### Kanban Board
+- **Card**: Use `KanbanCard` component for task items.
+- **Grid**: Use `gap-6` (24px) for column spacing.
+- **Columns**: Standard width, responsive grid.
+
 ## Layout & Spacing
 
 - **Grid System**: Use CSS Grid with `gap-6` (24px) for dashboard layouts.

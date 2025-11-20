@@ -6,9 +6,8 @@ import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
 import { SearchInput } from "@/components/ui/search-input";
-import { Card, CardContent } from "@/components/ui/card";
+import { KanbanCard } from "@/components/dashboard/kanban-card";
 import { DashboardHeader } from "@/components/dashboard/dashboard-header";
-import { StatusBadge } from "@/components/ui/status-badge";
 import {
   SearchIcon,
   PlusIcon,
@@ -149,80 +148,16 @@ export default function StrategyBoardsPage() {
             {/* Task Cards */}
             <div className="space-y-3">
               {getTasksByStatus(column.id).map((task) => (
-                <Card
+                <KanbanCard
                   key={task.id}
-                  className="hover:border-primary transition-colors cursor-pointer"
-                >
-                  <CardContent className="p-4 space-y-3">
-                    {/* Task ID */}
-                    <div className="flex items-start justify-between">
-                      <span className="text-xs font-semibold text-muted-foreground">{task.id}</span>
-                    </div>
-
-                    {/* Task Title */}
-                    <h4 className="text-sm font-medium text-foreground leading-snug line-clamp-2">
-                      {task.title}
-                    </h4>
-
-                    {/* Labels */}
-                    <div className="flex flex-wrap gap-2">
-                      {task.priority && (
-                        <StatusBadge priority={task.priority} />
-                      )}
-                      {task.labels && task.labels.map((label, index) => (
-                        <Badge
-                          key={index}
-                          variant="secondary"
-                          className="text-xs"
-                        >
-                          {label}
-                        </Badge>
-                      ))}
-                    </div>
-
-                    {/* Footer */}
-                    <div className="flex items-center justify-between pt-2">
-                      <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                        <CalendarIcon className="h-3 w-3" />
-                        <span>{task.date}</span>
-                      </div>
-                      {task.assignees ? (
-                        <div className="flex items-center -space-x-2">
-                          {task.assignees.map((assignee, index) => (
-                            <Avatar key={index} className="h-6 w-6 border-2 border-card">
-                              <AvatarImage src={assignee.avatar} />
-                              <AvatarFallback className="bg-accent text-accent-foreground text-[10px]">
-                                {assignee.initials}
-                              </AvatarFallback>
-                            </Avatar>
-                          ))}
-                        </div>
-                      ) : task.assignee ? (
-                        <Avatar className="h-6 w-6">
-                          <AvatarImage src={task.assignee.avatar} />
-                          <AvatarFallback className="bg-accent text-accent-foreground text-[10px]">
-                            {task.assignee.initials}
-                          </AvatarFallback>
-                        </Avatar>
-                      ) : null}
-                    </div>
-
-                    {/* Completed Checkmark */}
-                    {task.completed && (
-                      <div className="flex items-center gap-1 text-xs text-chart-1">
-                        <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                        </svg>
-                        <span>Completed</span>
-                      </div>
-                    )}
-                  </CardContent>
-                </Card>
+                  {...task}
+                />
               ))}
             </div>
           </div>
         ))}
-      </div>
-    </PageWrapper>
+
+      </div >
+    </PageWrapper >
   );
 }
