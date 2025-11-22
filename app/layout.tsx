@@ -2,9 +2,11 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { TopNav } from "@/components/layout/top-nav";
+import { AppSidebar } from "@/components/layout/app-sidebar";
 import { TeamProvider } from "@/components/providers/team-context";
 import { WorkspaceProvider } from "@/components/providers/workspace-context";
-import { SidebarProvider } from "@/components/layout/sidebar-context";
+import { GoalProvider } from "@/components/providers/goal-context";
+import { SidebarProvider } from "@/components/ui/sidebar";
 
 const inter = Inter({
   variable: "--font-sans",
@@ -28,16 +30,19 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         <WorkspaceProvider>
-          <TeamProvider>
-            <SidebarProvider>
-              <div className="flex flex-col h-screen">
-                <TopNav />
-                <div className="flex flex-1 overflow-hidden">
-                  {children}
-                </div>
-              </div>
-            </SidebarProvider>
-          </TeamProvider>
+          <GoalProvider>
+            <TeamProvider>
+              <SidebarProvider>
+                <AppSidebar />
+                <main className="flex flex-col flex-1 min-w-0 h-screen overflow-hidden">
+                  <TopNav />
+                  <div className="flex-1 overflow-y-auto">
+                    {children}
+                  </div>
+                </main>
+              </SidebarProvider>
+            </TeamProvider>
+          </GoalProvider>
         </WorkspaceProvider>
       </body>
     </html>

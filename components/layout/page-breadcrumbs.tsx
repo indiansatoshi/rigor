@@ -14,7 +14,7 @@ interface PageBreadcrumbsProps {
 }
 
 export function PageBreadcrumbs({ items }: PageBreadcrumbsProps) {
-  const { selectedWorkspace } = useWorkspace();
+  const { selectedOrg } = useWorkspace();
 
   return (
     <nav
@@ -35,7 +35,7 @@ export function PageBreadcrumbs({ items }: PageBreadcrumbsProps) {
           <ChevronRightIcon className="h-4 w-4 text-muted-foreground mx-0.5" aria-hidden="true" />
         </li>
         <li>
-          <span className="text-muted-foreground px-1">{selectedWorkspace.name}</span>
+          <span className="text-muted-foreground px-1">{selectedOrg?.name || "Select Org"}</span>
         </li>
         {items.map((item, index) => (
           <li key={index} className="flex items-center gap-1">
