@@ -7,45 +7,101 @@ export interface Metric {
   section?: string;
 }
 
+// --- Company Level (Strategy) ---
+export interface CompanyGoal {
+  id: string;
+  title: string;
+  description: string;
+  status: "On Track" | "At Risk" | "Off Track" | "Completed";
+  progress: number;
+  owner: string;
+  dueDate: string;
+  okrs: OKR[];
+}
+
 export interface OKR {
+  id: string;
   objective: string;
   progress: number;
   keyResults: KeyResult[];
 }
 
 export interface KeyResult {
+  id: string;
   description: string;
   current: number;
   target: number;
+  unit: string;
 }
 
 export interface LeanCanvasSection {
+  id: string;
   title: string;
-  items: number;
-  status: string;
+  items: string[];
+  status: "Draft" | "Defined" | "Validated";
+  color?: string;
 }
 
+// --- Portfolio Level (Investment) ---
+export interface Initiative {
+  id: string;
+  title: string;
+  description: string;
+  goalId: string; // Link to Company Goal
+  status: "Proposed" | "Funded" | "In Progress" | "Completed" | "Cancelled";
+  owner: string;
+  budget: string;
+  timeline: {
+    start: string;
+    end: string;
+  };
+  progress: number;
+}
+
+// --- Product Level (Discovery) ---
+export interface Opportunity {
+  id: string;
+  title: string;
+  description: string;
+  initiativeId: string; // Link to Initiative
+  status: "Identified" | "Prioritized" | "Solved" | "Dismissed";
+  solutions: Solution[];
+}
+
+export interface Solution {
+  id: string;
+  title: string;
+  description: string;
+  status: "Idea" | "Prototyping" | "Validated" | "Rejected";
+  validationResults?: string;
+}
+
+// --- Project Level (Delivery) ---
+export interface Epic {
+  id: string;
+  title: string;
+  description: string;
+  solutionId: string; // Link to Solution (Idea)
+  status: "To Do" | "In Progress" | "Review" | "Done";
+  assignee: string;
+  stories: Story[];
+  progress: number;
+}
+
+export interface Story {
+  id: string;
+  title: string;
+  points: number;
+  status: "To Do" | "In Progress" | "Done";
+  assignee: string;
+}
+
+// --- Legacy / Shared ---
 export interface Milestone {
   title: string;
   date: string;
   team: string;
   status: string;
-}
-
-export interface PIPlan {
-  name: string;
-  progress: number;
-  completed: number;
-  features: number;
-  teams: string[];
-}
-
-export interface RoadmapItem {
-  id: string;
-  title: string;
-  status: string;
-  quarter: string;
-  team: string;
 }
 
 export interface Incident {
@@ -54,12 +110,6 @@ export interface Incident {
   severity: "high" | "medium" | "low";
   status: string;
   time: string;
-}
-
-export interface ServiceStatus {
-  name: string;
-  status: string;
-  latency: string;
 }
 
 export interface SupportTicket {
@@ -83,32 +133,4 @@ export interface FeedbackItem {
   category: string;
   date: string;
   status: string;
-}
-
-export interface SectionOverview {
-  name: string;
-  href: string;
-  activeItems: number;
-  completedItems: number;
-  progress: number;
-  status: string;
-  statusColor: string;
-  recentActivity: string;
-}
-
-export interface ActivityItem {
-  section: string;
-  action: string;
-  item: string;
-  user: string;
-  time: string;
-  iconType: "check" | "alert" | "clock";
-}
-
-export interface DeadlineItem {
-  title: string;
-  section: string;
-  dueDate: string;
-  daysLeft: number;
-  priority: string;
 }
