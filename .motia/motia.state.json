@@ -1,0 +1,3 @@
+{
+  "app:goals": "[{\"id\":\"GOAL-1\",\"title\":\"V5 Test Goal\",\"status\":\"Proposed\",\"progress\":0,\"owner\":\"CEO\",\"dueDate\":\"2027-12-31\",\"okrs\":[]}]"
+}

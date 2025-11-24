@@ -12,7 +12,15 @@ declare module 'motia' {
   }
 
   interface Handlers {
+    'ValidateInitiative': EventHandler<never, { topic: 'initiative.validated'; data: never }>
+    'UpdateMetrics': EventHandler<never, never>
+    'UpdateEpic': ApiRouteHandler<Record<string, unknown>, unknown, { topic: 'epic.updated'; data: never }>
     'TestEndpoint': ApiRouteHandler<Record<string, unknown>, unknown, never>
     'GetStrategyData': ApiRouteHandler<Record<string, unknown>, unknown, never>
+    'RecalculateGoalProgress': EventHandler<never, never>
+    'NotifyGoalCreated': EventHandler<never, never>
+    'InitializeState': EventHandler<never, never>
+    'CreateInitiative': ApiRouteHandler<Record<string, unknown>, unknown, { topic: 'initiative.created'; data: never }>
+    'CreateGoal': ApiRouteHandler<Record<string, unknown>, unknown, { topic: 'goal.created'; data: never }>
   }
 }

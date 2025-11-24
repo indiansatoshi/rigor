@@ -1,0 +1,47 @@
+[
+  {
+    "id": "strategy-workflow",
+    "config": {
+      "steps/validate-initiative.step.ts": {
+        "x": 150,
+        "y": 250,
+        "sourceHandlePosition": "right",
+        "targetHandlePosition": "left"
+      },
+      "steps/update-metrics.step.ts": {
+        "x": 500,
+        "y": 250,
+        "targetHandlePosition": "left"
+      },
+      "steps/update-epic.step.ts": {
+        "x": -200,
+        "y": 500,
+        "sourceHandlePosition": "right",
+        "targetHandlePosition": "left"
+      },
+      "steps/recalculate-goal-progress.step.ts": {
+        "x": 150,
+        "y": 500,
+        "sourceHandlePosition": "right",
+        "targetHandlePosition": "left"
+      },
+      "steps/notify-goal-created.step.ts": {
+        "x": 150,
+        "y": 100,
+        "targetHandlePosition": "left"
+      },
+      "steps/create-initiative.step.ts": {
+        "x": -200,
+        "y": 300,
+        "sourceHandlePosition": "right",
+        "targetHandlePosition": "left"
+      },
+      "steps/create-goal.step.ts": {
+        "x": -200,
+        "y": 100,
+        "sourceHandlePosition": "right",
+        "targetHandlePosition": "left"
+      }
+    }
+  }
+]
