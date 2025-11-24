@@ -5,106 +5,64 @@
 
 :root {
   /* Atlassian Light Theme */
+  /* Shadows - Material 3 Elevation */
+  /* Level 1 */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  /* Level 2 (Cards) */
+  --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+  /* Level 3 (Hover/Lift) */
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  /* Level 4 (Modal/Popover) */
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
   /* Neutrals */
-  --background: hsl(0 0% 100%); /* N0 */
-  --foreground: hsl(218 20% 20%); /* N800 */
+  --background: hsl(0 0% 100%);
+  /* N0 */
+  --foreground: hsl(218 20% 20%);
+  /* N800 */
 
-  --card: hsl(0 0% 100%); /* N0 */
-  --card-foreground: hsl(218 20% 20%); /* N800 */
+  --card: hsl(0 0% 100%);
+  /* N0 */
+  --card-foreground: hsl(218 20% 20%);
+  /* N800 */
 
-  --popover: hsl(0 0% 100%); /* N0 */
-  --popover-foreground: hsl(218 20% 20%); /* N800 */
+  --popover: hsl(0 0% 100%);
+  /* N0 */
+  --popover-foreground: hsl(218 20% 20%);
+  /* N800 */
 
   /* Brand Colors (Blue) */
-  --primary: hsl(226 100% 60%); /* B600 */
-  --primary-foreground: hsl(0 0% 100%); /* N0 */
+  --primary: hsl(226 100% 60%);
+  /* B600 */
+  --primary-foreground: hsl(0 0% 100%);
+  /* N0 */
 
-  --secondary: hsl(220 14% 96%); /* N20 */
-  --secondary-foreground: hsl(218 20% 20%); /* N800 */
+  --secondary: hsl(220 14% 96%);
+  /* N20 */
+  --secondary-foreground: hsl(218 20% 20%);
+  /* N800 */
 
-  --muted: hsl(220 14% 96%); /* N20 */
-  --muted-foreground: hsl(218 15% 45%); /* N500 */
+  --muted: hsl(220 14% 96%);
+  /* N20 */
+  --muted-foreground: hsl(218 15% 45%);
+  /* N500 */
 
-  --accent: hsl(226 100% 96%); /* B50 */
-  --accent-foreground: hsl(226 100% 60%); /* B600 */
+  --accent: hsl(226 100% 96%);
+  /* B50 */
+  --accent-foreground: hsl(226 100% 60%);
+  /* B600 */
 
-  --destructive: hsl(0 84% 60%); /* R600 */
-  --destructive-foreground: hsl(0 0% 100%); /* N0 */
-
-  --border: hsl(220 13% 91%); /* N30 */
-  --input: hsl(220 13% 91%); /* N30 */
-  --ring: hsl(226 100% 60%); /* B600 */
-
-  --radius: 0.25rem; /* 4px (ADS uses 3px, but 4px is close enough for Tailwind) */
-
-  /* Functional Colors */
-  --chart-1: hsl(142 76% 36%); /* G600 (Success) */
-  --chart-2: hsl(48 96% 53%); /* Y400 (Warning) */
-  --chart-3: hsl(217 91% 60%); /* B400 (Info) */
-  --chart-4: hsl(262 52% 47%); /* P400 (Discovery) */
-  --chart-5: hsl(191 100% 40%); /* T400 (Teal) */
-
-  /* Sidebar */
-  --sidebar: hsl(218 28% 20%); /* N800 (Dark Sidebar) */
-  --sidebar-foreground: hsl(220 14% 96%); /* N20 */
-  --sidebar-primary: hsl(226 100% 60%); /* B600 */
-  --sidebar-primary-foreground: hsl(0 0% 100%); /* N0 */
-  --sidebar-accent: hsl(217 28% 24%); /* N700 */
-  --sidebar-accent-foreground: hsl(0 0% 100%); /* N0 */
-  --sidebar-border: hsl(217 28% 24%); /* N700 */
-  --sidebar-ring: hsl(226 100% 60%); /* B600 */
-
-  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans", Ubuntu, "Droid Sans", "Helvetica Neue", sans-serif;
-  
-  --shadow-sm: 0 1px 1px rgba(9, 30, 66, 0.25), 0 0 1px rgba(9, 30, 66, 0.31);
-  --shadow: 0 3px 5px rgba(9, 30, 66, 0.2), 0 0 1px rgba(9, 30, 66, 0.31);
-  --shadow-md: 0 8px 12px rgba(9, 30, 66, 0.15), 0 0 1px rgba(9, 30, 66, 0.31);
-}
-
-.dark {
-  /* Atlassian Dark Theme */
-  --background: hsl(218 28% 20%); /* N800 */
-  --foreground: hsl(220 14% 96%); /* N20 */
-
-  --card: hsl(217 28% 24%); /* N700 */
-  --card-foreground: hsl(220 14% 96%); /* N20 */
-
-  --popover: hsl(217 28% 24%); /* N700 */
-  --popover-foreground: hsl(220 14% 96%); /* N20 */
-
-  --primary: hsl(226 100% 60%); /* B600 */
-  --primary-foreground: hsl(0 0% 100%); /* N0 */
-
-  --secondary: hsl(217 28% 24%); /* N700 */
-  --secondary-foreground: hsl(220 14% 96%); /* N20 */
-
-  --muted: hsl(217 28% 24%); /* N700 */
-  --muted-foreground: hsl(220 14% 65%); /* N200 */
-
-  --accent: hsl(217 28% 30%); /* N600 */
-  --accent-foreground: hsl(220 14% 96%); /* N20 */
-
-  --destructive: hsl(0 84% 60%); /* R600 */
-  --destructive-foreground: hsl(0 0% 100%); /* N0 */
-
-  --border: hsl(217 28% 30%); /* N600 */
-  --input: hsl(217 28% 30%); /* N600 */
-  --ring: hsl(226 100% 60%); /* B600 */
-
-  --chart-1: hsl(142 76% 36%);
-  --chart-2: hsl(48 96% 53%);
-  --chart-3: hsl(217 91% 60%);
-  --chart-4: hsl(262 52% 47%);
-  --chart-5: hsl(191 100% 40%);
-
-  --sidebar: hsl(218 28% 15%); /* N900 */
-  --sidebar-foreground: hsl(220 14% 96%); /* N20 */
-  --sidebar-primary: hsl(226 100% 60%); /* B600 */
-  --sidebar-primary-foreground: hsl(0 0% 100%); /* N0 */
-  --sidebar-accent: hsl(218 28% 20%); /* N800 */
-  --sidebar-accent-foreground: hsl(220 14% 96%); /* N20 */
-  --sidebar-border: hsl(218 28% 20%); /* N800 */
-  --sidebar-ring: hsl(226 100% 60%); /* B600 */
+  --destructive: hsl(0 84% 60%);
+  /* R600 */
+  --sidebar-primary-foreground: hsl(0 0% 100%);
+  /* N0 */
+  --sidebar-accent: hsl(218 28% 20%);
+  /* N800 */
+  --sidebar-accent-foreground: hsl(220 14% 96%);
+  /* N20 */
+  --sidebar-border: hsl(218 28% 20%);
+  /* N800 */
+  --sidebar-ring: hsl(226 100% 60%);
+  /* B600 */
 }
 
 @theme inline {

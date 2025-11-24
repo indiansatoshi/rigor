@@ -1,140 +1,194 @@
+"use client";
+
 import { companyGoals, initiatives, opportunities, epics } from "@/lib/mock-data";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ArrowRight, Target, Map, Lightbulb, Layers } from "lucide-react";
+import { ArrowRight, Target, Map, Lightbulb, Layers, Sparkles } from "lucide-react";
 import Link from "next/link";
+import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 export default function MasterView() {
-    // Helper to find connected items (simplified for demo)
-    const goal = companyGoals[0];
-    const initiative = initiatives.find(i => i.goalId === goal.id);
-    const opportunity = opportunities.find(o => o.initiativeId === initiative?.id);
-    const solution = opportunity?.solutions[0];
-    const epic = epics.find(e => e.solutionId === solution?.id);
+    // Define the "Golden Thread" for highlighting
+    const activeGoalId = companyGoals[0].id;
+    const activeInitiativeId = initiatives.find(i => i.goalId === activeGoalId)?.id;
+    const activeSolutionId = opportunities.find(o => o.initiativeId === activeInitiativeId)?.solutions[0].id;
+    const activeEpicId = epics.find(e => e.solutionId === activeSolutionId)?.id;
+
+    const FlowColumn = ({ title, icon: Icon, color, children }: { title: string, icon: any, color: string, children: React.ReactNode }) => (
+        <div className="flex flex-col gap-4 min-w-[320px] max-w-[320px] h-full">
+            <div className="flex items-center gap-2 px-1">
+                <div className={cn("p-2 rounded-lg bg-white shadow-sm border border-gray-100", color)}>
+                    <Icon className="h-4 w-4" />
+                </div>
+                <h2 className="text-sm font-semibold text-gray-700 uppercase tracking-wide">{title}</h2>
+            </div>
+            <div className="flex-1 overflow-y-auto pr-2 space-y-4 pb-10">
+                {children}
+            </div>
+        </div>
+    );
+
+    const FlowCard = ({ title, description, status, isActive, type, meta }: { title: string, description: string, status?: string, isActive: boolean, type: string, meta?: string }) => (
+        <motion.div
+            whileHover={{ y: -2 }}
+            className={cn(
+                "group relative bg-white rounded-xl p-4 border transition-all duration-300 cursor-pointer",
+                isActive
+                    ? "border-primary/40 shadow-md ring-1 ring-primary/10"
+                    : "border-gray-100 shadow-sm hover:shadow-md hover:border-gray-200"
+            )}
+        >
+            {isActive && (
+                <div className="absolute -left-1 top-1/2 -translate-y-1/2 w-1 h-8 bg-primary rounded-r-full" />
+            )}
+            <div className="flex justify-between items-start mb-2">
+                <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">{type}</span>
+                {status && (
+                    <span className={cn(
+                        "text-[10px] px-2 py-0.5 rounded-full font-medium",
+                        isActive ? "bg-primary/10 text-primary" : "bg-gray-100 text-gray-500"
+                    )}>
+                        {status}
+                    </span>
+                )}
+            </div>
+            <h3 className={cn("text-sm font-semibold mb-1 leading-snug", isActive ? "text-gray-900" : "text-gray-700")}>
+                {title}
+            </h3>
+            <p className="text-xs text-gray-500 line-clamp-2 mb-3">
+                {description}
+            </p>
+            {meta && (
+                <div className="pt-2 border-t border-gray-50 flex items-center gap-2 text-[10px] text-gray-400">
+                    <Sparkles className="h-3 w-3" />
+                    {meta}
+                </div>
+            )}
+
+            {/* Connector Dot (Right) */}
+            <div className={cn(
+                "absolute -right-1.5 top-1/2 -translate-y-1/2 w-3 h-3 rounded-full border-2 border-white transition-colors z-10",
+                isActive ? "bg-primary" : "bg-gray-200 group-hover:bg-gray-300"
+            )} />
+            {/* Connector Dot (Left) - Hidden for first column */}
+            <div className={cn(
+                "absolute -left-1.5 top-1/2 -translate-y-1/2 w-3 h-3 rounded-full border-2 border-white transition-colors z-10",
+                isActive ? "bg-primary" : "bg-gray-200 group-hover:bg-gray-300"
+            )} />
+        </motion.div>
+    );
 
     return (
-        <div className="space-y-12 animate-in fade-in duration-500 h-full overflow-y-auto pr-4">
-            <div className="text-center space-y-4 max-w-2xl mx-auto">
-                <h1 className="text-4xl font-bold tracking-tight">The Cascade</h1>
-                <p className="text-xl text-muted-foreground">
-                    Visualizing the thread from Strategy to Execution.
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="h-full flex flex-col overflow-hidden"
+        >
+            {/* Header */}
+            <div className="flex flex-col gap-1 mb-6 shrink-0">
+                <h1 className="text-2xl font-bold tracking-tight text-gray-900 flex items-center gap-2">
+                    Strategy Flow
+                    <span className="text-xs font-normal text-gray-400 px-2 py-1 bg-white rounded-full border border-gray-100 shadow-sm">
+                        Live Thread
+                    </span>
+                </h1>
+                <p className="text-muted-foreground text-sm">
+                    Visualizing the connected path from Company Strategy to Project Delivery.
                 </p>
             </div>
 
-            <div className="relative">
-                {/* Connecting Line */}
-                <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-border -z-10 hidden md:block" />
+            {/* Canvas */}
+            <div className="flex-1 overflow-x-auto overflow-y-hidden">
+                <div className="flex h-full gap-12 min-w-max px-4 relative">
 
-                <div className="space-y-12">
-                    {/* Level 1: Strategy */}
-                    <div className="grid md:grid-cols-2 gap-8 items-center">
-                        <div className="text-right space-y-2 md:pr-8">
-                            <h2 className="text-2xl font-bold text-primary">Company Strategy</h2>
-                            <p className="text-muted-foreground">The "Why" and Financial Boundaries.</p>
-                            <Link href="/strategy" className="text-sm font-medium hover:underline">View Strategy Hub &rarr;</Link>
-                        </div>
-                        <Card className="border-l-4 border-l-primary relative">
-                            <div className="absolute -left-3 top-1/2 -translate-y-1/2 bg-background p-1 rounded-full border hidden md:block">
-                                <Target className="h-4 w-4 text-primary" />
-                            </div>
-                            <CardHeader>
-                                <CardTitle className="flex items-center gap-2">
-                                    <Target className="h-5 w-5 md:hidden" />
-                                    {goal.title}
-                                </CardTitle>
-                            </CardHeader>
-                            <CardContent>
-                                <p className="text-sm text-muted-foreground">{goal.description}</p>
-                                <div className="mt-4 p-2 bg-secondary/50 rounded text-xs font-mono">
-                                    Goal: {goal.okrs[0].keyResults[0].description}
-                                </div>
-                            </CardContent>
-                        </Card>
-                    </div>
+                    {/* SVG Connector Layer (Simplified for Demo - would ideally be dynamic) */}
+                    <svg className="absolute inset-0 w-full h-full pointer-events-none z-0 opacity-20">
+                        {/* A simple bezier curve representing the "Golden Thread" */}
+                        <path
+                            d="M 320 200 C 400 200, 400 200, 480 200"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            className="text-primary"
+                        />
+                        <path
+                            d="M 800 200 C 880 200, 880 200, 960 200"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            className="text-primary"
+                        />
+                        <path
+                            d="M 1280 200 C 1360 200, 1360 200, 1440 200"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            className="text-primary"
+                        />
+                    </svg>
 
-                    {/* Level 2: Portfolio */}
-                    <div className="grid md:grid-cols-2 gap-8 items-center">
-                        <Card className="border-l-4 border-l-blue-500 md:order-2 relative">
-                            <div className="absolute -left-[45px] top-1/2 -translate-y-1/2 bg-background p-1 rounded-full border hidden md:block z-10">
-                                <Map className="h-4 w-4 text-blue-500" />
-                            </div>
-                            <CardHeader>
-                                <CardTitle className="flex items-center gap-2">
-                                    <Map className="h-5 w-5 md:hidden" />
-                                    {initiative?.title}
-                                </CardTitle>
-                            </CardHeader>
-                            <CardContent>
-                                <p className="text-sm text-muted-foreground">{initiative?.description}</p>
-                                <div className="mt-2 flex gap-2">
-                                    <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Funded: {initiative?.budget}</span>
-                                </div>
-                            </CardContent>
-                        </Card>
-                        <div className="text-left space-y-2 md:pl-8 md:order-1">
-                            <h2 className="text-2xl font-bold text-blue-600">Portfolio Investment</h2>
-                            <p className="text-muted-foreground">Allocating resources to "Big Bets".</p>
-                            <Link href="/portfolio" className="text-sm font-medium hover:underline">View Roadmap &rarr;</Link>
-                        </div>
-                    </div>
+                    {/* Column 1: Strategy */}
+                    <FlowColumn title="Strategy" icon={Target} color="text-red-600">
+                        {companyGoals.map(goal => (
+                            <FlowCard
+                                key={goal.id}
+                                type="Goal"
+                                title={goal.title}
+                                description={goal.description}
+                                status={goal.status}
+                                isActive={goal.id === activeGoalId}
+                                meta={`${goal.progress}% Complete`}
+                            />
+                        ))}
+                    </FlowColumn>
 
-                    {/* Level 3: Product */}
-                    <div className="grid md:grid-cols-2 gap-8 items-center">
-                        <div className="text-right space-y-2 md:pr-8">
-                            <h2 className="text-2xl font-bold text-yellow-600">Product Discovery</h2>
-                            <p className="text-muted-foreground">Mapping opportunities to solutions.</p>
-                            <Link href="/product" className="text-sm font-medium hover:underline">View Discovery Engine &rarr;</Link>
-                        </div>
-                        <Card className="border-l-4 border-l-yellow-500 relative">
-                            <div className="absolute -left-3 top-1/2 -translate-y-1/2 bg-background p-1 rounded-full border hidden md:block">
-                                <Lightbulb className="h-4 w-4 text-yellow-500" />
-                            </div>
-                            <CardHeader>
-                                <CardTitle className="flex items-center gap-2">
-                                    <Lightbulb className="h-5 w-5 md:hidden" />
-                                    {opportunity?.title}
-                                </CardTitle>
-                            </CardHeader>
-                            <CardContent>
-                                <p className="text-sm text-muted-foreground">{opportunity?.description}</p>
-                                <div className="mt-4 border-t pt-4">
-                                    <div className="text-xs font-semibold uppercase text-muted-foreground mb-2">Selected Solution</div>
-                                    <div className="flex items-center gap-2">
-                                        <div className="h-2 w-2 bg-green-500 rounded-full" />
-                                        <span className="font-medium">{solution?.title}</span>
-                                    </div>
-                                </div>
-                            </CardContent>
-                        </Card>
-                    </div>
+                    {/* Column 2: Portfolio */}
+                    <FlowColumn title="Portfolio" icon={Map} color="text-blue-600">
+                        {initiatives.map(item => (
+                            <FlowCard
+                                key={item.id}
+                                type="Initiative"
+                                title={item.title}
+                                description={item.description}
+                                status={item.status}
+                                isActive={item.id === activeInitiativeId}
+                                meta={item.budget}
+                            />
+                        ))}
+                    </FlowColumn>
 
-                    {/* Level 4: Delivery */}
-                    <div className="grid md:grid-cols-2 gap-8 items-center">
-                        <Card className="border-l-4 border-l-green-500 md:order-2 relative">
-                            <div className="absolute -left-[45px] top-1/2 -translate-y-1/2 bg-background p-1 rounded-full border hidden md:block z-10">
-                                <Layers className="h-4 w-4 text-green-500" />
-                            </div>
-                            <CardHeader>
-                                <CardTitle className="flex items-center gap-2">
-                                    <Layers className="h-5 w-5 md:hidden" />
-                                    {epic?.title}
-                                </CardTitle>
-                            </CardHeader>
-                            <CardContent>
-                                <p className="text-sm text-muted-foreground">{epic?.description}</p>
-                                <div className="mt-2 w-full bg-secondary rounded-full h-2">
-                                    <div className="bg-green-500 h-2 rounded-full" style={{ width: `${epic?.progress}%` }} />
-                                </div>
-                                <div className="text-xs text-right mt-1 text-muted-foreground">{epic?.progress}% Complete</div>
-                            </CardContent>
-                        </Card>
-                        <div className="text-left space-y-2 md:pl-8 md:order-1">
-                            <h2 className="text-2xl font-bold text-green-600">Project Execution</h2>
-                            <p className="text-muted-foreground">Building the validated solution.</p>
-                            <Link href="/delivery" className="text-sm font-medium hover:underline">View Delivery Board &rarr;</Link>
-                        </div>
-                    </div>
+                    {/* Column 3: Product */}
+                    <FlowColumn title="Discovery" icon={Lightbulb} color="text-yellow-600">
+                        {opportunities.flatMap(o => o.solutions).map(item => (
+                            <FlowCard
+                                key={item.id}
+                                type="Solution"
+                                title={item.title}
+                                description={item.description}
+                                status={item.status}
+                                isActive={item.id === activeSolutionId}
+                                meta={item.validationResults ? "Validated" : "Researching"}
+                            />
+                        ))}
+                    </FlowColumn>
+
+                    {/* Column 4: Delivery */}
+                    <FlowColumn title="Delivery" icon={Layers} color="text-purple-600">
+                        {epics.map(item => (
+                            <FlowCard
+                                key={item.id}
+                                type="Epic"
+                                title={item.title}
+                                description={item.description}
+                                status={item.status}
+                                isActive={item.id === activeEpicId}
+                                meta={`${item.progress}% Done`}
+                            />
+                        ))}
+                    </FlowColumn>
+
                 </div>
             </div>
-        </div>
+        </motion.div>
     );
 }
