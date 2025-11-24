@@ -1,6 +1,7 @@
 "use client";
 
-import { companyGoals, initiatives, opportunities, epics } from "@/lib/mock-data";
+import { useState, useEffect } from "react";
+import { CompanyGoal, Initiative, Opportunity, Epic } from "@/types/domain";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowRight, Target, Map, Lightbulb, Layers, Sparkles } from "lucide-react";
 import Link from "next/link";
@@ -8,6 +9,30 @@ import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 export default function MasterView() {
+    const [data, setData] = useState<{
+        companyGoals: CompanyGoal[];
+        initiatives: Initiative[];
+        opportunities: Opportunity[];
+        epics: Epic[];
+    } | null>(null);
+
+    useEffect(() => {
+        fetch('/api/strategy-data')
+            .then(res => res.json())
+            .then(setData)
+            .catch(err => console.error("Failed to fetch strategy data:", err));
+    }, []);
+
+    if (!data) {
+        return (
+            <div className="h-full flex items-center justify-center">
+                <div className="animate-pulse text-gray-400">Loading strategy data...</div>
+            </div>
+        );
+    }
+
+    const { companyGoals, initiatives, opportunities, epics } = data;
+
     // Define the "Golden Thread" for highlighting
     const activeGoalId = companyGoals[0].id;
     const activeInitiativeId = initiatives.find(i => i.goalId === activeGoalId)?.id;

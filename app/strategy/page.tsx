@@ -1,4 +1,7 @@
-import { companyGoals, leanCanvas, strategyMetrics } from "@/lib/mock-data";
+"use client";
+
+import { useState, useEffect } from "react";
+import { CompanyGoal, LeanCanvasSection, Metric } from "@/types/domain";
 import { LeanCanvas } from "@/components/strategy/LeanCanvas";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
@@ -7,6 +10,34 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ArrowUpRight, ArrowDownRight, Target, TrendingUp } from "lucide-react";
 
 export default function StrategyPage() {
+    const [companyGoals, setCompanyGoals] = useState<CompanyGoal[]>([]);
+    const [leanCanvas, setLeanCanvas] = useState<LeanCanvasSection[]>([]);
+    const [strategyMetrics, setStrategyMetrics] = useState<Metric[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        fetch('/api/strategy-data')
+            .then(res => res.json())
+            .then(data => {
+                setCompanyGoals(data.companyGoals || []);
+                setLeanCanvas(data.leanCanvas || []);
+                setStrategyMetrics(data.strategyMetrics || []);
+                setLoading(false);
+            })
+            .catch(err => {
+                console.error("Failed to fetch data:", err);
+                setLoading(false);
+            });
+    }, []);
+
+    if (loading) {
+        return (
+            <div className="flex items-center justify-center h-full">
+                <div className="animate-pulse text-gray-400">Loading...</div>
+            </div>
+        );
+    }
+
     return (
         <div className="flex flex-col h-full space-y-4 animate-in fade-in duration-500">
             {/* Header Section */}

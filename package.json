@@ -12,6 +12,11 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@motiadev/core": "0.12.0-beta.157",
+    "@motiadev/plugin-endpoint": "0.12.0-beta.157",
+    "@motiadev/plugin-logs": "0.12.0-beta.157",
+    "@motiadev/plugin-observability": "0.12.0-beta.157",
+    "@motiadev/plugin-states": "0.12.0-beta.157",
     "@radix-ui/react-avatar": "^1.1.11",
     "@radix-ui/react-collapsible": "^1.1.12",
     "@radix-ui/react-dialog": "^1.1.15",
@@ -28,6 +33,7 @@
     "clsx": "^2.1.1",
     "framer-motion": "^12.23.24",
     "lucide-react": "^0.553.0",
+    "motia": "0.12.0-beta.157",
     "next": "16.0.1",
     "react": "19.2.0",
     "react-dom": "19.2.0",

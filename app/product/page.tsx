@@ -1,10 +1,36 @@
-import { opportunities, initiatives } from "@/lib/mock-data";
+"use client";
+
+import { useState, useEffect } from "react";
+import { Opportunity, Initiative } from "@/types/domain";
 import { OpportunityTree } from "@/components/product/OpportunityTree";
 import { Map } from "lucide-react";
 
 export default function ProductPage() {
-    // In a real app, this would be dynamic based on selection
-    const selectedInitiative = initiatives[0];
+    const [opportunities, setOpportunities] = useState<Opportunity[]>([]);
+    const [selectedInitiative, setSelectedInitiative] = useState<Initiative | null>(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        fetch('/api/strategy-data')
+            .then(res => res.json())
+            .then(data => {
+                setOpportunities(data.opportunities || []);
+                setSelectedInitiative(data.initiatives?.[0] || null);
+                setLoading(false);
+            })
+            .catch(err => {
+                console.error("Failed to fetch data:", err);
+                setLoading(false);
+            });
+    }, []);
+
+    if (loading) {
+        return (
+            <div className="flex items-center justify-center h-full">
+                <div className="animate-pulse text-gray-400">Loading...</div>
+            </div>
+        );
+    }
 
     return (
         <div className="flex flex-col h-full space-y-4 animate-in fade-in duration-500">
@@ -16,15 +42,17 @@ export default function ProductPage() {
             </div>
 
             {/* Context Banner */}
-            <div className="bg-blue-50 border border-blue-100 p-3 rounded-[3px] flex items-center gap-3 text-blue-900 shrink-0">
-                <div className="bg-blue-100 p-1.5 rounded-[3px]">
-                    <Map className="h-4 w-4 text-blue-700" />
+            {selectedInitiative && (
+                <div className="bg-blue-50 border border-blue-100 p-3 rounded-[3px] flex items-center gap-3 text-blue-900 shrink-0">
+                    <div className="bg-blue-100 p-1.5 rounded-[3px]">
+                        <Map className="h-4 w-4 text-blue-700" />
+                    </div>
+                    <div>
+                        <div className="text-[10px] font-bold uppercase tracking-wider text-blue-700">Aligned Initiative</div>
+                        <div className="font-semibold text-sm">{selectedInitiative.title}</div>
+                    </div>
                 </div>
-                <div>
-                    <div className="text-[10px] font-bold uppercase tracking-wider text-blue-700">Aligned Initiative</div>
-                    <div className="font-semibold text-sm">{selectedInitiative.title}</div>
-                </div>
-            </div>
+            )}
 
             <div className="flex-1 min-h-0 overflow-y-auto pr-2">
                 <OpportunityTree opportunities={opportunities} />
